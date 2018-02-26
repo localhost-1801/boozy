@@ -9,4 +9,4 @@ const db = new Sequelize(
     logging: false
   }
 )
-module.exports = db
+module.exports = db;
