@@ -1,7 +1,7 @@
 {
-  "name": "boilermaker",
+  "name": "boozy",
   "version": "1.0.0",
-  "description": "Some boilerplate code to get you started - get shakin'!",
+  "description": "Team work makes the dream work",
   "engines": {
     "node": ">= 7.0.0"
   },
@@ -11,9 +11,8 @@
     "build-client-watch": "webpack -w",
     "deploy": "script/deploy",
     "lint": "eslint ./ --ignore-path .gitignore",
-    "prepush": "npm run lint && npm test",
     "postinstall": "touch secrets.js",
-    "seed": "node script/seed.js",
+    "seed": "node SEED.js",
     "start": "node server",
     "start-dev": "NODE_ENV='development' npm run build-client-watch & npm run start-server",
     "start-server": "nodemon server -e html,js,scss --ignore public --ignore client",
@@ -23,6 +22,7 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^0.15.3",
+    "bluebird": "^3.5.1",
     "body-parser": "^1.16.1",
     "compression": "^1.7.1",
     "connect-session-sequelize": "^4.1.0",
@@ -60,7 +60,6 @@
     "eslint": "^4.10.0",
     "eslint-config-fullstack": "^3.0.0",
     "eslint-plugin-react": "^7.4.0",
-    "husky": "^0.14.3",
     "mocha": "^3.3.0",
     "nodemon": "^1.12.1",
     "react-test-renderer": "^16.0.0",
