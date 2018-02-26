@@ -28,4 +28,4 @@ const Product = db.define('product', {
     }
 })
 
-export default Product;
+module.exports = Product;
