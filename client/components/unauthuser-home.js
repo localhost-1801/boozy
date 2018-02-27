@@ -20,7 +20,7 @@ export default class UnAuthUserHome extends Component {
       homeOrAgeGate = (
         <div>
           <button onClick={() => this.setState({ over21: true })}>
-            Click here if you are over 21
+            Click here if you are over 21 to use this website
           </button>
         </div>
       )
