@@ -2,33 +2,19 @@ const Sequelize = require('sequelize')
 const db = require('../db')
 
 const Order = db.define('order', {
-    quantity: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        validate: {
-            min: 1
-        }
+    created: {
+        type: Sequelize.ENUM('Order created', null),
+        defaultValue: null
     },
-}, {
-        scopes: {
-            allProducts: {
-                include: [
-                    {
-                        model: db.model('product'),
-                            through: {
-                                attributes: ['orderId', 'productId'],
-                                where: {orderId: this.id}
-                            }
-                    }
-                ]
-            }
-        },
-        getterMethods: {
-            totalPrice() {
-                // return this.quantity 
-            }
-        }
-    })
+    processing: {
+        type: Sequelize.ENUM('In processing...', null),
+        defaultValue: null
+    },
+    completed: {
+        type: Sequelize.ENUM('Order has been completed', 'Order has been cancelled'),
+        defaultValue: null 
+    }
+})
 
 //total price would be a function that returns price of items times quantity FOR each item
 
