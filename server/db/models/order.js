@@ -2,17 +2,20 @@ const Sequelize = require('sequelize')
 const db = require('../db')
 
 const Order = db.define('order', {
-    created: {
-        type: Sequelize.ENUM('Order created', null),
-        defaultValue: null
-    },
-    processing: {
-        type: Sequelize.ENUM('In processing...', null),
-        defaultValue: null
-    },
-    completed: {
-        type: Sequelize.ENUM('Order has been completed', 'Order has been cancelled'),
-        defaultValue: null 
+    //created: {
+    //     type: Sequelize.ENUM('Order created', null),
+    //     defaultValue: null
+    // },
+    // processing: {
+    //     type: Sequelize.BOOLEAN('In processing...', null),
+    //     defaultValue: null
+    // },
+    // completed: {
+    //     type: Sequelize.ENUM('Order has been completed', 'Order has been cancelled'),
+    //     defaultValue: null
+    // }
+    status: {
+        type: Sequelize.ENUM('created', 'processing', 'sent', 'delivered')
     }
 })
 
