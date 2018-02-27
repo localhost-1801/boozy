@@ -11,9 +11,9 @@ export class Products extends Component {
         super(props)
         this.state = {}
     }
-    componentDidMount() {
-        this.props.fetchProducts();
-    }
+    // componentDidMount() {
+    //     this.props.fetchProducts();
+    // }
     render() {
         console.log(this.props.products)
         return (
