@@ -2,7 +2,7 @@ const {expect} = require('chai')
 const request = require('supertest')
 const db = require('../db')
 const app = require('../index')
-const User = db.model('user')
+const Order = db.model('order')
 
 describe('Order routes', () => {
   beforeEach(() => {
@@ -13,7 +13,7 @@ describe('Order routes', () => {
     const orderQuantity = 3;
 
     beforeEach(() => {
-      return User.create({
+      return Order.create({
         quantity: orderQuantity
       })
     })
