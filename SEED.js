@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 const Promise = require('bluebird');
 //don't forget to npm install bluebird
-const { User, Review, Product, Order, Category } = require('./server/db/models');
+const { User, Review, Product, Order, Category, CartItem } = require('./server/db/models');
 const db = require('./server/db');
 
 const userDBseed =
@@ -57,11 +57,17 @@ const productDBseed =
 const orderDBseed =
     [
         {
-            quantity: 1,
+            // quantity: 1,
             userId: 1
         },
         {
-            quantity: 1,
+            // quantity: 1,
+            userId: 2
+        },
+        {
+            userId: 1
+        },
+        {
             userId: 2
         }
     ]
@@ -80,15 +86,18 @@ const cartDBseed =
     [
         {
             productId: 1,
-            orderId: 1
+            orderId: 1,
+            quantity: 1
         },
         {
             productId: 2,
-            orderId: 1
+            orderId: 1,
+            quantity: 2
         },
         {
             productId: 2,
-            orderId: 2
+            orderId: 2,
+            quantity: 10
         }
     ]
 
@@ -112,10 +121,10 @@ const seed = () =>
             Promise.all(orderDBseed.map(order =>
                 Order.create(order))
             ))
-        // .then(() => //not sure how to populate a join table
-        //     Promise.all(cartDBseed.map(cartItem =>
-        //         cartItems.create(cartItem)
-        //     )))
+        .then(() => //not sure how to populate a join table
+            Promise.all(cartDBseed.map(cartItem =>
+                CartItem.create(cartItem)
+            )))
 
 
 const main = () => {

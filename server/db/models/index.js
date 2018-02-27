@@ -6,6 +6,7 @@ const Order = require('./order');
 const Category = require('./category');
 const Review = require('./review');
 const db = require('../db');
+const CartItem = require('./cartItem');
 
 //potential issue later with circular dependencies, maybe
 Product.belongsTo(Category);
@@ -14,7 +15,7 @@ Review.belongsTo(Product);
 Review.belongsTo(User);
 User.hasMany(Order);
 // Order.hasMany(Product)
-Product.belongsToMany(Order, { through: 'cartItems' });
+Product.belongsToMany(Order, { through: CartItem });
 
 
 //User.hasMany(Review); //if we want to implement later
@@ -39,5 +40,6 @@ module.exports = {
   Product,
   Order,
   Category,
-  Review
+  Review,
+  CartItem
 }

@@ -2,32 +2,32 @@ const Sequelize = require('sequelize')
 const db = require('../db')
 
 const Order = db.define('order', {
-    quantity: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        validate: {
-            min: 1
-        }
-    },
-}, {
-        scopes: {
-            allProducts: {
-                include: [
-                    {
-                        model: db.model('product'),
-                            through: {
-                                attributes: ['orderId', 'productId'],
-                                where: {orderId: this.id}
-                            }
-                    }
-                ]
-            }
-        },
-        getterMethods: {
-            totalPrice() {
-                // return this.quantity 
-            }
-        }
+    // quantity: {
+    //     type: Sequelize.INTEGER,
+    //     allowNull: false,
+    //     validate: {
+    //         min: 1
+    //     }
+//     // },
+// }, {
+//         scopes: {
+//             allProducts: {
+//                 include: [
+//                     {
+//                         model: db.model('product'),
+//                             through: {
+//                                 attributes: ['orderId', 'productId'],
+//                                 where: {orderId: this.id}
+//                             }
+//                     }
+//                 ]
+//             }
+//         },
+//         getterMethods: {
+//             totalPrice() {
+//                 // return this.quantity 
+//             }
+//         }
     })
 
 //total price would be a function that returns price of items times quantity FOR each item
