@@ -57,10 +57,12 @@ const productDBseed =
 const orderDBseed =
     [
         {
-            quantity: 1
+            quantity: 1,
+            userId: 1
         },
         {
-            quantity: 1
+            quantity: 1,
+            userId: 2
         }
     ]
 
@@ -74,43 +76,63 @@ const categoryDBseed =
         }
     ]
 
+const cartDBseed =
+    [
+        {
+            productId: 1,
+            orderId: 1
+        },
+        {
+            productId: 2,
+            orderId: 1
+        },
+        {
+            productId: 2,
+            orderId: 2
+        }
+    ]
+
 const seed = () =>
-  Promise.all(userDBseed.map(user =>
-    User.create(user))
-  )
-  .then(() =>
-  Promise.all(reviewDBseed.map(review =>
-    Review.create(review))
-  ))
-  .then(() =>
-  Promise.all(productDBseed.map(product =>
-    Product.create(product))
-  ))
-  .then(() =>
-  Promise.all(orderDBseed.map(order =>
-    Order.create(order))
-  ))
-  .then(() =>
-  Promise.all(categoryDBseed.map(category =>
-    Category.create(category))
-  ))
+    Promise.all(userDBseed.map(user =>
+        User.create(user))
+    )
+        .then(() =>
+            Promise.all(categoryDBseed.map(category =>
+                Category.create(category))
+            ))
+        .then(() =>
+            Promise.all(productDBseed.map(product =>
+                Product.create(product))
+            ))
+        .then(() =>
+            Promise.all(reviewDBseed.map(review =>
+                Review.create(review))
+            ))
+        .then(() =>
+            Promise.all(orderDBseed.map(order =>
+                Order.create(order))
+            ))
+        // .then(() => //not sure how to populate a join table
+        //     Promise.all(cartDBseed.map(cartItem =>
+        //         cartItems.create(cartItem)
+        //     )))
 
 
 const main = () => {
     console.log('Syncing db...');
     db.sync({ force: true })
-      .then(() => {
-        console.log('Seeding database...');
-        return seed();
-      })
-      .catch(err => {
-        console.log('Error while seeding');
-        console.log(err.stack);
-      })
-      .then(() => {
-        db.close();
-        return null;
-      });
-  };
+        .then(() => {
+            console.log('Seeding database...');
+            return seed();
+        })
+        .catch(err => {
+            console.log('Error while seeding');
+            console.log(err.stack);
+        })
+        .then(() => {
+            db.close();
+            return null;
+        });
+};
 
-  main();
+main();
