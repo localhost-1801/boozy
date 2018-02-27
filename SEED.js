@@ -8,10 +8,12 @@ const userDBseed =
     [
         {
             email: 'test@test.com',
+            username: 'BOOZY MCBOOZYFACE',
             password: '123'
         },
         {
             email: 'TEST2@TEST2.com',
+            username: 'I am not an alcoholic',
             password: '123'
         }
     ]
@@ -57,18 +59,18 @@ const productDBseed =
 const orderDBseed =
     [
         {
-            // quantity: 1,
-            userId: 1
-        },
-        {
-            // quantity: 1,
-            userId: 2
-        },
-        {
-            userId: 1
+            userId: 1,
         },
         {
             userId: 2
+        },
+        {
+            userId: 1,
+            created: 'Order created'
+        },
+        {
+            userId: 2,
+            created: 'Order created'
         }
     ]
 
