@@ -19,3 +19,42 @@ form div {
   margin: 1em;
   display: inline-block;
 }
+
+.logo {
+  font-family: 'Nanum Myeongjo', serif;
+  font-size: 20px;
+}
+
+.indexBackground {
+  background-color: black;
+  background-image: url(img/background.jpg);
+  background-repeat: no-repeat;
+  background-position:left top;
+  background-size: cover;
+  min-height: 100%;
+  width: 100%;
+  position: fixed;
+  padding: 0;
+  margin: 0;
+}
+
+.navbar {
+  z-index: 1;
+  padding: 0;
+  margin: 0;
+  border: 0
+}
+
+
+.login-form {
+  background-color: black;
+  background-image: url(img/login.jpg);
+  background-repeat: no-repeat;
+  background-position:left top;
+  background-size: cover;
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  padding: 0;
+  margin: 0;
+}
