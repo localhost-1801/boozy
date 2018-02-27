@@ -60,17 +60,19 @@ const orderDBseed =
     [
         {
             userId: 1,
-        },
-        {
-            userId: 2
-        },
-        {
-            userId: 1,
-            created: 'Order created'
+            status: 'created'
         },
         {
             userId: 2,
-            created: 'Order created'
+            status: 'created'
+        },
+        {
+            userId: 1,
+            status: 'created'
+        },
+        {
+            userId: 2,
+            status: 'created'
         }
     ]
 
