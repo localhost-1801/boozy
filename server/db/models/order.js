@@ -11,6 +11,8 @@ const Order = db.define('order', {
         
     }
 })
+//we're gonna seed hooks and setters here
+// see comments below
 
 module.exports = Order;
 

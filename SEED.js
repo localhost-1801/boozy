@@ -20,11 +20,15 @@ const reviewDBseed =
     [
         {
             body: 'This is a good review',
-            rating: 5
+            rating: 5,
+            productId: 1,
+            userId: 1
         },
         {
             body: 'This is a bad review',
-            rating: 0
+            rating: 0,
+            productId: 2,
+            userId: 2
         }
     ]
 
@@ -36,7 +40,8 @@ const productDBseed =
             price: '10.00',
             inventory: '1018',
             year: '2018',
-            imageUrl: 'https://www.fillmurray.com/200/300'
+            imageUrl: 'https://www.fillmurray.com/200/300',
+            categoryId: 1
         },
         {
             title: 'FAKE RED WINE',
@@ -44,7 +49,8 @@ const productDBseed =
             price: '10.00',
             inventory: '1018',
             year: '2018',
-            imageUrl: 'https://www.fillmurray.com/200/300'
+            imageUrl: 'https://www.fillmurray.com/200/300',
+            categoryId: 2
         },
     ]
 
