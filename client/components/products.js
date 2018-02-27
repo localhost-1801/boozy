@@ -1,5 +1,65 @@
-import React from 'react'
-import { Card, Icon, Image } from 'semantic-ui-react'
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
+import { auth } from '../store'
+import { Card, Image, Icon } from 'semantic-ui-react'
+import { fetchProducts} from '../store/products.js'
+
+
+export class Products extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {}
+    }
+    componentDidMount() {
+        this.props.fetchProducts();
+    }
+    render() {
+        console.log(this.props.products)
+        return (
+            <Card.Group>
+                {this.props.products.map(wine => {
+                    return (
+                        <Card 
+                        key = {wine.id}
+                        centered = { true }
+                        >
+                        <Image src={wine.imageURL} />
+                        <Card.Content>
+                            <Card.Meta>
+                                <span className='date'>
+                                    {wine.year}
+                                </span>
+                            </Card.Meta>
+                            <Card.Header>
+                                {wine.wineName}
+                            </Card.Header>
+                            <Card.Description>
+                                {wine.description}
+                            </Card.Description>
+                            </Card.Content>
+                        <Card.Content extra>
+                            <a>
+                                <Icon name='dollar' />
+                                {wine.price}
+                            </a>
+                        </Card.Content>
+                    </Card>
+                    )
+                })}
+            </Card.Group>
+        )
+    }
+}
+
+//map state and map dispatch to props
+
+
+const mapState = ({ products }) => ({ products })
+const mapDispatch = {fetchProducts}
+//const mapDispatch = {fetchStudents};
+
+export default connect(mapState, mapDispatch)(Products);
 
 const dummyData = [
     {
@@ -39,30 +99,3 @@ const dummyData = [
         description: 'Loved by college students and trophy wives alike'
     },
 ]
-
-const CardExampleCard = () => (
-  <Card>
-    <Image src='/assets/images/avatar/large/matthew.png' />
-    <Card.Content>
-      <Card.Header>
-        Matthew
-      </Card.Header>
-      <Card.Meta>
-        <span className='date'>
-          Joined in 2015
-        </span>
-      </Card.Meta>
-      <Card.Description>
-        Matthew is a musician living in Nashville.
-      </Card.Description>
-    </Card.Content>
-    <Card.Content extra>
-      <a>
-        <Icon name='user' />
-        22 Friends
-      </a>
-    </Card.Content>
-  </Card>
-)
-
-export default CardExampleCard

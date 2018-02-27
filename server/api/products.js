@@ -1,6 +1,6 @@
 const router = require('express').Router()
 const {Product} = require('../db/models')
-module.exports = router
+
 
 // /api/products/
 router.get('/', (req, res, next) => {
@@ -19,6 +19,6 @@ router.get('/:id', (req, res, next) => {
         .then(product => res.json(product))
         .catch(next)
 })
-
+module.exports = router
 
 //Will need additional routes for filtering
