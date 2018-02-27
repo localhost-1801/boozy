@@ -13,7 +13,8 @@ Product.hasMany(Review);
 Review.belongsTo(Product);
 Review.belongsTo(User);
 User.hasMany(Order);
-
+// Order.hasMany(Product)
+Product.belongsToMany(Order, { through: 'cartItems' });
 
 
 //User.hasMany(Review); //if we want to implement later
