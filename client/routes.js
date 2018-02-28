@@ -1,9 +1,9 @@
-import React, {Component} from 'react'
-import {connect} from 'react-redux'
-import {withRouter, Route, Switch} from 'react-router-dom'
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { withRouter, Route, Switch } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import {Login, Signup, UserHome, Home} from './components'
-import {me} from './store'
+import { Login, Signup, UserHome, Home, UnAuthUserHome } from './components'
+import { me } from './store'
 import Products from './components/products'
 import { fetchProducts } from './store/products.js'
 
@@ -12,28 +12,29 @@ import { fetchProducts } from './store/products.js'
  * COMPONENT
  */
 class Routes extends Component {
-  componentDidMount () {
+  componentDidMount() {
     this.props.loadInitialData()
   }
 
-  render () {
-    const {isLoggedIn} = this.props
+  render() {
+    const { isLoggedIn } = this.props
     return (
       <Switch>
-      <Route exact path="/" component={Home} />
+        <Route exact path="/" component={Home} />
+        <Route exact path="/ageGate" component={UnAuthUserHome} />
         {/* Routes placed here are available to all visitors */}
         <Route path="/products" component={Products} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
         {
           isLoggedIn &&
-            <Switch>
-              {/* Routes placed here are only available after logging in */}
-              <Route path="/userhome" component={UserHome} />
-              </Switch>
-            }
-            {/* Displays our Login component as a fallback */}
-            <Route component={Login} />
+          <Switch>
+            {/* Routes placed here are only available after logging in */}
+            <Route path="/userhome" component={UserHome} />
+          </Switch>
+        }
+        {/* Displays our Login component as a fallback */}
+        <Route component={Login} />
 
       </Switch>
     )
@@ -53,7 +54,7 @@ const mapState = (state) => {
 
 const mapDispatch = (dispatch) => {
   return {
-    loadInitialData () {
+    loadInitialData() {
       dispatch(me())
       dispatch(fetchProducts())
     }
