@@ -6,6 +6,7 @@ import history from '../history'
  */
 const GET_USER = 'GET_USER'
 const REMOVE_USER = 'REMOVE_USER'
+const SET_CURRENT_USER = 'SET_CURRENT_USER'
 
 /**
  * INITIAL STATE
@@ -17,6 +18,7 @@ const defaultUser = {}
  */
 const getUser = user => ({type: GET_USER, user})
 const removeUser = () => ({type: REMOVE_USER})
+const setCurrentUser = user => ({ type: SET_CURRENT_USER, user})
 
 /**
  * THUNK CREATORS
@@ -26,7 +28,7 @@ const removeUser = () => ({type: REMOVE_USER})
  axios.put('/auth/login', credentials)
    .then(res => setUserAndRedirect(res.data, history, dispatch))
    .catch(err => console.error(`Logging in with ${credentials.email} and ${credentials.password} was unsuccesful`, err));
-};
+ };
 
 export const me = () =>
   dispatch =>
@@ -60,6 +62,8 @@ export const logout = () =>
  */
 export default function (state = defaultUser, action) {
   switch (action.type) {
+    case SET_CURRENT_USER:
+      return action.user
     case GET_USER:
       return action.user
     case REMOVE_USER:
@@ -70,6 +74,6 @@ export default function (state = defaultUser, action) {
 }
 
 function setUserAndRedirect (user, history, dispatch) {
- dispatch(setCurrentUser(user));
- history.push('/')
+  dispatch(setCurrentUser(user));
+  history.push('/')
 }
