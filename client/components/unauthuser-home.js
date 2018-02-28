@@ -6,7 +6,7 @@ export default class UnAuthUserHome extends Component {
     this.state = {
       over21: false
     }
-  }
+  }//test test
   render() {
     let homeOrAgeGate;
     if (this.state.over21) {

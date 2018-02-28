@@ -14,16 +14,6 @@ router.get('/', (req, res, next) => {
             {model: Product, through: CartItem}
         ]
     })
-    //.then(something => res.json(something))
-    // .then(cart => {
-    //     CartItem.findAll({
-            
-    //         where: {
-    //             cartId: cart.id
-    //         },
-    //         include:[{model: Product}]
-            
-    //     })
         .then(cartItems => {
             console.log(cartItems)
             res.json(cartItems)
