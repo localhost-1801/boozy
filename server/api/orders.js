@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {Order, Product, User} = require('../db/models')
+const {Order, Product, User, CartItem} = require('../db/models')
 module.exports = router
 
 //api/orders
@@ -27,3 +27,21 @@ router.post('/', (req, res, next) => {
     .then(result => res.json(result))
     .catch(next)
 })
+
+// //api/orders/id/cartItems
+// router.get('/:id/cartItems', (req, res, next) => {
+//   // Order.findOne({
+//   //   where: {
+//   //     id: req.params.id
+//   //   }
+//   // })
+//   //   .then(order => {
+      
+//   //   })
+//   CartItem.findAll({
+
+//     where: {
+//       orderId: req.params.id
+//     }
+//   })
+// })

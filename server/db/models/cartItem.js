@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
+const Product = require('./product') 
 
 const CartItem = db.define('cartItem', {
     quantity: {
@@ -8,16 +9,16 @@ const CartItem = db.define('cartItem', {
         validate: {
             min: 1
         }
-    }
+    },
     // scopes: {
     //     allProducts: {
     //         include: [
     //             {
-    //                 model: db.model('product'),
-    //                 through: {
-    //                     attributes: ['orderId', 'productId'],
-    //                     where: { orderId: this.id }
-    //                 }
+    //                 model: Product,
+    //                 // through: {
+    //                 //     attributes: ['cartId', 'productId'],
+    //                 //     where: { cartId: this.id }
+    //                 // }
     //             }
     //         ]
     //     }
