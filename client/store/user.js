@@ -21,6 +21,13 @@ const removeUser = () => ({type: REMOVE_USER})
 /**
  * THUNK CREATORS
  */
+
+ export const login = (credentials, history) => dispatch => {
+ axios.put('/auth/login', credentials)
+   .then(res => setUserAndRedirect(res.data, history, dispatch))
+   .catch(err => console.error(`Logging in with ${credentials.email} and ${credentials.password} was unsuccesful`, err));
+};
+
 export const me = () =>
   dispatch =>
     axios.get('/auth/me')
@@ -60,4 +67,9 @@ export default function (state = defaultUser, action) {
     default:
       return state
   }
+}
+
+function setUserAndRedirect (user, history, dispatch) {
+ dispatch(setCurrentUser(user));
+ history.push('/')
 }
