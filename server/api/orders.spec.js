@@ -10,11 +10,11 @@ describe('Order routes', () => {
   })
 
   describe('/api/orders/', () => {
-    const orderQuantity = 3;
+    const orderStatus = 'created';
 
     beforeEach(() => {
       return Order.create({
-        quantity: orderQuantity
+        status: orderStatus
       })
     })
 
@@ -24,7 +24,7 @@ describe('Order routes', () => {
         .expect(200)
         .then(res => {
           expect(res.body).to.be.an('array')
-          expect(res.body[0].quantity).to.be.equal(orderQuantity)
+          expect(res.body[0].status).to.be.equal(orderStatus)
         })
     })
   }) // end describe('/api/orders')
