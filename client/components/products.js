@@ -36,7 +36,7 @@ export class Products extends Component {
                                 </Card.Meta>
 
                                 <Card.Header>
-                                    {wine.wineName}
+                                    {wine.title}
                                 </Card.Header>
 
                                 <Card.Description>
@@ -45,9 +45,9 @@ export class Products extends Component {
                             </Card.Content>
                             <Card.Content extra>
                                 <Segment.Group horizontal>
-                                    <Segment><Icon name='dollar'/>{wine.price}</Segment>
-                                    <Segment><Button as={Link} to={`/products/${wine.id}`} size={'small'}><Icon name='eye' /></Button></Segment>
-                                    <Segment><Button size={'small'} ><Icon fitted={true} size={'large'} name='add to cart'/></Button></Segment>
+                                    <Segment>${wine.price}</Segment>
+                                    <Segment><Button  as={Link} to={`/products/${wine.id}`} size={'small'}>VIEW</Button></Segment>
+                                    <Segment><Button  >ADD</Button></Segment>
                                 </Segment.Group>
                             </Card.Content>
                         </Card>
