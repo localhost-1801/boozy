@@ -6,18 +6,10 @@ import { Button, Form, Grid, Header, Message, Segment, Icon } from 'semantic-ui-
 class Login extends React.Component {
   constructor(props){
     super(props)
-    this.onLoginSubmit = this.onLoginSubmit.bind(this)
-  }
-
-  onLoginSubmit(event){
-    event.preventDefault();
-    this.props.login({
-      email: event.target.email.value,
-      password: event.target.password.value
-    })
   }
 
   render(){
+    const { onLoginSubmit } = this.props
      return(
       <div className='login-form'>
         {/*
@@ -41,7 +33,7 @@ class Login extends React.Component {
             <Header as='h2' color='olive' textAlign='center'>
               {' '}Log-in to your account
             </Header>
-            <Form onSubmit={this.onLoginSubmit} size='large'>
+            <Form onSubmit={evt => onLoginSubmit(evt)} size='large'>
               <Segment raised>
                 <Form.Input
                   name='email'
@@ -79,7 +71,13 @@ class Login extends React.Component {
 
 const mapState = null;
 const mapDispatch = (dispatch, ownProps) => ({
-  login: credentials => dispatch(loginFromReducer(credentials, ownProps.history))
+  onLoginSubmit(event){
+    event.preventDefault();
+    dispatch (loginFromReducer({
+      email: event.target.email.value,
+      password: event.target.password.value
+    }))
+  }
 })
 
 export default connect(mapState, mapDispatch)(Login);

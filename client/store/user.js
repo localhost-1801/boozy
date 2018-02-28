@@ -24,9 +24,11 @@ const setCurrentUser = user => ({ type: SET_CURRENT_USER, user})
  * THUNK CREATORS
  */
 
- export const login = (credentials, history) => dispatch => {
- axios.put('/auth/login', credentials)
-   .then(res => setUserAndRedirect(res.data, history, dispatch))
+ export const login = (credentials) => dispatch => {
+ axios.post('/auth/login', credentials)
+   .then(res => {
+     return(setUserAndRedirect(res.data, history, dispatch))
+   })
    .catch(err => console.error(`Logging in with ${credentials.email} and ${credentials.password} was unsuccesful`, err));
  };
 
