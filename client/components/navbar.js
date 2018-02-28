@@ -39,7 +39,7 @@ export default class Navbar extends Component {
             />
             <Menu.Item
               as={Link}
-              to="/wines"
+              to="/products"
               name="wines"
               active={activeItem === "wines"}
               onClick={this.setActiveItem}

@@ -2,8 +2,10 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { auth } from '../store'
-import { Card, Image, Icon } from 'semantic-ui-react'
-import { fetchProducts} from '../store/products.js'
+import { Card, Image, Icon, Button, Segment } from 'semantic-ui-react'
+import { fetchProducts } from '../store/products.js'
+import { Link } from 'react-router-dom'
+
 
 
 export class Products extends Component {
@@ -20,31 +22,35 @@ export class Products extends Component {
             <Card.Group>
                 {this.props.products.map(wine => {
                     return (
-                        <Card 
-                        key = {wine.id}
-                        centered = { true }
+                        <Card
+                            link
+                            key={wine.id}
+                            centered={true}
                         >
-                        <Image src={wine.imageURL} />
-                        <Card.Content>
-                            <Card.Meta>
-                                <span className='date'>
-                                    {wine.year}
-                                </span>
-                            </Card.Meta>
-                            <Card.Header>
-                                {wine.wineName}
-                            </Card.Header>
-                            <Card.Description>
-                                {wine.description}
-                            </Card.Description>
+                            <Image src='https://files.slack.com/files-pri/T024FPYBQ-F9FGYBYEP/untitled-3.jpg' />
+                            <Card.Content>
+                                <Card.Meta>
+                                    <span className='date'>
+                                        {wine.year}
+                                    </span>
+                                </Card.Meta>
+
+                                <Card.Header>
+                                    {wine.wineName}
+                                </Card.Header>
+
+                                <Card.Description>
+                                    {wine.description}
+                                </Card.Description>
                             </Card.Content>
-                        <Card.Content extra>
-                            <a>
-                                <Icon name='dollar' />
-                                {wine.price}
-                            </a>
-                        </Card.Content>
-                    </Card>
+                            <Card.Content extra>
+                                <Segment.Group horizontal>
+                                    <Segment><Icon name='dollar'/>{wine.price}</Segment>
+                                    <Segment><Button as={Link} to={`/products/${wine.id}`} size={'small'}><Icon name='eye' /></Button></Segment>
+                                    <Segment><Button size={'small'} ><Icon fitted={true} size={'large'} name='add to cart'/></Button></Segment>
+                                </Segment.Group>
+                            </Card.Content>
+                        </Card>
                     )
                 })}
             </Card.Group>
@@ -56,7 +62,7 @@ export class Products extends Component {
 
 
 const mapState = ({ products }) => ({ products })
-const mapDispatch = {fetchProducts}
+const mapDispatch = { fetchProducts }
 //const mapDispatch = {fetchStudents};
 
 export default connect(mapState, mapDispatch)(Products);
