@@ -54,6 +54,60 @@ const productDBseed =
             imageUrl: 'https://www.fillmurray.com/200/300',
             categoryId: 2
         },
+        {
+            title: 'Chardonnay',
+            description: 'Chardonnay or Should I Go?',
+            price: '10.00',
+            inventory: '1018',
+            year: '2018',
+            imageUrl: 'https://www.fillmurray.com/200/300',
+            categoryId: 1
+        },
+        {
+            title: 'Riesling',
+            description: 'Everything happens for a riesling',
+            price: '10.00',
+            inventory: '1018',
+            year: '2018',
+            imageUrl: 'https://www.fillmurray.com/200/300',
+            categoryId: 1
+        },
+        {
+            title: 'Moscato',
+            description: 'Hakuna Moscato',
+            price: '10.00',
+            inventory: '1018',
+            year: '2018',
+            imageUrl: 'https://www.fillmurray.com/200/300',
+            categoryId: 1
+        },
+        {
+            title: 'Merlot',
+            description: 'Is it Merlot you are looking for?',
+            price: '10.00',
+            inventory: '1018',
+            year: '2018',
+            imageUrl: 'https://www.fillmurray.com/200/300',
+            categoryId: 2
+        },
+        {
+            title: 'Pinot Noir',
+            description: 'After drinking this, you will be as useful as the "t" in Pinot Noir',
+            price: '10.00',
+            inventory: '1018',
+            year: '2018',
+            imageUrl: 'https://www.fillmurray.com/200/300',
+            categoryId: 2
+        },
+        {
+            title: 'Cabernet Sauvignon',
+            description: 'I got nothing',
+            price: '10.00',
+            inventory: '1018',
+            year: '2018',
+            imageUrl: 'https://www.fillmurray.com/200/300',
+            categoryId: 2
+        },
     ]
 
 const orderDBseed =
