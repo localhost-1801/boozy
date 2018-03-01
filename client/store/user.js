@@ -25,7 +25,7 @@ const setCurrentUser = user => ({ type: SET_CURRENT_USER, user})
  */
 
 export const signup = (credentials) => dispatch => {
-  axios.post('/api/users', credentials)
+  axios.post('/auth/signup', credentials)
     .then(res => {
       return(setUserAndRedirect(res.data, history, dispatch))
     })
