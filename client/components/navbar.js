@@ -41,8 +41,12 @@ class Navbar extends Component {
             <Menu.Item
               as={Link}
               to="/products"
-              name="products"
-              active={activeItem === "products"}
+              name="wines"
+              active={activeItem === "wines"}
+// =======
+//               name="products"
+//               active={activeItem === "products"}
+// >>>>>>> master
               onClick={this.setActiveItem}
             />
             <Menu.Item

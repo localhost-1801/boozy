@@ -43,7 +43,7 @@ const productDBseed =
             inventory: '1018',
             year: '2018',
             imageUrl: 'https://www.fillmurray.com/200/300',
-            categoryId: 1
+            //categoryId: 1
         },
         {
             title: 'FAKE RED WINE',
@@ -52,7 +52,7 @@ const productDBseed =
             inventory: '1018',
             year: '2018',
             imageUrl: 'https://www.fillmurray.com/200/300',
-            categoryId: 2
+            //categoryId: 2
         },
         {
             title: 'Chardonnay',
@@ -61,7 +61,7 @@ const productDBseed =
             inventory: '1018',
             year: '2018',
             imageUrl: 'https://www.fillmurray.com/200/300',
-            categoryId: 1
+            //categoryId: 1
         },
         {
             title: 'Riesling',
@@ -70,7 +70,7 @@ const productDBseed =
             inventory: '1018',
             year: '2018',
             imageUrl: 'https://www.fillmurray.com/200/300',
-            categoryId: 1
+            //categoryId: 1
         },
         {
             title: 'Moscato',
@@ -79,7 +79,11 @@ const productDBseed =
             inventory: '1018',
             year: '2018',
             imageUrl: 'https://www.fillmurray.com/200/300',
-            categoryId: 1
+            //categoryId: 1
+            // categories: [
+            //     {id: 1},
+            //     {id: 2}
+            // ]
         },
         {
             title: 'Merlot',
@@ -88,7 +92,7 @@ const productDBseed =
             inventory: '1018',
             year: '2018',
             imageUrl: 'https://www.fillmurray.com/200/300',
-            categoryId: 2
+            //categoryId: 2
         },
         {
             title: 'Pinot Noir',
@@ -97,7 +101,7 @@ const productDBseed =
             inventory: '1018',
             year: '2018',
             imageUrl: 'https://www.fillmurray.com/200/300',
-            categoryId: 2
+            //categoryId: 2
         },
         {
             title: 'Cabernet Sauvignon',
@@ -106,7 +110,7 @@ const productDBseed =
             inventory: '1018',
             year: '2018',
             imageUrl: 'https://www.fillmurray.com/200/300',
-            categoryId: 2
+            //categoryId: 2
         },
     ]
 
@@ -133,10 +137,13 @@ const orderDBseed =
 const categoryDBseed =
     [
         {
-            color: 'white'
+            name: 'white'
         },
         {
-            color: 'red'
+            name: 'red'
+        },
+        {
+            name: 'dry'
         }
     ]
 
@@ -170,36 +177,88 @@ const cartDummyData =
             token: 'hello'
         }
     ]
+const prodCatDummyData =
+    [
+        {
+            productId: 1,
+            categoryId: 1,
+        },
+        {
+            productId: 2,
+            categoryId: 1,
+        },
+        {
+            productId: 2,
+            categoryId: 2,
+        }
+    ]
 
-const seed = () =>
-    Promise.all(userDBseed.map(user =>
-        User.create(user))
-    )
-        .then(() =>
-            Promise.all(categoryDBseed.map(category =>
-                Category.create(category))
-            ))
-        .then(() => //not sure how to populate a join table
-            Promise.all(cartDummyData.map(cart =>
-                Cart.create(cart)
-            )))
-        .then(() =>
-            Promise.all(productDBseed.map(product =>
-                Product.create(product))
-            ))
-        .then(() =>
-            Promise.all(reviewDBseed.map(review =>
-                Review.create(review))
-            ))
-        .then(() =>
-            Promise.all(orderDBseed.map(order =>
-                Order.create(order))
-            ))
-        .then(() => //not sure how to populate a join table
-            Promise.all(cartDBseed.map(cartItem =>
-                CartItem.create(cartItem)
-            )))
-      
+const seed = async () => {
+    try {
+        const user = await Promise.all(userDBseed.map(user => User.create(user)))
+        const category = await Promise.all(categoryDBseed.map(category => Category.create(category)))
+        const cart = await Promise.all(cartDummyData.map(cart => Cart.create(cart)))
+        const product = await Promise.all(productDBseed.map(product => Product.create(product)))
+        const review = await Promise.all(reviewDBseed.map(review => Review.create(review)))
+        
+        const cartItem = await Promise.all(cartDBseed.map(cartItem => CartItem.create(cartItem)))
+        // console.log('product', product[0]);
+        // console.log('category', category[0]);
+        console.log('product: ',product[0], 'category: ', category[1])
+        // await product[0].setCategories(category[1]);
+        // await product.map(async (prod, i )=> {
+        //     const prodJoin = await prod.setCategories(category[1])
+        //     return prodJoin
+        // })
+        for (let i = 0; i<product.length; i++) {
+            await product[i].setCategories(category[i % category.length])
+        }
+
+        
+    } catch(err) {
+        console.error(err)
+    }
+ 
+    
+    // .then(() => //not sure how to populate a join table
+    //     Promise.all(prodCatDummyData.map(prodCat =>
+    //         ProdCatJoin.create(prodCat)
+    //     )))
+}
+// Promise.all(userDBseed.map(user =>
+//     User.create(user))
+// )
+//     .then(() =>
+//         Promise.all(categoryDBseed.map(category =>
+//             Category.create(category))
+//         ))
+//     .then(() => //not sure how to populate a join table
+//         Promise.all(cartDummyData.map(cart =>
+//             Cart.create(cart)
+//         )))
+//     .then(() =>
+//         Promise.all(productDBseed.map(product =>
+//             Product.create(product))
+
+//         ))
+//     .then(() =>
+//         Promise.all(reviewDBseed.map(review =>
+//             Review.create(review))
+//         ))
+//     .then(() =>
+//         Promise.all(orderDBseed.map(order =>
+//             Order.create(order))
+//         ))
+//     .then(() => //not sure how to populate a join table
+//         Promise.all(cartDBseed.map(cartItem =>
+//             CartItem.create(cartItem)
+//         )))
+// // .then(() => //not sure how to populate a join table
+// //     Promise.all(prodCatDummyData.map(prodCat =>
+// //         ProdCatJoin.create(prodCat)
+// //     )))
+
+
 
 
 const main = () => {

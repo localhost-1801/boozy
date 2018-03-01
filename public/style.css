@@ -58,3 +58,8 @@ form div {
   padding: 0;
   margin: 0;
 }
+
+.single-product {
+  height: 200px;
+  background-image: url(img/background.jpg)
+}
