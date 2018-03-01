@@ -7,13 +7,14 @@ const Category = require('./category');
 const Review = require('./review');
 const db = require('../db');
 const CartItem = require('./cartItem');
+// const ProdCatJoin = require('./prodCatJoin')
 const Cart = require('./cart')
 
 //potential issue later with circular dependencies, maybe
 Product.belongsToMany(Cart, { foreignKey: 'productId', through: CartItem });
-// Cart.belongsTo(CartItem);
 Cart.belongsToMany(Product, { foreignKey: 'cartId', through: CartItem })
-Product.belongsTo(Category);
+Product.belongsToMany(Category, { foreignKey: 'productId', through: "ProdCatJoin" })
+Category.belongsToMany(Product, { foreignKey: 'categoryId', through: 'ProdCatJoin' })
 Product.hasMany(Review);
 Review.belongsTo(Product);
 Review.belongsTo(User);
@@ -49,4 +50,5 @@ module.exports = {
   Review,
   CartItem,
   Cart
+  
 }
