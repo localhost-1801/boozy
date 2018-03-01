@@ -108,7 +108,8 @@ const mapState = state => {
 const mapDispatch = dispatch => {
   return {
     handleClick() {
-      dispatch(logout())
+      dispatch(logout());
+      this.setActiveItem();
     }
   }
 }
