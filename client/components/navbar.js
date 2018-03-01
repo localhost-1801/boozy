@@ -109,7 +109,6 @@ const mapDispatch = dispatch => {
   return {
     handleClick() {
       dispatch(logout());
-      this.setActiveItem();
     }
   }
 }
