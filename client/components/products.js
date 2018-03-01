@@ -41,7 +41,7 @@ export class Products extends Component {
                                 key={wine.id}
                                 centered={true}
                             >
-                                <Image src='https://files.slack.com/files-pri/T024FPYBQ-F9FGYBYEP/untitled-3.jpg' />
+                                <Image src='img/red.jpg' />
                                 <Card.Content>
                                     <Card.Meta>
                                         <span className='date'>
