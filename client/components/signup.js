@@ -1,15 +1,15 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { login as loginFromReducer } from '../store/user'
+import { signup as signUpFromReducer } from '../store/user'
 import { Button, Form, Grid, Header, Message, Segment, Icon } from 'semantic-ui-react'
 
-class Login extends React.Component {
+class Signup extends React.Component {
   constructor(props){
     super(props)
   }
 
   render(){
-    const { onLoginSubmit } = this.props
+    const { onSignUpSubmit } = this.props
      return(
       <div className='login-form'>
         {/*
@@ -31,10 +31,16 @@ class Login extends React.Component {
         >
           <Grid.Column style={{ maxWidth: 450 }}>
             <Header as='h2' color='olive' textAlign='center'>
-              {' '}Log-in to your account
+              {' '}Create a Boozy account and start shopping
             </Header>
-            <Form onSubmit={evt => onLoginSubmit(evt)} size='large'>
+            <Form onSubmit={evt => onSignUpSubmit(evt)} size='large'>
               <Segment raised>
+                <Form.Input
+                name='username'
+                icon='user'
+                iconPosition='left'
+                placeholder='Username'
+              />
                 <Form.Input
                   name='email'
                   icon='mail'
@@ -48,21 +54,9 @@ class Login extends React.Component {
                   placeholder='Password'
                   type='password'
                 />
-                <Button type='submit' color='olive' fluid size='small'>Login</Button>
+                <Button type='submit' color='olive' fluid size='small'>Sign Up</Button>
               </Segment>
             </Form>
-            <Message>
-              <a
-                target='_self'
-                href='/auth/google'>
-                <Button color='google plus' fluid size='small'>
-                  <Icon name='google' /> Login With Google
-                </Button>
-              </a>
-            </Message>
-            <Message>
-              New to us? <a href='/signup'>Sign Up</a>
-            </Message>
           </Grid.Column>
         </Grid>
       </div>
@@ -71,13 +65,14 @@ class Login extends React.Component {
 
 const mapState = null;
 const mapDispatch = (dispatch, ownProps) => ({
-  onLoginSubmit(event){
+  onSignUpSubmit(event){
     event.preventDefault();
-    dispatch (loginFromReducer({
+    dispatch (signUpFromReducer({
+      username: event.target.username.value,
       email: event.target.email.value,
       password: event.target.password.value
     }))
   }
 })
 
-export default connect(mapState, mapDispatch)(Login);
+export default connect(mapState, mapDispatch)(Signup);
