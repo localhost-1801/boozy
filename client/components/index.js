@@ -8,4 +8,4 @@ export { default as UserHome } from './user-home'
 export { default as Home } from './home'
 export { default as Login } from './login'
 export { default as UnAuthUserHome } from './unauthuser-home';
-export { Signup } from './auth-form'
+export { Signup } from './signup'

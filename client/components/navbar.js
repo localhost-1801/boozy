@@ -40,9 +40,9 @@ class Navbar extends Component {
             />
             <Menu.Item
               as={Link}
-              to="/wines"
-              name="wines"
-              active={activeItem === "wines"}
+              to="/products"
+              name="products"
+              active={activeItem === "products"}
               onClick={this.setActiveItem}
             />
             <Menu.Item

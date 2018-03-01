@@ -37,7 +37,7 @@ class Login extends React.Component {
               <Segment raised>
                 <Form.Input
                   name='email'
-                  icon='user'
+                  icon='mail'
                   iconPosition='left'
                   placeholder='E-mail address'
                 />
