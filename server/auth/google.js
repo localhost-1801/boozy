@@ -32,14 +32,15 @@ if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
   }
 
   const strategy = new GoogleStrategy(googleConfig, (token, refreshToken, profile, done) => {
+    console.log('profile info: ', profile);
     const googleId = profile.id
-    const name = profile.displayName
+    const username = profile.displayName
     const email = profile.emails[0].value
 
     User.find({where: {googleId}})
       .then(foundUser => (foundUser
         ? done(null, foundUser)
-        : User.create({name, email, googleId})
+        : User.create({email, googleId, username})
           .then(createdUser => done(null, createdUser))
       ))
       .catch(done)
@@ -47,10 +48,12 @@ if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
 
   passport.use(strategy)
 
+  //auth/google/
   router.get('/', passport.authenticate('google', {scope: 'email'}))
 
-  router.get('/callback', passport.authenticate('google', {
-    successRedirect: '/home',
+  //auth/google.confirm
+  router.get('/confirm', passport.authenticate('google', {
+    successRedirect: '/',
     failureRedirect: '/login'
   }))
 

@@ -5,11 +5,12 @@ import { Link } from "react-router-dom";
 import { logout } from "../store";
 import { Menu, Segment, Image } from "semantic-ui-react";
 
-export default class Navbar extends Component {
+class Navbar extends Component {
   constructor(props) {
     super(props);
 
     this.state = { activeItem: "about" };
+    this.setActiveItem = this.setActiveItem.bind(this);
   }
 
   setActiveItem = (e, { name }) => this.setState({ activeItem: name });
@@ -42,6 +43,10 @@ export default class Navbar extends Component {
               to="/products"
               name="wines"
               active={activeItem === "wines"}
+// =======
+//               name="products"
+//               active={activeItem === "products"}
+// >>>>>>> master
               onClick={this.setActiveItem}
             />
             <Menu.Item
@@ -56,7 +61,7 @@ export default class Navbar extends Component {
                   as={Link}
                   to="/logout"
                   name="Logout"
-                  active={activeItem === "logout"}
+                  active={activeItem === "Logout"}
                   onClick={this.props.handleClick}
                 />
             )}
@@ -66,7 +71,7 @@ export default class Navbar extends Component {
                   fitted="vertically"
                   to="/login"
                   name="Login"
-                  active={activeItem === "login"}
+                  active={activeItem === "Login"}
                   onClick={this.setActiveItem}
                 />
             )}
@@ -76,7 +81,7 @@ export default class Navbar extends Component {
                   fitted="vertically"
                   to="/signup"
                   name="Sign Up"
-                  active={activeItem === "signup"}
+                  active={activeItem === "Sign Up"}
                   onClick={this.setActiveItem}
                 />
             )}
@@ -94,53 +99,30 @@ export default class Navbar extends Component {
     );
   }
 }
-// = ({ handleClick, isLoggedIn }) => (
-//   <div>
-//     <h1>BOILERMAKER</h1>
-//     <nav>
-//       {isLoggedIn ? (
-//         <div>
-//           {/* The navbar will show these links after you log in */}
-//           <Link to="/about">Home</Link>
-//           <a href="#" onClick={handleClick}>
-//             Logout
-//           </a>
-//         </div>
-//       ) : (
-//         <div>
-//           {/* The navbar will show these links before you log in */}
-//           <Link to="/login">Login</Link>
-//           <Link to="/signup">Sign Up</Link>
-//         </div>
-//       )}
-//     </nav>
-//     <hr />
-//   </div>
-// )
 
-// /**
-//  * CONTAINER
-//  */
-// const mapState = state => {
-//   return {
-//     isLoggedIn: !!state.user.id
-//   }
-// }
+/**
+ * CONTAINER
+ */
+const mapState = state => {
+  return {
+    isLoggedIn: !!state.user.id
+  }
+}
 
-// const mapDispatch = dispatch => {
-//   return {
-//     handleClick() {
-//       dispatch(logout())
-//     }
-//   }
-// }
+const mapDispatch = dispatch => {
+  return {
+    handleClick() {
+      dispatch(logout());
+    }
+  }
+}
 
-// export default connect(mapState, mapDispatch)(Navbar)
+export default connect(mapState, mapDispatch)(Navbar)
 
-// /**
-//  * PROP TYPES
-//  */
-// Navbar.propTypes = {
-//   handleClick: PropTypes.func.isRequired,
-//   isLoggedIn: PropTypes.bool.isRequired
-// }
+/**
+ * PROP TYPES
+ */
+Navbar.propTypes = {
+  handleClick: PropTypes.func.isRequired,
+  isLoggedIn: PropTypes.bool.isRequired
+}

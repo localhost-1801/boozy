@@ -1,5 +1,6 @@
 const router = require('express').Router()
-const {Product} = require('../db/models')
+const { Product } = require('../db/models')
+module.exports = router
 
 
 // /api/products/
@@ -19,6 +20,28 @@ router.get('/:id', (req, res, next) => {
         .then(product => res.json(product))
         .catch(next)
 })
-module.exports = router
 
-//Will need additional routes for filtering
+// api/products
+router.post('/', (req, res, next) => {
+    Product.create(req.body)
+        .then(product => res.json(product))
+        .catch(next)
+})
+
+//api/products/:id
+router.put('/:id', (req, res, next) => {
+    req.product.update(req.body)
+        .then(product => res.json(product))
+        .catch(next)
+})
+
+
+//api/products/:id
+router.delete('/:id', (req, res, next) => {
+    req.product.destroy()
+        .then(() => res.sendStatus(204))
+        .catch(next);
+});
+
+
+//Will need additional routes for filtering, maybe

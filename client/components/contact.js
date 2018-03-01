@@ -1,6 +1,6 @@
 import React from 'react'
 
-const ContactUs = () => (
+const Contact = () => (
     <div>
         <p>
             Cras sollicitudin congue turpis a rhoncus. Duis metus arcu,
@@ -17,4 +17,4 @@ const ContactUs = () => (
     </p>
     </div>
 )
-export default ContactUs;
+export default Contact;
