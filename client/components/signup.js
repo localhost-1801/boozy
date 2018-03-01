@@ -31,7 +31,7 @@ class Signup extends React.Component {
         >
           <Grid.Column style={{ maxWidth: 450 }}>
             <Header as='h2' color='olive' textAlign='center'>
-              {' '}Create a Boozy account and start shopping
+              {' '}Create a Boozy account
             </Header>
             <Form onSubmit={evt => onSignUpSubmit(evt)} size='large'>
               <Segment raised>
