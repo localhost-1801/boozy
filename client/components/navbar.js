@@ -40,9 +40,13 @@ class Navbar extends Component {
             />
             <Menu.Item
               as={Link}
-              to="/wines"
+              to="/products"
               name="wines"
               active={activeItem === "wines"}
+// =======
+//               name="products"
+//               active={activeItem === "products"}
+// >>>>>>> master
               onClick={this.setActiveItem}
             />
             <Menu.Item
@@ -108,7 +112,7 @@ const mapState = state => {
 const mapDispatch = dispatch => {
   return {
     handleClick() {
-      dispatch(logout())
+      dispatch(logout());
     }
   }
 }

@@ -7,8 +7,10 @@ export { default as Navbar } from './navbar'
 export { default as UserHome } from './user-home'
 export { default as Home } from './home'
 export { default as Login } from './login'
+export { default as SingleProduct } from './singleProduct'
 export { default as UnAuthUserHome } from './unauthuser-home';
-export { default as ContactUs } from './contactUs'
 export { default as About } from './about'
 export { default as Products } from './products';
-export { Signup } from './auth-form'
+export { AuthSignup } from './auth-form'
+export { default as Signup } from './signup'
+export { default as Contact } from './contact'
