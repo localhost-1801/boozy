@@ -31,7 +31,6 @@ router.post('/', (req, res, next) => {
         .catch(next)
 })
 
-//done
 //api/products/:id
 router.put('/:id', (req, res, next) => {
     req.product.update(req.body)
