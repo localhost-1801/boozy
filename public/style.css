@@ -25,6 +25,12 @@ form div {
   font-size: 20px;
 }
 
+.contactAboutText {
+  text-align: center;
+  font-size: x-large;
+  padding: 60px 200px
+}
+
 .indexBackground {
   background-color: black;
   background-image: url(img/background.jpg);
@@ -60,6 +66,13 @@ form div {
 }
 
 .single-product {
-  height: 200px;
-  background-image: url(img/background.jpg)
+ height: 200px;
+ background-image: url(img/background.jpg);
+}
+
+.headerStyle {
+  text-decoration: underline;
+  text-align: center;
+  padding-top: 50px;
+  font-size: 350%;
 }

@@ -10,5 +10,6 @@ export { default as Login } from './login'
 export { default as SingleProduct } from './singleProduct'
 export { default as UnAuthUserHome } from './unauthuser-home';
 export { default as Signup } from './signup'
+export { default as Products } from './products';
 export { default as About } from './about'
 export { default as Contact } from './contact'
