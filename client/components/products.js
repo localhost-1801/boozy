@@ -5,6 +5,7 @@ import { auth } from '../store'
 import { Card, Image, Icon, Button, Label, Segment, Menu, Input } from 'semantic-ui-react'
 import { fetchProducts } from '../store/products.js'
 import { Link } from 'react-router-dom'
+import { addProductToCart } from '../store/cart.js'
 
 
 
@@ -15,6 +16,21 @@ export class Products extends Component {
             activeItem: 'all',
             input: '',
         }
+    }
+    handleAdd = (id) => {
+      console.log(document.cookie)
+      if (document.cookie){
+        //use thunk to make axios put request, {quantity: 5, productId: 2, token: lsafkl}
+        console.log(id)
+        this.props.addProductToCart({
+          quantity: {
+            value: 1,
+            add: true
+          },
+          token: 'nR',
+          productId: id
+        })
+      }
     }
     handleItemClick = (e, { id }) => this.setState({ activeItem: id })
     handleInput = (e) => {
@@ -41,7 +57,7 @@ export class Products extends Component {
                 return false
             }
         })
-        
+
         return (
             <div>
                 <Menu attached='top' >
@@ -86,7 +102,7 @@ export class Products extends Component {
                                     <Segment.Group horizontal>
                                         <Segment>${wine.price}</Segment>
                                         <Segment>
-                                            <Label as={Link} to='/test'>
+                                            <Label onClick={() => this.handleAdd(wine.id)}>
                                                 <Icon name="add to cart"/>
                                             </Label>
                                         </Segment>
@@ -106,7 +122,7 @@ export class Products extends Component {
 
 
 const mapState = ({ products }) => ({ products })
-const mapDispatch = { fetchProducts }
+const mapDispatch = { fetchProducts, addProductToCart }
 //const mapDispatch = {fetchStudents};
 
 export default connect(mapState, mapDispatch)(Products);

@@ -200,7 +200,7 @@ const seed = async () => {
         const cart = await Promise.all(cartDummyData.map(cart => Cart.create(cart)))
         const product = await Promise.all(productDBseed.map(product => Product.create(product)))
         const review = await Promise.all(reviewDBseed.map(review => Review.create(review)))
-        
+
         const cartItem = await Promise.all(cartDBseed.map(cartItem => CartItem.create(cartItem)))
         // console.log('product', product[0]);
         // console.log('category', category[0]);
@@ -214,12 +214,12 @@ const seed = async () => {
             await product[i].setCategories(category[i % category.length])
         }
 
-        
+
     } catch(err) {
         console.error(err)
     }
- 
-    
+
+
     // .then(() => //not sure how to populate a join table
     //     Promise.all(prodCatDummyData.map(prodCat =>
     //         ProdCatJoin.create(prodCat)
