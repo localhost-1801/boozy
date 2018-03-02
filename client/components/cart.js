@@ -9,10 +9,10 @@ export default class Cart extends Component {
         <div className='cart'>
         </div>
         <Header as='h2' color='black' textAlign='center'>
-          {' '}Shopping Cart
+        {' '}Shopping Cart
       </Header>
         <Grid divided='vertically'>
-          <Grid.Row>
+        <Grid.Row>
             <Grid.Column width={3}>
             </Grid.Column>
             <Grid.Column width={6} className="cartHeader">
@@ -72,3 +72,4 @@ export default class Cart extends Component {
     )
   }
 }
+

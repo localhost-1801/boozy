@@ -13,15 +13,23 @@ const defaultProduct = {};
  * ACTION CREATORS
  */
 const getProduct = product => ({ type: GET_PRODUCT, product });
-const removeProduct = () => ({ type: REMOVE_PRODUCT });
+const removeProduct = (id) => ({ type: REMOVE_PRODUCT, id });
 /**
  * THUNK CREATORS
  */
 export const fetchProduct = (productId) =>
     dispatch =>
-        axios.get(`/product/${productId}`)
+        axios.get(`api/products/${productId}`)
             .then(res =>
-                dispatch(getUser(res.data || defaultProduct)))
+                dispatch(getProduct(res.data || defaultProduct)))
+            .catch(err => console.log(err))
+
+
+export const removeProductAsync = (id) =>
+    dispatch =>
+        axios.delete(`api/products/${id}`)
+            .then(res =>
+                dispatch(removeProduct(res.data || defaultProduct)))
             .catch(err => console.log(err))
 /**
 * REDUCER
@@ -31,7 +39,7 @@ export default function (state = defaultProduct, action) {
         case GET_PRODUCT:
             return action.product;
         case REMOVE_PRODUCT:
-            return defaultProduct;
+            return defaultProduct; //
         default:
             return state
     }

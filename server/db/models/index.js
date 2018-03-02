@@ -19,6 +19,7 @@ Product.hasMany(Review);
 Review.belongsTo(Product);
 Review.belongsTo(User);
 User.hasMany(Order);
+Cart.hasOne(Order); //adds cart column to Order
 // Order.hasMany(Product)
 
 
