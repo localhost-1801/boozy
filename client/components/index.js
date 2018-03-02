@@ -14,3 +14,4 @@ export { default as Products } from './products';
 export { default as About } from './about'
 export { default as Contact } from './contact'
 export { default as Cart } from './cart'
+export { default as Orders } from './orders'

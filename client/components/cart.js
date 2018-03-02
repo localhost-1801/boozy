@@ -1,9 +1,8 @@
 
 import React, { Component } from 'react'
-import { Grid, Container, Divider, Header, Card, Image, Icon, Dropdown, Button } from 'semantic-ui-react'
-import { fetchProducts } from '../store/products.js'
+import { Grid, Header, Image, Dropdown, Button } from 'semantic-ui-react'
 
-export default class SingleProduct extends Component {
+export default class Cart extends Component {
   render() {
     return (
       <div>
@@ -26,6 +25,7 @@ export default class SingleProduct extends Component {
               Quantity
             </Grid.Column>
           </Grid.Row>
+
           <Grid.Row>
             <Grid.Column width={3}>
               <Image src='img/white.jpg' />
@@ -40,15 +40,31 @@ export default class SingleProduct extends Component {
               $20.00
         </Grid.Column>
             <Grid.Column width={3}>
-            <Dropdown text='Quantity'>
-            <Dropdown.Menu>
-              <Dropdown.Item text='1' />
-              <Dropdown.Item text='2' />
-              <Dropdown.Item text='3' />
-              <Dropdown.Item text='4' />
-              <Dropdown.Item text='5' />
-            </Dropdown.Menu>
-          </Dropdown>
+              <Dropdown text='Quantity'>
+                <Dropdown.Menu>
+                  <Dropdown.Item text='1' />
+                  <Dropdown.Item text='2' />
+                  <Dropdown.Item text='3' />
+                  <Dropdown.Item text='4' />
+                  <Dropdown.Item text='5' />
+                </Dropdown.Menu>
+              </Dropdown>
+            </Grid.Column>
+          </Grid.Row>
+
+          <Grid.Row>
+            <Grid.Column width={3}>
+            </Grid.Column>
+            <Grid.Column width={6}>
+            </Grid.Column>
+            <Grid.Column width={3}>
+            </Grid.Column>
+            <Grid.Column width={3}>
+              <a
+                target='_self'
+                href='/checkout'>
+                <Button color='green'>Proceed to checkout</Button>
+              </a>
             </Grid.Column>
           </Grid.Row>
         </Grid>
@@ -56,5 +72,4 @@ export default class SingleProduct extends Component {
     )
   }
 }
-
 

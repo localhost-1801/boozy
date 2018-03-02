@@ -43,10 +43,6 @@ class Navbar extends Component {
               to="/products"
               name="wines"
               active={activeItem === "wines"}
-// =======
-//               name="products"
-//               active={activeItem === "products"}
-// >>>>>>> master
               onClick={this.setActiveItem}
             />
             <Menu.Item
