@@ -65,14 +65,14 @@ form div {
   margin: 0;
 }
 
+.single-product {
+ height: 200px;
+ background-image: url(img/background.jpg);
+}
+
 .headerStyle {
   text-decoration: underline;
   text-align: center;
   padding-top: 50px;
   font-size: 350%;
-}
-
-.single-product {
-  height: 200px;
-  background-image: url(img/background.jpg)
 }

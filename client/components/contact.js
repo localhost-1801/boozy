@@ -2,7 +2,7 @@ import React from 'react'
 
 
 //edit
-const ContactUs = () => (
+const Contact = () => (
     <div className="indexBackground">
     <h1 className='headerStyle'>Contact Us</h1>
         <p className= 'contactAboutText'>
