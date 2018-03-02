@@ -1,8 +1,11 @@
 import React from 'react'
 
-const Contact = () => (
-    <div>
-        <p>
+
+//edit
+const ContactUs = () => (
+    <div className="indexBackground">
+    <h1 className='headerStyle'>Contact Us</h1>
+        <p className= 'contactAboutText'>
             Cras sollicitudin congue turpis a rhoncus. Duis metus arcu,
             maximus et sollicitudin eu, congue eget leo. Ut dignissim lacus
             sed elit efficitur, in porttitor est accumsan. Praesent eget sem
@@ -17,4 +20,4 @@ const Contact = () => (
     </p>
     </div>
 )
-export default Contact;
+export default ContactUs;

@@ -9,6 +9,8 @@ export { default as Home } from './home'
 export { default as Login } from './login'
 export { default as SingleProduct } from './singleProduct'
 export { default as UnAuthUserHome } from './unauthuser-home';
-export { default as Signup } from './signup'
 export { default as About } from './about'
+export { default as Products } from './products';
+export { AuthSignup } from './auth-form'
+export { default as Signup } from './signup'
 export { default as Contact } from './contact'
