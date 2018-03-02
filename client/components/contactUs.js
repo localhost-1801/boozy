@@ -1,14 +1,7 @@
 import React from 'react'
 
-const headerStyle = {
-    textDecoration: 'underline',
-    textAlign: 'center',
-    paddingTop: '50px',
-    fontSize: 'xx-large',
-    fontSize: '350%'
-}
 
-
+//edit
 const ContactUs = () => (
     <div className="indexBackground">
     <h1 className='headerStyle'>Contact Us</h1>

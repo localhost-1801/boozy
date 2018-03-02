@@ -1,5 +1,6 @@
 import React from 'react'
 
+//edit
 const About = () => (
     <div className="indexBackground">
         <h1 className='headerStyle'>About</h1>
