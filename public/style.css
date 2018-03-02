@@ -118,3 +118,7 @@ form div {
   text-align: center;
   color: black;
 }
+
+.cartToCheckoutButton {
+  text-align: center;
+}
