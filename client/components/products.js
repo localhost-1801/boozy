@@ -41,7 +41,7 @@ export class Products extends Component {
                 return false
             }
         })
-        
+
         return (
             <div>
                 <Menu attached='top' >
@@ -66,7 +66,7 @@ export class Products extends Component {
                                 key={wine.id}
                                 centered={true}
                             >
-                                <Image as={Link} to={`/products/${wine.id}`} src='https://files.slack.com/files-pri/T024FPYBQ-F9FGYBYEP/untitled-3.jpg' />
+                                <Image as={Link} to={`/products/${wine.id}`} src='img/red.jpg' />
                                 <Card.Content as={Link} to={`/products/${wine.id}`}>
                                     <Card.Meta>
                                         <span className='date'>
@@ -87,7 +87,7 @@ export class Products extends Component {
                                         <Segment>${wine.price}</Segment>
                                         <Segment>
                                             <Label as={Link} to='/test'>
-                                                <Icon name="add to cart"/>
+                                                <Icon name="add to cart" />
                                             </Label>
                                         </Segment>
                                     </Segment.Group>
