@@ -2,7 +2,7 @@ const router = require('express').Router()
 const { Product, Category } = require('../db/models')
 module.exports = router
 
-
+//done
 // /api/products/
 router.get('/', (req, res, next) => {
     Product.findAll({include: [
@@ -23,6 +23,7 @@ router.get('/:id', (req, res, next) => {
         .catch(next)
 })
 
+
 // api/products
 router.post('/', (req, res, next) => {
     Product.create(req.body)
@@ -30,6 +31,7 @@ router.post('/', (req, res, next) => {
         .catch(next)
 })
 
+//done
 //api/products/:id
 router.put('/:id', (req, res, next) => {
     req.product.update(req.body)

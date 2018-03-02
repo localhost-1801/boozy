@@ -20,4 +20,4 @@ const Contact = () => (
     </p>
     </div>
 )
-export default ContactUs;
+export default Contact;

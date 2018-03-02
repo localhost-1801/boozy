@@ -9,14 +9,8 @@ export { default as Home } from './home'
 export { default as Login } from './login'
 export { default as SingleProduct } from './singleProduct'
 export { default as UnAuthUserHome } from './unauthuser-home';
-<<<<<<< HEAD
-export { default as About } from './about'
-export { default as Products } from './products';
-export { AuthSignup } from './auth-form'
-export { default as Signup } from './signup'
-=======
 export { default as Signup } from './signup'
 export { default as Products } from './products';
 export { default as About } from './about'
->>>>>>> 0b8794544683ba22f79bd52ffde70c0d6590766d
 export { default as Contact } from './contact'
+export { default as Cart } from './cart'

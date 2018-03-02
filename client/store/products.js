@@ -4,7 +4,6 @@ import axios from 'axios'
 
 const GET_PRODUCTS = 'GET_PRODUCTS'
 
-
 //INITIAL STATE
 
 const defaultProducts = []

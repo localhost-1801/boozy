@@ -76,3 +76,16 @@ form div {
   padding-top: 50px;
   font-size: 350%;
 }
+
+.cart {
+  height: 200px;
+  background-image: url(img/checkout-header.jpg);
+ }
+
+.cartHeader {
+  padding: 0 !important;
+  margin: 0 !important;
+  border: 0 !important;
+  left: 15px;
+  font-weight: bold;
+}
