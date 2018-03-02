@@ -1,9 +1,8 @@
 
 import React, { Component } from 'react'
-import { Grid, Container, Divider, Header, Card, Image, Icon, Dropdown, Button } from 'semantic-ui-react'
-import { fetchProducts } from '../store/products.js'
+import { Grid, Header, Image, Dropdown, Button } from 'semantic-ui-react'
 
-export default class SingleProduct extends Component {
+export default class Cart extends Component {
   render() {
     return (
       <div>
@@ -73,5 +72,3 @@ export default class SingleProduct extends Component {
     )
   }
 }
-
-
