@@ -46,9 +46,9 @@ form div {
 
 .navbar {
   z-index: 1;
-  padding: 0;
-  margin: 0;
-  border: 0
+  padding: 0 !important;
+  margin: 0 !important;
+  border: 0 !important;
 }
 
 
@@ -63,6 +63,11 @@ form div {
   position: fixed;
   padding: 0;
   margin: 0;
+}
+
+.single-product {
+ height: 200px;
+ background-image: url(img/background.jpg);
 }
 
 .headerStyle {
