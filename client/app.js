@@ -11,8 +11,6 @@ const App = () => {
     <div>
       <Navbar />
       <Routes />
-      {/* <Products /> */}
-
     </div>
   )
 }
