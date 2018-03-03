@@ -45,7 +45,7 @@ export const updateProductThunk = (product, id) =>
         .then(res => dispatch(updateProduct(res.data || defaultProduct)))
         .catch(err => console.log(err))
 
-
+//test
 
 /**
 * REDUCER

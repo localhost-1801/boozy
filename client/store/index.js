@@ -24,3 +24,5 @@ console.log('STORE', store);
 
 export default store
 export * from './user'
+
+//test

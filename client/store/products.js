@@ -23,7 +23,7 @@ export const fetchProducts = () =>
                 )
             })
             .catch(err => console.log(err))
-
+//test
 
 //Reducer
 export default function (state = defaultProducts, action) {
