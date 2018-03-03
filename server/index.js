@@ -1,3 +1,4 @@
+/* WE HAVE A VERY STRANGE BUG THAT ONLY LETS YOU ADD 6 THINGS TO CART */
 const path = require('path')
 const express = require('express')
 const morgan = require('morgan')
@@ -73,6 +74,7 @@ const createApp = () => {
       })
       .catch(next)
     } else {
+      console.log('missed');
       next()
     }
   })

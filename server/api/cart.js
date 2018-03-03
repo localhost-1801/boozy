@@ -5,9 +5,10 @@ const Hashids = require('hashids')
 const hashids = new Hashids()
 module.exports = router
 
-router.get('/', (req, res, next) => {
+ //api/cart/:token
+router.get('/:token', (req, res, next) => {
     //assuming cookies will work
-    const cookieToken = 'abc'
+    const cookieToken = req.params.token
     Cart.findOne({
         where: {
             token: cookieToken
@@ -17,7 +18,6 @@ router.get('/', (req, res, next) => {
         ]
     })
         .then(cartItems => {
-            console.log(cartItems)
             res.json(cartItems)
         })
         .catch(err => { console.log(err) })
@@ -50,6 +50,7 @@ router.put('/', (req, res, next) => {
     // })
     //     .then(modifiedCart => res.json(modifiedCart))
     //     .catch(next);
+    console.log('click');
     let cartIdFromHash = hashids.decode(req.cookies.cart)[0];
     CartItem.findOne({
       where: {

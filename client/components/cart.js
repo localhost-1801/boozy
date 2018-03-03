@@ -1,8 +1,15 @@
 
 import React, { Component } from 'react'
 import { Grid, Header, Image, Dropdown, Button } from 'semantic-ui-react'
+import { connect } from 'react-redux'
+import { fetchCart } from '../store/cart'
 
-export default class Cart extends Component {
+class Cart extends Component {
+
+  componentDidMount(){
+    this.props.getCart('' + document.cookie.slice(5))
+  }
+
   render() {
     return (
       <div>
@@ -73,3 +80,9 @@ export default class Cart extends Component {
   }
 }
 
+const mapState = ({ cart }) => ({ cart });
+const mapDispatch = (dispatch) => ({ getCart(cookie){
+  dispatch(fetchCart(cookie))
+}});
+
+export default connect(mapState, mapDispatch)(Cart);

@@ -19,7 +19,7 @@ const getCart = cart => ({ type: GET_CART, cart })
 
 export const fetchCart = (cookieToken) =>
     dispatch =>
-        axios.get('/api/cart')
+        axios.get(`/api/cart/${cookieToken}`)
             .then(res => {
                 return (
                     dispatch(getCart(res.data || defaultCart))
