@@ -32,41 +32,38 @@ router.post('/', (req, res, next) => {
         ]
     })
         .then(newCart => {
-          let cartHash = hashids.encode(newCart.id);
-          newCart.update({token: cartHash})
-          req.cookie = cartHash;
-          res.json(newCart)
+            let cartHash = hashids.encode(newCart.id);
+            newCart.update({ token: cartHash })
+            req.cookie = cartHash;
+            res.json(newCart)
         })
         .catch(next);
 })
 
 //api/cart
 router.put('/', (req, res, next) => {
-    //not sure if cart will be on the request body?
-    // req.cart.update(req.body, {
-    //     include: [
-    //         { model: Product, through: CartItem }
-    //     ]
-    // })
-    //     .then(modifiedCart => res.json(modifiedCart))
-    //     .catch(next);
-
     CartItem.findOne({
-      where: {
-        cartId: hashids.decode(req.body.token)[0],
-        productId: req.body.productId
-      }
-    }).then( res => {
-      if (res) {
-        let quantity = req.body.quantity.add ? res.quantity + req.body.quantity.value : req.body.quantity.value;
-        console.log('in if statement')
-        res.update({quantity})
-      } else {
-        console.log('in else statement')
-        CartItem.create({productId: req.body.productId, cartId: hashids.decode(req.body.token)[0], quantity: req.body.quantity.value})
-      }
+        where: {
+            cartId: hashids.decode(req.body.token)[0],
+            productId: req.body.productId
+        }
+    }).then(res => {
+        if (res) {
+            if (req.body.quantity.add) {
+                let quantity = req.body.quantity.add ? res.quantity + req.body.quantity.value : req.body.quantity.value;
+                console.log('in if statement')
+                res.update({ quantity })
+            } else { //req.body.quantity.add
+                let quantity = req.body.quantity.remove ? res.quantity + req.body.quantity.value : req.body.quantity.value;
+                console.log('in if, if-else statement')
+                res.update({ quantity })
+            }
+        } else {
+            console.log('in else statement')
+            CartItem.create({ productId: req.body.productId, cartId: hashids.decode(req.body.token)[0], quantity: req.body.quantity.value })
+        }
     })
-    .catch(next);
+        .catch(next);
 })
 
 //api/cart
@@ -78,7 +75,7 @@ router.delete('/', (req, res, next) => {
 })
 
 
-// Should NOT be able to get cart by ID
+// should NOT be able to get cart by ID
 // should be able to post a new cart
 //should be able to update a cart
 //should be able to delete a cart in its entirity
