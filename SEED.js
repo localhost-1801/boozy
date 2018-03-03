@@ -223,12 +223,12 @@ const seed = async () => {
             await product[i].setCategories(category[i % category.length])
         }
 
-        
+
     } catch(err) {
         console.error(err)
     }
- 
-    
+
+
     // .then(() => //not sure how to populate a join table
     //     Promise.all(prodCatDummyData.map(prodCat =>
     //         ProdCatJoin.create(prodCat)

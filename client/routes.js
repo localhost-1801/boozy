@@ -25,6 +25,7 @@ class Routes extends Component {
         <Route exact path="/ageGate" component={UnAuthUserHome} />
         <Route exact path="/cart" component={Cart} />
         {/* Routes placed here are available to all visitors */}
+        <Route path="/wines" component={Products} />
         <Route exact path="/products" component={Products} />
         <Route path="/products/:id" component={SingleProduct} />
         <Route path="/contact" component={Contact} />
