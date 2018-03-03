@@ -13,7 +13,6 @@ const defaultCart = [];
 
 const add = (productToAdd) => ({type: ADD, productToAdd})
 const getCart = cart => ({ type: GET_CART, cart })
-const add = (productToAdd) => ({type: ADD, productToAdd})
 
 
 //THUNK CREATORS
