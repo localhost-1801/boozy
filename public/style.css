@@ -68,6 +68,9 @@ form div {
 .single-product {
  height: 200px;
  background-image: url(img/background.jpg);
+ background-repeat: no-repeat;
+ background-position:left top;
+ background-size: cover;
 }
 
 .headerStyle {
@@ -77,9 +80,12 @@ form div {
   font-size: 350%;
 }
 
-.cart {
+.cart-background {
   height: 200px;
   background-image: url(img/checkout-header.jpg);
+  background-repeat: no-repeat;
+  background-position:left top;
+  background-size: cover;
  }
 
 .cartHeader {
@@ -121,4 +127,21 @@ form div {
   margin: auto;
   width: 50%;
   padding: 10px;
+}
+
+.productsBackground {
+  background-color: black;
+  background-image: url(img/products-background.jpg);
+  background-repeat: no-repeat;
+  background-position:left top;
+  background-size: cover;
+  background-position: fixed;
+  height: 100%;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.centered-text {
+  text-align: center;
 }
