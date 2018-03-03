@@ -209,7 +209,6 @@ const seed = async () => {
         const cart = await Promise.all(cartDummyData.map(cart => Cart.create(cart)))
         const product = await Promise.all(productDBseed.map(product => Product.create(product)))
         const review = await Promise.all(reviewDBseed.map(review => Review.create(review)))
-
         const cartItem = await Promise.all(cartDBseed.map(cartItem => CartItem.create(cartItem)))
         const order = await Promise.all(orderDBseed.map(order => Order.create(order)))
         // console.log('product', product[0]);

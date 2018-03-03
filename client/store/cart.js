@@ -11,6 +11,7 @@ const defaultCart = [];
 
 //ACTION CREATORS
 
+const add = (productToAdd) => ({type: ADD, productToAdd})
 const getCart = cart => ({ type: GET_CART, cart })
 const add = (productToAdd) => ({type: ADD, productToAdd})
 
@@ -39,12 +40,14 @@ export const addProductToCart = (productToAdd) =>
 
 //REDUCERS
 
+//REDUCERS
+
 export default function (state = defaultCart, action) {
     switch (action.type) {
         case GET_CART:
-          return action.cart
+            return action.cart
         case ADD:
-          return action.add
+            return action.add
         default:
             return state
     }
