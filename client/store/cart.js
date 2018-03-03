@@ -13,9 +13,10 @@ const defaultCart = [];
 
 const add = (productToAdd) => ({type: ADD, productToAdd})
 const getCart = cart => ({ type: GET_CART, cart })
+const add = (productToAdd) => ({type: ADD, productToAdd})
 
 
-//THUNK CREATORS 
+//THUNK CREATORS
 
 export const fetchCart = (cookieToken) =>
     dispatch =>
@@ -37,6 +38,7 @@ export const addProductToCart = (productToAdd) =>
       })
     .catch(err => console.error(err));
 
+//REDUCERS
 
 //REDUCERS
 

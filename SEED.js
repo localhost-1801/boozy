@@ -122,7 +122,7 @@ const orderDBseed =
             address: '221 B Baker St',
             cartId: 1,
             date: '09/01/1995'
-            
+
         },
         {
             userId: 2,
