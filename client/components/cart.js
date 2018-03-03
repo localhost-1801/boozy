@@ -9,6 +9,7 @@ class Cart extends Component {
     super(props)
 
 
+    this.generateDropdown = this.generateDropdown.bind(this);
   }
 
   componentDidMount(){
@@ -16,8 +17,28 @@ class Cart extends Component {
     console.log(this.props.cart)
   }
 
+  handleQuantityChange(event){
+
+  }
+
+  generateDropdown(item){
+    let dropDowns = [];
+    for(var i = 0; i < item.cartItem.quantity + 3; i++){
+      dropDowns.push(
+        <Dropdown.Item text={i} />
+      )
+    }
+    return dropDowns;
+  }
+
   render() {
-    console.log(this.props.cart)
+    if(this.props.cart.length === 0){
+      return(
+        <div>
+          Loading..
+        </div>
+      )
+    } else {
     return (
       <div>
         <div className='cart'>
@@ -55,13 +76,9 @@ class Cart extends Component {
                   {item.price}
             </Grid.Column>
                 <Grid.Column width={3}>
-                  <Dropdown text='Quantity'>
+                  <Dropdown text={item.cartItem.quantity}>
                     <Dropdown.Menu>
-                      <Dropdown.Item text='1' />
-                      <Dropdown.Item text='2' />
-                      <Dropdown.Item text='3' />
-                      <Dropdown.Item text='4' />
-                      <Dropdown.Item text='5' />
+                      {this.generateDropdown(item)}
                     </Dropdown.Menu>
                   </Dropdown>
                 </Grid.Column>
@@ -112,6 +129,7 @@ class Cart extends Component {
         </Grid>
       </div>
     )
+  }
   }
 }
 
