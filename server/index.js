@@ -59,9 +59,8 @@ const createApp = () => {
   //cookie middleware
   app.use(cookieParser())
   app.use((req, res, next) => {
-    console.log(req.cookies)
+    // console.log(req.cookies)
     if (!req.cookies.cart){
-      console.log('creating cookie')
       Cart.create()
       .then(newCart => {
         let cartHash = hashids.encode(newCart.id);

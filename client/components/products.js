@@ -26,7 +26,7 @@ export class Products extends Component {
             add: true
           },
           //set to document.cookie
-          token: document.cookie,
+          token: document.cookie.slice(5) + '',
           productId: id
         })
       }
