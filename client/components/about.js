@@ -1,45 +1,44 @@
 import React from 'react'
-import { Grid, Image, Item } from 'semantic-ui-react'
+import { Grid, Image, Header } from 'semantic-ui-react'
 
 //edit
 const About = () => (
     <div>
         <div className="about">
         </div>
+        <div>
+
+            <Header as='h2' textAlign='center'>
+                {' '}Meet the Boozy Wines Team
+</Header>
+        </div>
         <br />
-        <br />
-        <Grid>
-            <Grid.Row columns={6}>
+        <Grid columns={4}>
+            <Grid.Row>
                 <Grid.Column>
-                </Grid.Column>
-                <Grid.Column>
-                    <Image src='/img/team/charlie.png' />
+                    <Image src='/img/team/charlie.png' size="medium" />
                     <div className="about-name">Charley Kirkpatrick </div>
-                    <br />
                     <p className="title">Chief Llama Officer (CLO)</p>
                 </Grid.Column>
                 <Grid.Column>
-                    <Image src='/img/team/nirali.png' />
+                    <Image src='/img/team/nirali.png' size="medium" />
                     <div className="about-name">Nirali Shah</div>
-                    <br />
                     <p className="title">Chief Aesthetics Officer (CAO)</p>
                 </Grid.Column>
                 <Grid.Column>
-                    <Image src='/img/team/thomas.png' />
+                    <Image src='/img/team/thomas.png' size="medium" />
                     <div className="about-name">Thomas Lawless</div>
-                    <br />
                     <p className="title">Chief Something (CS)</p>
                 </Grid.Column>
                 <Grid.Column>
-                    <Image src='/img/team/warren.png' />
+                    <Image src='/img/team/warren.png' size="medium" />
                     <div className="about-name">Warren Mui</div>
-                    <br />
                     <p className="title">Cheif Something (CS)</p>
-                </Grid.Column>
-                <Grid.Column>
                 </Grid.Column>
             </Grid.Row>
         </Grid>
     </div>
 )
 export default About;
+
+
