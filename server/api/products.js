@@ -2,7 +2,7 @@ const router = require('express').Router()
 const { Product, Category } = require('../db/models')
 module.exports = router
 
-
+//done
 // /api/products/
 router.get('/', (req, res, next) => {
     Product.findAll({include: [
@@ -22,6 +22,7 @@ router.get('/:id', (req, res, next) => {
         .then(product => res.json(product))
         .catch(next)
 })
+
 
 // api/products
 router.post('/', (req, res, next) => {

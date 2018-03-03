@@ -12,6 +12,19 @@ router.get('/', (req, res, next) => {
   })
 })
 
+
+//api/reviews/p/:productId/
+router.get('/p/:productId', (req, res, next) => {
+  Review.findAll({
+    where: { productId: req.params.productId },
+    include: [
+      { model: Product },
+      { model: User, attributes: ['id', 'e-mail'] }
+    ],
+  })
+})
+
+
 //api/reviews/id
 router.get('/:id', (req, res, next) => {
   Review.findOne({

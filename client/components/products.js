@@ -83,7 +83,7 @@ export class Products extends Component {
                                 key={wine.id}
                                 centered={true}
                             >
-                                <Image as={Link} to={`/products/${wine.id}`} src='https://files.slack.com/files-pri/T024FPYBQ-F9FGYBYEP/untitled-3.jpg' />
+                                <Image as={Link} to={`/products/${wine.id}`} src='img/red.jpg' />
                                 <Card.Content as={Link} to={`/products/${wine.id}`}>
                                     <Card.Meta>
                                         <span className='date'>
