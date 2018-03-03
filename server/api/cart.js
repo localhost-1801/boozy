@@ -50,10 +50,10 @@ router.put('/', (req, res, next) => {
     // })
     //     .then(modifiedCart => res.json(modifiedCart))
     //     .catch(next);
-
+    let cartIdFromHash = hashids.decode(req.cookies.cart)[0];
     CartItem.findOne({
       where: {
-        cartId: hashids.decode(req.body.token)[0],
+        cartId: cartIdFromHash,
         productId: req.body.productId
       }
     }).then( res => {
@@ -63,7 +63,7 @@ router.put('/', (req, res, next) => {
         res.update({quantity})
       } else {
         console.log('in else statement')
-        CartItem.create({productId: req.body.productId, cartId: hashids.decode(req.body.token)[0], quantity: req.body.quantity.value})
+        CartItem.create({productId: req.body.productId, cartId: cartIdFromHash, quantity: req.body.quantity.value})
       }
     })
     .catch(next);
