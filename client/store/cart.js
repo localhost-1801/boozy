@@ -1,10 +1,31 @@
-import axios from 'axios'
+import axios from 'axios';
 
+//ACTION TYPES
 
-const ADD = 'ADD_TO_CART'
+const GET_CART = 'GET_CART';
+const ADD = 'ADD_TO_CART';
 
+//INITIAL STATE
 
+const defaultCart = [];
+
+//ACTION CREATORS
+
+const getCart = cart => ({ type: GET_CART, cart })
 const add = (productToAdd) => ({type: ADD, productToAdd})
+
+
+//THUNK CREATORS
+
+export const fetchCart = (cookieToken) =>
+    dispatch =>
+        axios.get('/api/cart')
+            .then(res => {
+                return (
+                    dispatch(getCart(res.data || defaultCart))
+                )
+            })
+            .catch(err => console.log(err));
 
 export const addProductToCart = (productToAdd) =>
   dispatch =>
@@ -16,12 +37,15 @@ export const addProductToCart = (productToAdd) =>
       })
     .catch(err => console.error(err));
 
+//REDUCERS
 
-export default function (state = {}, action) {
-  switch (action.type) {
-    case ADD:
-      return action.add
-    default:
-      return state
-  }
+export default function (state = defaultCart, action) {
+    switch (action.type) {
+        case GET_CART:
+          return action.cart
+        case ADD:
+          return action.add
+        default:
+            return state
+    }
 }

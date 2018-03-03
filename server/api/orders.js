@@ -1,21 +1,23 @@
 const router = require('express').Router()
-const {Order, Product, User, CartItem} = require('../db/models')
+const { Order, Product, User, CartItem } = require('../db/models')
 module.exports = router
 
-//api/orders
-router.get('/', (req, res, next) => {
+//api/orders/:userId
+router.get('/:userId', (req, res, next) => {
   Order.findAll({
-    include: [
-      {model: Product},
-      {model: User, attributes: ['id', 'email']}
-    ],
-  })
+    where: { userId: req.params.userId },
+    // include: [
+    //   { model: Product },
+    //   { model: User, attributes: ['id', 'email'] }
+    // ],
+  }).then(orders => res.json(orders))
+    .catch(next)
 })
 
-//api/orders/id
-router.get('/:id', (req, res, next) => {
+//api/orders/single/:userId/:id
+router.get('/single/:userId/:id', (req, res, next) => {
   Order.findOne({
-    where: {id: req.paramsid}
+    where: { id: req.params.id, userId: req.params.userId }
   })
     .then(orders => res.json(orders))
     .catch(next)
@@ -36,7 +38,7 @@ router.post('/', (req, res, next) => {
 //   //   }
 //   // })
 //   //   .then(order => {
-      
+
 //   //   })
 //   CartItem.findAll({
 
