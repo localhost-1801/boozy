@@ -5,12 +5,19 @@ import { connect } from 'react-redux'
 import { fetchCart } from '../store/cart'
 
 class Cart extends Component {
+  constructor(props){
+    super(props)
+
+
+  }
 
   componentDidMount(){
-    this.props.getCart('' + document.cookie.slice(5))
+    this.props.setCart('' + document.cookie.slice(5))
+    console.log(this.props.cart)
   }
 
   render() {
+    console.log(this.props.cart)
     return (
       <div>
         <div className='cart'>
@@ -32,7 +39,35 @@ class Cart extends Component {
               Quantity
             </Grid.Column>
           </Grid.Row>
-
+          {this.props.cart.products.map( item => {
+            return(
+              <Grid.Row>
+                <Grid.Column width={3}>
+                  <Image src={item.imageURL} />
+                </Grid.Column>
+                <Grid.Column width={6}>
+                  {item.title}
+                  <br />
+                  <br />
+                  <Button basic color='red' content='Delete' />
+                </Grid.Column>
+                <Grid.Column width={3}>
+                  {item.price}
+            </Grid.Column>
+                <Grid.Column width={3}>
+                  <Dropdown text='Quantity'>
+                    <Dropdown.Menu>
+                      <Dropdown.Item text='1' />
+                      <Dropdown.Item text='2' />
+                      <Dropdown.Item text='3' />
+                      <Dropdown.Item text='4' />
+                      <Dropdown.Item text='5' />
+                    </Dropdown.Menu>
+                  </Dropdown>
+                </Grid.Column>
+              </Grid.Row>
+            )
+          })}
           <Grid.Row>
             <Grid.Column width={3}>
               <Image src='img/white.jpg' />
@@ -81,7 +116,7 @@ class Cart extends Component {
 }
 
 const mapState = ({ cart }) => ({ cart });
-const mapDispatch = (dispatch) => ({ getCart(cookie){
+const mapDispatch = (dispatch) => ({ setCart(cookie){
   dispatch(fetchCart(cookie))
 }});
 
