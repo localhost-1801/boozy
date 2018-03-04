@@ -51,6 +51,8 @@ router.put('/', (req, res, next) => {
     //     .then(modifiedCart => res.json(modifiedCart))
     //     .catch(next);
     console.log('click');
+    //takes a few cart paramaters: productId, and quantity object
+    //quantity object: {add: true/false, value: quantity}
     let cartIdFromHash = hashids.decode(req.cookies.cart)[0];
     CartItem.findOne({
       where: {

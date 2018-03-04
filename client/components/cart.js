@@ -2,7 +2,7 @@
 import React, { Component } from 'react'
 import { Grid, Header, Image, Dropdown, Button } from 'semantic-ui-react'
 import { connect } from 'react-redux'
-import { fetchCart } from '../store/cart'
+import { fetchCart, addProductToCart } from '../store/cart'
 
 class Cart extends Component {
   constructor(props){
@@ -12,20 +12,30 @@ class Cart extends Component {
     this.generateDropdown = this.generateDropdown.bind(this);
   }
 
-  componentDidMount(){
+  componentWillMount(){
     this.props.setCart('' + document.cookie.slice(5))
     console.log(this.props.cart)
   }
 
-  handleQuantityChange(event){
-
+  handleQuantityChange(newQuantity, productId){
+    console.log(newQuantity, productId)
+    let cartDetails = {
+      productId,
+      quantity: {
+        add: false,
+        value: newQuantity
+      }
+    }
+    this.props.updateCart(cartDetails)
   }
 
   generateDropdown(item){
+    console.log(item)
     let dropDowns = [];
-    for(var i = 0; i < item.cartItem.quantity + 3; i++){
+    for(var i = 1; i < item.cartItem.quantity + 4; i++){
+      let iCopy = i;
       dropDowns.push(
-        <Dropdown.Item text={i} />
+        <Dropdown.Item text={i} key={i} onClick={() => this.handleQuantityChange(iCopy, item.cartItem.productId)} />
       )
     }
     return dropDowns;
@@ -62,7 +72,7 @@ class Cart extends Component {
           </Grid.Row>
           {this.props.cart.products.map( item => {
             return(
-              <Grid.Row>
+              <Grid.Row key={item.id}>
                 <Grid.Column width={3}>
                   <Image src={item.imageURL} />
                 </Grid.Column>
@@ -76,8 +86,8 @@ class Cart extends Component {
                   {item.price}
             </Grid.Column>
                 <Grid.Column width={3}>
-                  <Dropdown text={item.cartItem.quantity}>
-                    <Dropdown.Menu>
+                  <Dropdown text={'' + item.cartItem.quantity}>
+                    <Dropdown.Menu >
                       {this.generateDropdown(item)}
                     </Dropdown.Menu>
                   </Dropdown>
@@ -85,31 +95,6 @@ class Cart extends Component {
               </Grid.Row>
             )
           })}
-          <Grid.Row>
-            <Grid.Column width={3}>
-              <Image src='img/white.jpg' />
-            </Grid.Column>
-            <Grid.Column width={6}>
-              Merlot
-              <br />
-              <br />
-              <Button basic color='red' content='Delete' />
-            </Grid.Column>
-            <Grid.Column width={3}>
-              $20.00
-        </Grid.Column>
-            <Grid.Column width={3}>
-              <Dropdown text='Quantity'>
-                <Dropdown.Menu>
-                  <Dropdown.Item text='1' />
-                  <Dropdown.Item text='2' />
-                  <Dropdown.Item text='3' />
-                  <Dropdown.Item text='4' />
-                  <Dropdown.Item text='5' />
-                </Dropdown.Menu>
-              </Dropdown>
-            </Grid.Column>
-          </Grid.Row>
 
           <Grid.Row>
             <Grid.Column width={3}>
@@ -134,8 +119,9 @@ class Cart extends Component {
 }
 
 const mapState = ({ cart }) => ({ cart });
-const mapDispatch = (dispatch) => ({ setCart(cookie){
-  dispatch(fetchCart(cookie))
-}});
+const mapDispatch = (dispatch) => { return ({
+  setCart(cookie){ dispatch(fetchCart(cookie))},
+  updateCart(product){ dispatch(addProductToCart(product))}
+})}
 
 export default connect(mapState, mapDispatch)(Cart);
