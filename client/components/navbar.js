@@ -21,7 +21,7 @@ class Navbar extends Component {
     return (
       <Segment className="navbar">
         <Menu pointing secondary className="navbar">
-        <Image src="/img/logo.jpg" size='tiny' verticalAlign='bottom' />
+        <Image src="/img/logo.jpg" href="/" size='tiny' verticalAlign='bottom' />
           <Menu.Item
             className="logo"
             as={Link}

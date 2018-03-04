@@ -6,7 +6,7 @@ export default class Cart extends Component {
   render() {
     return (
       <div>
-        <div className='cart'>
+        <div className='cart-background'>
         </div>
         <Header as='h2' color='black' textAlign='center'>
         {' '}Shopping Cart

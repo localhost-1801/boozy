@@ -60,7 +60,7 @@ export class Products extends Component {
         })
 
         return (
-            <div>
+            <div className="productsBackground">
                 <Menu attached='top' >
                     <Menu.Item name='All' id='all' active={activeItem === 'all'} onClick={this.handleItemClick} />
                     <Menu.Item name='Reds' id='red' active={activeItem === 'red'} onClick={this.handleItemClick} />

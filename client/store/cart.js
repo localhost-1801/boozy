@@ -18,7 +18,6 @@ const add = (productToAdd) => ({ type: ADD, productToAdd })
 const getCart = cart => ({ type: GET_CART, cart })
 const remove = (productToRemove) => ({ type: REMOVE, productToRemove })
 
-
 //THUNK CREATORS
 
 export const fetchCart = (cookieToken) =>
