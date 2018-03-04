@@ -18,17 +18,15 @@ export class Products extends Component {
         }
     }
     handleAdd = (id) => {
-      console.log(document.cookie)
       if (document.cookie){
         //use thunk to make axios put request, {quantity: 5, productId: 2, token: lsafkl}
-        console.log(id)
         this.props.addProductToCart({
           quantity: {
             value: 1,
             add: true
           },
           //set to document.cookie
-          token: 'nR',
+          token: document.cookie.slice(5) + '',
           productId: id
         })
       }

@@ -14,11 +14,12 @@ const defaultCart = [];
 const add = (productToAdd) => ({type: ADD, productToAdd})
 const getCart = cart => ({ type: GET_CART, cart })
 
+
 //THUNK CREATORS
 
 export const fetchCart = (cookieToken) =>
     dispatch =>
-        axios.get('/api/cart')
+        axios.get(`/api/cart/${cookieToken}`)
             .then(res => {
                 return (
                     dispatch(getCart(res.data || defaultCart))

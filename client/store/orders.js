@@ -16,7 +16,7 @@ const getOrder = order => ({ type: GET_CART, order })
 const createOrder = order => ({ type: CREATE_ORDER, order })
 
 
-//THUNK CREATORS 
+//THUNK CREATORS
 
 export const fetchOrders = (userId) =>
     dispatch =>
@@ -40,7 +40,7 @@ export const fetchOrder = (userId, id) =>
 
 export const createNewOrder = (order) =>
     dispatch =>
-        axios.get('/api/orders', order)
+        axios.post('/api/orders', order)
             .then(res => {
                 return (
                     dispatch(createOrder(res.data || defaultOrders))
