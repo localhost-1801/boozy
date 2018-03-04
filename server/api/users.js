@@ -14,6 +14,16 @@ router.get('/', (req, res, next) => {
     .catch(next)
 })
 
+//api/users/allUsersStatuses
+router.get('/allUsersStatuses', (req, res, next) => {
+  User.findAll({
+    attributes: ['id', 'email', 'username', 'isAdmin']
+  })
+    .then(users => res.json(users))
+    .catch(next)
+})
+
+
 //api/users/:id
 router.get('/:id', (req, res, next) => {
   User.findOne({

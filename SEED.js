@@ -15,6 +15,18 @@ const userDBseed =
             email: 'TEST2@TEST2.com',
             username: 'I am not an alcoholic',
             password: '123'
+        },
+        {
+            email: 'ADMIN@ADMIN.COM',
+            username: 'I AM AN ADMIN',
+            password: '123',
+            isAdmin: true
+        },
+        {
+            email: 'ADMIN@ADMIN.ADMIN',
+            username: 'I AM AN ADMIN',
+            password: '123',
+            isAdmin: true
         }
     ]
 
