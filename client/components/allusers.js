@@ -1,27 +1,23 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Icon, Label, Menu, Table } from 'semantic-ui-react';
+import { Icon, Label, Menu, Table, Button } from 'semantic-ui-react';
 import { fetchUsers } from '../store/users.js';
+import { deleteUserThunk } from '../store/user.js';
 import { Link } from 'react-router-dom';
 
 export class Users extends Component {
     constructor(props) {
         super(props)
-        this.state = {
-
-        }
     }
+    
     componentWillMount() {
         this.props.loadInitialData()
     }
 
-    handleClick = (event) => {
-        console.log(event);
+    handleIsAdmin = (id, event) => {
+        console.log(id);
     }
-
-
-    //handleClick to change users to admins
 
     render() {
 
@@ -34,7 +30,8 @@ export class Users extends Component {
                         <Table.Row>
                             <Table.HeaderCell>UserName</Table.HeaderCell>
                             <Table.HeaderCell>Email</Table.HeaderCell>
-                            <Table.HeaderCell>isAdmin</Table.HeaderCell>
+                            <Table.HeaderCell>Admin Status</Table.HeaderCell>
+                            <Table.HeaderCell>Delete User</Table.HeaderCell>
                         </Table.Row>
                     </Table.Header>
 
@@ -45,10 +42,16 @@ export class Users extends Component {
                                     <Table.Row key={user.id}>
                                         <Table.Cell>{user.username}</Table.Cell>
                                         <Table.Cell>{user.email}</Table.Cell>
-                                        <Table.Cell>{user.isAdmin === true? 
-                                            <Icon color='green' 
-                                            name='checkmark' 
-                                            size='large' onClick={this.handleClick}/>  : '' } </Table.Cell>
+                                        <Table.Cell>{user.isAdmin === true ?
+                                            <Icon color='green'
+                                                name='checkmark'
+                                                size='large' onClick={(e) => this.handleIsAdmin(user.id, e)} /> :
+                                            <Icon color='red'
+                                                name='cancel'
+                                                size='large' />} </Table.Cell>
+                                        <Table.Cell>
+                                            <Button color='red' onClick={() => deleteUserThunk(user.id)}>DELETE USER</Button>
+                                        </Table.Cell>
                                     </Table.Row>
                                 )
                             })
@@ -67,7 +70,8 @@ const mapDispatch = (dispatch) => {
     return {
         loadInitialData() {
             dispatch(fetchUsers())
-        }
+        },
+        
     }
 }
 
