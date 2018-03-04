@@ -1,15 +1,23 @@
 
 import React, { Component } from 'react'
-import { Grid, Header, Image, Dropdown, Button } from 'semantic-ui-react'
+import { Grid, Header, Image, Dropdown, Button, Form, Checkbox } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import { fetchCart, addProductToCart } from '../store/cart'
+import { createNewOrder } from '../store/orders'
 
 class Cart extends Component {
   constructor(props){
     super(props)
 
+    this.state = {
+      cCNumber: '',
+      eMail: '',
+      address: '',
+    }
+    this.updateFormState = this.updateFormState.bind(this);
     this.handleQuantityChange = this.handleQuantityChange.bind(this);
     this.generateDropdown = this.generateDropdown.bind(this);
+    this.checkout = this.checkout.bind(this);
   }
 
   componentDidMount(){
@@ -38,6 +46,23 @@ class Cart extends Component {
       )
     }
     return dropDowns;
+  }
+
+  updateFormState(event){
+    this.setState({
+      [event.target.name] : event.target.value
+    })
+  }
+
+  checkout(){
+    let orderDetail = {
+      address: this.state.address,
+      status: 'processing',
+      userId: this.props.user.id ? this.props.user.id : null,
+      cartId: this.props.cart.id
+    }
+    console.log(orderDetail)
+    this.props.createOrder(orderDetail);
   }
 
   render() {
@@ -94,7 +119,24 @@ class Cart extends Component {
               </Grid.Row>
             )
           })}
-
+          <Grid.Row>
+            <Grid.Column width={15}>
+              <Form>
+                <Form.Field>
+                  <label>E-Mail</label>
+                  <input name='eMail' onChange={this.updateFormState} placeholder='E-Mail' />
+                </Form.Field>
+                <Form.Field>
+                  <label>Credit Card Number</label>
+                  <input name='cCNumber' onChange={this.updateFormState} placeholder='Credit Card Number' />
+                </Form.Field>
+                <Form.Field>
+                  <label>Address</label>
+                  <input name='address' onChange={this.updateFormState} placeholder='Address' />
+                </Form.Field>
+              </Form>
+            </Grid.Column>
+          </Grid.Row>
           <Grid.Row>
             <Grid.Column width={3}>
             </Grid.Column>
@@ -103,11 +145,7 @@ class Cart extends Component {
             <Grid.Column width={3}>
             </Grid.Column>
             <Grid.Column width={3}>
-              <a
-                target='_self'
-                href='/checkout'>
-                <Button type='submit' color='green'>Proceed to checkout</Button>
-              </a>
+                <Button onClick={this.checkout} color='green'>Proceed to checkout</Button>
             </Grid.Column>
           </Grid.Row>
         </Grid>
@@ -117,10 +155,11 @@ class Cart extends Component {
   }
 }
 
-const mapState = ({ cart }) => ({ cart });
+const mapState = ({ cart, user }) => ({ cart, user });
 const mapDispatch = (dispatch) => { return ({
   setCart(cookie){ dispatch(fetchCart(cookie))},
-  updateCart(product){ dispatch(addProductToCart(product))}
+  updateCart(product){ dispatch(addProductToCart(product))},
+  createOrder(order){ dispatch(createNewOrder(order)) }
 })}
 
 export default connect(mapState, mapDispatch)(Cart);
