@@ -75,7 +75,7 @@ class Cart extends Component {
     } else {
     return (
       <div>
-        <div className='cart'>
+        <div className='cart-background'>
         </div>
         <Header as='h2' color='black' textAlign='center'>
         {' '}Shopping Cart
