@@ -61,7 +61,7 @@ class Cart extends Component {
       userId: this.props.user.id ? this.props.user.id : null,
       cartId: this.props.cart.id
     }
-    console.log(orderDetail)
+    document.cookie = "cart=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     this.props.createOrder(orderDetail);
   }
 
@@ -145,7 +145,11 @@ class Cart extends Component {
             <Grid.Column width={3}>
             </Grid.Column>
             <Grid.Column width={3}>
-                <Button onClick={this.checkout} color='green'>Proceed to checkout</Button>
+              <a
+                target='_self'
+                href='/orders'>
+                <Button onClick={this.checkout} color='green'>Place Order</Button>
+              </a>
             </Grid.Column>
           </Grid.Row>
         </Grid>
