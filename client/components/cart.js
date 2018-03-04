@@ -8,17 +8,17 @@ class Cart extends Component {
   constructor(props){
     super(props)
 
-
+    this.handleQuantityChange = this.handleQuantityChange.bind(this);
     this.generateDropdown = this.generateDropdown.bind(this);
   }
 
-  componentWillMount(){
-    this.props.setCart('' + document.cookie.slice(5))
+  componentDidMount(){
     console.log(this.props.cart)
+    this.props.setCart('' + document.cookie.slice(5))
   }
 
+  //need to somehow .then off of updateCart and call this.props.setCart
   handleQuantityChange(newQuantity, productId){
-    console.log(newQuantity, productId)
     let cartDetails = {
       productId,
       quantity: {
@@ -30,7 +30,6 @@ class Cart extends Component {
   }
 
   generateDropdown(item){
-    console.log(item)
     let dropDowns = [];
     for(var i = 1; i < item.cartItem.quantity + 4; i++){
       let iCopy = i;
@@ -107,7 +106,7 @@ class Cart extends Component {
               <a
                 target='_self'
                 href='/checkout'>
-                <Button color='green'>Proceed to checkout</Button>
+                <Button type='submit' color='green'>Proceed to checkout</Button>
               </a>
             </Grid.Column>
           </Grid.Row>
