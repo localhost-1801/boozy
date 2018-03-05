@@ -48,7 +48,7 @@ class Cart extends Component {
     const payload = {
       productId: productId,
       cartId: cartId
-      
+
     }
     this.props.removeProduct(payload);
   }
@@ -75,10 +75,11 @@ class Cart extends Component {
       address: this.state.address,
       status: 'processing',
       userId: this.props.user.id ? this.props.user.id : null,
-      cartId: this.props.cart.id
+      cartId: this.props.cart.id,
+      email: this.state.email
     }
     document.cookie = "cart=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-    this.props.createOrder(orderDetail);
+    this.props.createOrder(orderDetail, );
   }
 
   render() {
@@ -91,7 +92,7 @@ class Cart extends Component {
           Loading..
         </div>
       )
-    } 
+    }
     console.log(this.props.cart)
     return (
       <div>
