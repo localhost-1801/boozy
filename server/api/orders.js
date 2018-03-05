@@ -32,14 +32,15 @@ router.get('/single/:userId/:id', (req, res, next) => {
 router.post('/', (req, res, next) => {
   Order.create(req.body)
     .then(result => {
-      var data = {
+      let data = {
         from: 'Boozy',
-        to: req.body.email,
+        to: 'boozy.winery@gmail.com',
         subject: 'Conifrming your order',
         text: 'This E-mail is confirming your recent order with boozy winery'
       };
       mailgun.messages.send(data, function (error, body){
           console.error(error);
+          console.log(body);
       })
       return (res.json(result))
     })

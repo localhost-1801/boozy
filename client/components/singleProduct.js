@@ -5,6 +5,7 @@ import PropTypes from 'prop-types'
 import { auth } from '../store'
 import { Grid, Container, Divider, Header, Card, Image, Icon, Item, Button } from 'semantic-ui-react'
 import { fetchProducts } from '../store/products.js'
+import { fetchProduct } from '../store/product.js'
 import  Reviews  from './reviews'
 import ReviewForm from './reviewForm'
 
@@ -21,7 +22,6 @@ class SingleProduct extends Component {
   render() {
     const { product } = this.props;
     const { isAdmin } = this.props.user;
-
     if (product  === undefined) {
       return <div>LOADING</div>
     }
@@ -55,8 +55,8 @@ class SingleProduct extends Component {
           <Divider horizontal> Reviews</Divider>
           <Grid.Row centered={false}>
             <Grid.Column width={13}>
-            <Reviews theProduct={singleProduct} />
-            {this.props.user.id !== undefined ? <ReviewForm productId={singleProduct.id}/> : <div>Please login to leave a review</div>}
+            <Reviews theProduct={product} />
+            {this.props.user.id !== undefined ? <ReviewForm productId={product.id}/> : <div>Please login to leave a review</div>}
             </Grid.Column>
           </Grid.Row>
 

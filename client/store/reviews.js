@@ -39,7 +39,7 @@ export const fetchReviewThunk = (id) =>
             .then(res => dispatch(getReview(res.data || defaultReviews)))
             .catch(err => console.log(err));
 
-export const postReviewThunk = (review) =>
+export const postReview = (review) =>
     dispatch =>
         axios.post('/api/reviews', review)
 

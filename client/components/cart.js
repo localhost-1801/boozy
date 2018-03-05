@@ -55,7 +55,7 @@ class Cart extends Component {
 
   generateDropdown(item){
     let dropDowns = [];
-    for(var i = 1; i < item.cartItem.quantity + 4; i++){
+    for (var i = 1; i < item.cartItem.quantity + 4; i++){
       let iCopy = i;
       dropDowns.push(
         <Dropdown.Item text={i} key={i} onClick={() => this.handleQuantityChange(iCopy, item.cartItem.productId)} />
@@ -72,13 +72,13 @@ class Cart extends Component {
 
   checkout(){
       let orderDetail = {
-        email: this.state.email,
+        // email: this.state.email,
         address: this.state.address,
         status: 'processing',
         userId: this.props.user.id ? this.props.user.id : null,
       }
     document.cookie = "cart=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-    this.props.createOrder(payload);
+    this.props.createOrder(orderDetail);
   }
 
   render() {
@@ -88,11 +88,10 @@ class Cart extends Component {
 
       return(
         <div>
-          Loading..
+          Loading...
         </div>
       )
     }
-    console.log(this.props.cart)
     return (
       <div>
         <div className='cart-background'>
@@ -116,7 +115,7 @@ class Cart extends Component {
           </Grid.Row>
           {this.props.cart.products.sort((a, b)=> a.title > b.title).map( item => {
             console.log(item)
-            return(
+            return (
               <Grid.Row key={item.id}>
                 <Grid.Column width={3}>
                   <Image src={item.imageURL} />
