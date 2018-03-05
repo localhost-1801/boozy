@@ -41,15 +41,7 @@ router.post('/', (req, res, next) => {
 })
 
 //api/cart
-router.put('/', (req, res, next) => {
-    //not sure if cart will be on the request body?
-    // req.cart.update(req.body, {
-    //     include: [
-    //         { model: Product, through: CartItem }
-    //     ]
-    // })
-    //     .then(modifiedCart => res.json(modifiedCart))
-    //     .catch(next);
+router.put('/',  (req, res, next) => {
     console.log('click');
     //takes a few cart paramaters: productId, and quantity object
     //quantity object: {add: true/false, value: quantity}
@@ -59,24 +51,30 @@ router.put('/', (req, res, next) => {
         cartId: cartIdFromHash,
         productId: req.body.productId
       }
-    }).then( res => {
-      if (res) {
-        let quantity = req.body.quantity.add ? res.quantity + req.body.quantity.value : req.body.quantity.value;
+    }).then(found => {
+      if (found) {
+        let quantity = req.body.quantity.add ? found.quantity + req.body.quantity.value : req.body.quantity.value;
         console.log('in if statement')
-        res.update({quantity})
+        found.update({quantity})
+        .then(async updatedItem => {res.json(updatedItem)})
       } else {
-        console.log('in else statement')
+        console.log('in else statement', req.body)
         CartItem.create({productId: req.body.productId, cartId: cartIdFromHash, quantity: req.body.quantity.value})
+        .then(newItem => {
+            console.log(newItem)
+            res.json(newItem)
+        })
       }
     })
     .catch(next);
 })
 
 //api/cart/cartItem
-router.delete('/cartItem', async (req, res, next) => {
-    const productId = req.body.productId
-    const cartId = hashids.decode(req.cookies.cart)[0];
-    console.log(req.body)
+router.delete('/cartItem/:prodId/:cartId', async (req, res, next) => {
+    const productId = req.params.prodId
+    // const cartId = hashids.decode(req.cookies.cart)[0];
+    const cartId = req.params.cartId
+    console.log('in api route', req.params,productId, cartId)
     const cartItemToDelete = await CartItem.findOne({
         where: {
             productId: productId,
@@ -84,7 +82,7 @@ router.delete('/cartItem', async (req, res, next) => {
         }
     })
     cartItemToDelete.destroy()
-        .then( nothing => res.send('deleted'))
+        .then( nothing => res.json({productId: productId, cartId: cartId}))
 })
 
 //api/cart
