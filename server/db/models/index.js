@@ -51,5 +51,5 @@ module.exports = {
   Review,
   CartItem,
   Cart
-  
+
 }

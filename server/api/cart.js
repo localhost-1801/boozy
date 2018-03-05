@@ -32,16 +32,17 @@ router.post('/', (req, res, next) => {
         ]
     })
         .then(newCart => {
-          let cartHash = hashids.encode(newCart.id);
-          newCart.update({token: cartHash})
-          req.cookie = cartHash;
-          res.json(newCart)
+            let cartHash = hashids.encode(newCart.id);
+            newCart.update({ token: cartHash })
+            req.cookie = cartHash;
+            res.json(newCart)
         })
         .catch(next);
 })
 
 //api/cart
 router.put('/', (req, res, next) => {
+
     //not sure if cart will be on the request body?
     // req.cart.update(req.body, {
     //     include: [
@@ -69,7 +70,7 @@ router.put('/', (req, res, next) => {
         CartItem.create({productId: req.body.productId, cartId: cartIdFromHash, quantity: req.body.quantity.value})
       }
     })
-    .catch(next);
+        .catch(next);
 })
 
 //api/cart
@@ -81,7 +82,8 @@ router.delete('/', (req, res, next) => {
 })
 
 
-// Should NOT be able to get cart by ID
+// should NOT be able to get cart by ID
 // should be able to post a new cart
 //should be able to update a cart
 //should be able to delete a cart in its entirity
+//test

@@ -65,6 +65,11 @@ form div {
   margin: 0;
 }
 
+.userTablePadding {
+  padding-left: 200px !important;
+  padding-right: 200px !important;
+}
+
 .single-product {
  height: 200px;
  background-image: url(img/background.jpg);
@@ -144,4 +149,10 @@ form div {
 
 .centered-text {
   text-align: center;
+}
+
+.contactUs {
+  padding-left: 20em;
+  padding-right: 20em;
+  padding-top: 10em;
 }

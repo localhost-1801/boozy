@@ -7,12 +7,12 @@ const GET_ORDER = 'GET_ORDER';
 const CREATE_ORDER = 'CREATE_ORDER';
 //INITIAL STATE
 
-const defaultOrders =[];
+const defaultOrders = [];
 
 //ACTION CREATORS
 
-const getOrders = orders => ({ type: GET_CART, orders })
-const getOrder = order => ({ type: GET_CART, order })
+const getOrders = orders => ({ type: GET_ORDERS, orders })
+const getOrder = order => ({ type: GET_ORDER, order })
 const createOrder = order => ({ type: CREATE_ORDER, order })
 
 
@@ -61,3 +61,4 @@ export default function (state = defaultOrders, action) {
             return state
     }
 }
+

@@ -4,9 +4,6 @@ import history from '../history'
  * ACTION TYPES
  */
 const GET_PRODUCT = 'GET_PRODUCT';
-const REMOVE_PRODUCT = 'REMOVE_PRODUCT';
-const CREATE_PRODUCT = 'CREATE_PRODUCT';
-const UPDATE_PRODUCT = 'UPDATE_PRODUCT';
 /**
  * INITIAL STATE
  */
@@ -18,6 +15,7 @@ const getProduct = product => ({ type: GET_PRODUCT, product });
 const removeProduct = (id) => ({ type: REMOVE_PRODUCT, id });
 const createProduct = productToAdd => ({ type: CREATE_PRODUCT, productToAdd })
 const updateProduct = product => ({ type: UPDATE_PRODUCT, product })
+
 /**
  * THUNK CREATORS
  */
@@ -26,6 +24,7 @@ export const fetchProduct = (id) =>
         axios.get(`/api/products/${id}`)
             .then(res => dispatch(getProduct(res.data)))
             .catch(err => console.log(err))
+
 
 export const removeProductThunk = (id) =>
     dispatch =>
@@ -45,7 +44,6 @@ export const updateProductThunk = (product, id) =>
         axios.put(`/api/products/${id}`, product)
         .then(res => dispatch(updateProduct(res.data || defaultProduct)))
         .catch(err => console.log(err))
-
 
 
 /**

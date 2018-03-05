@@ -24,6 +24,8 @@ class Routes extends Component {
         <Route exact path="/about" component={About} />
         <Route exact path="/ageGate" component={UnAuthUserHome} />
         <Route exact path="/cart" component={Cart} />
+        <Route exact path="/allUsers" component={AllUsers} />
+        <Route path="/wines" component={Products} />
         <Route exact path="/products" component={Products} />
         <Route exact path="/products/update/:id" component={Edit} />
         <Route path="/products/:id" component={SingleProduct} />
