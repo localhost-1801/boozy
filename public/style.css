@@ -145,3 +145,9 @@ form div {
 .centered-text {
   text-align: center;
 }
+
+.contactUs {
+  padding-left: 20em;
+  padding-right: 20em;
+  padding-top: 10em;
+}
