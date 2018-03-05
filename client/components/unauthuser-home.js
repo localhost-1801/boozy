@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { Icon, Label, Menu, Table, Button } from 'semantic-ui-react';
+import Home from './home'
 
 export default class UnAuthUserHome extends Component {
   constructor(props) {
@@ -25,17 +27,15 @@ export default class UnAuthUserHome extends Component {
     let homeOrAgeGate;
     if (this.state.over21) {
       homeOrAgeGate = (
-        <div>
-          <h3>Welcome to our Boozy Vineyard and Winery!</h3>
-          <p>Please feel free to check out our selection of the finest wines around!</p>
-        </div>
+       <Home/>
       )
     } else {
       homeOrAgeGate = (
         <div style={styles}>
-          <button onClick={() => this.setState({ over21: true })}>
+          <Button type='submit' color='olive' fluid size='small' 
+          onClick={() => this.setState({ over21: true })}>
             Click here if you are over 21 to use this website
-          </button>
+          </Button>
         </div>
       )
     }

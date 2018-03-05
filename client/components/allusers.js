@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Icon, Label, Menu, Table, Button } from 'semantic-ui-react';
-import { fetchUsers, deleteUserThunk, updateToAdminThunk } from '../store/users.js';
+import { fetchUsers, deleteUserThunk, updateToAdminThunk, updateUserPassword } from '../store/users.js';
 import { Link } from 'react-router-dom';
 
 class Users extends Component {
@@ -27,6 +27,7 @@ class Users extends Component {
                             <Table.HeaderCell>UserName</Table.HeaderCell>
                             <Table.HeaderCell>Email</Table.HeaderCell>
                             <Table.HeaderCell>Admin Status</Table.HeaderCell>
+                            <Table.HeaderCell> Trigger Password Reset</Table.HeaderCell>
                             <Table.HeaderCell>Delete User</Table.HeaderCell>
                         </Table.Row>
                     </Table.Header>
@@ -51,8 +52,12 @@ class Users extends Component {
                                             </Button>
                                         </Table.Cell>
                                         <Table.Cell>
+                                            <Button color='blue'>Reset Password</Button>
+                                        </Table.Cell>
+                                        <Table.Cell>
                                             <Button color='red' onClick={() => this.props.deleteUser(user.id)}>DELETE USER</Button>
                                         </Table.Cell>
+
                                     </Table.Row>
                                 )
                             })
