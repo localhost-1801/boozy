@@ -59,20 +59,16 @@ class SingleProduct extends Component {
             {this.props.user.id !== undefined ? <ReviewForm productId={singleProduct.id}/> : <div>Please login to leave a review</div>}
             </Grid.Column>
           </Grid.Row>
-          
+
 
         </Grid>
-        
+
 
       </div>
     )
   }
 }
 
-<<<<<<< HEAD
-const mapState = ({ products, user, reviews }) => ({ products, user, reviews})
-const mapDispatch = null
-=======
 const mapState = ({ product, products, user }) => ({ product, products, user })
 
 function mapDispatch(dispatch, ownProps){
@@ -86,7 +82,6 @@ function mapDispatch(dispatch, ownProps){
     }
   };
 }
->>>>>>> master
 
 export default connect(mapState, mapDispatch)(SingleProduct);
 
