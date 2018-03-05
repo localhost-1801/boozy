@@ -9,7 +9,7 @@ import { addProductToCart } from '../store/cart.js'
 
 
 
-export class Products extends Component {
+export class AdminAllProducts extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -40,9 +40,8 @@ export class Products extends Component {
 
     render() {
         const { activeItem } = this.state
-        const { isAdmin } = this.props.user
         const filteredProducts = this.props.products.filter(wine => {
-            if (wine.title.toLowerCase().indexOf(this.state.input.toLowerCase()) > -1 && wine.availability === 'available'){
+            if (wine.title.toLowerCase().indexOf(this.state.input.toLowerCase()) > -1){
                 if (this.state.activeItem === 'all') {
                     return true
                 } else {
@@ -112,13 +111,11 @@ export class Products extends Component {
                         )
                     })}
                 </Card.Group>
-                {isAdmin && (
                 <Grid centered columns={1}>
                 <Grid.Row>
                 <Button color="green" href="/new"><Icon name="add" />Add New Item</Button>
                 </Grid.Row>
                 </Grid>
-            )}
                 <br />
                 </div>
             </div>
@@ -129,47 +126,8 @@ export class Products extends Component {
 //map state and map dispatch to props
 
 
-const mapState = ({ products, user }) => ({ products, user })
+const mapState = ({ products }) => ({ products })
 const mapDispatch = { fetchProducts, addProductToCart }
 //const mapDispatch = {fetchStudents};
 
-export default connect(mapState, mapDispatch)(Products);
-
-const dummyData = [
-    {
-        wineName: 'Franzia Boxed Wine',
-        imageURL: 'https://files.slack.com/files-tmb/T024FPYBQ-F9F0MRVNU-9cf43749e0/wine_1024.jpg',
-        year: 2018,
-        description: 'Loved by college students and trophy wives alike'
-    },
-    {
-        wineName: 'Franzia Boxed Wine',
-        imageURL: 'https://files.slack.com/files-tmb/T024FPYBQ-F9F0MRVNU-9cf43749e0/wine_1024.jpg',
-        year: 2018,
-        description: 'Loved by college students and trophy wives alike'
-    },
-    {
-        wineName: 'Franzia Boxed Wine',
-        imageURL: 'https://files.slack.com/files-tmb/T024FPYBQ-F9F0MRVNU-9cf43749e0/wine_1024.jpg',
-        year: 2018,
-        description: 'Loved by college students and trophy wives alike'
-    },
-    {
-        wineName: 'Franzia Boxed Wine',
-        imageURL: 'https://files.slack.com/files-tmb/T024FPYBQ-F9F0MRVNU-9cf43749e0/wine_1024.jpg',
-        year: 2018,
-        description: 'Loved by college students and trophy wives alike'
-    },
-    {
-        wineName: 'Franzia Boxed Wine',
-        imageURL: 'https://files.slack.com/files-tmb/T024FPYBQ-F9F0MRVNU-9cf43749e0/wine_1024.jpg',
-        year: 2018,
-        description: 'Loved by college students and trophy wives alike'
-    },
-    {
-        wineName: 'Franzia Boxed Wine',
-        imageURL: 'https://files.slack.com/files-tmb/T024FPYBQ-F9F0MRVNU-9cf43749e0/wine_1024.jpg',
-        year: 2018,
-        description: 'Loved by college students and trophy wives alike'
-    },
-]
+export default connect(mapState, mapDispatch)(AdminAllProducts);

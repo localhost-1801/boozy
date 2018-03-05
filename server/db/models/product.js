@@ -25,6 +25,10 @@ const Product = db.define('product', {
     imageURL: {
         type: Sequelize.STRING,
         defaultValue: 'https://www.fillmurray.com/200/300'
+    },
+    availability: {
+        type: Sequelize.ENUM('available', 'unavailable'),
+        defaultValue: 'available'
     }
 })
 

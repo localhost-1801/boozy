@@ -9,12 +9,14 @@ const userDBseed =
         {
             email: 'test@test.com',
             username: 'BOOZY MCBOOZYFACE',
-            password: '123'
+            password: '123',
+            isAdmin: true
         },
         {
             email: 'TEST2@TEST2.com',
             username: 'I am not an alcoholic',
-            password: '123'
+            password: '123',
+            isAdmin: false
         }
     ]
 
@@ -43,6 +45,7 @@ const productDBseed =
             inventory: '1018',
             year: '2018',
             imageUrl: 'https://www.fillmurray.com/200/300',
+            available: 'available'
             //categoryId: 1
         },
         {
@@ -52,6 +55,7 @@ const productDBseed =
             inventory: '1018',
             year: '2018',
             imageUrl: 'https://www.fillmurray.com/200/300',
+            available: 'available'
             //categoryId: 2
         },
         {
@@ -61,6 +65,7 @@ const productDBseed =
             inventory: '1018',
             year: '2018',
             imageUrl: 'https://www.fillmurray.com/200/300',
+            available: 'available'
             //categoryId: 1
         },
         {
@@ -70,6 +75,7 @@ const productDBseed =
             inventory: '1018',
             year: '2018',
             imageUrl: 'https://www.fillmurray.com/200/300',
+            available: 'available'
             //categoryId: 1
         },
         {
@@ -79,6 +85,7 @@ const productDBseed =
             inventory: '1018',
             year: '2018',
             imageUrl: 'https://www.fillmurray.com/200/300',
+            available: 'available'
             //categoryId: 1
             // categories: [
             //     {id: 1},
@@ -92,6 +99,7 @@ const productDBseed =
             inventory: '1018',
             year: '2018',
             imageUrl: 'https://www.fillmurray.com/200/300',
+            available: 'available'
             //categoryId: 2
         },
         {
@@ -101,6 +109,7 @@ const productDBseed =
             inventory: '1018',
             year: '2018',
             imageUrl: 'https://www.fillmurray.com/200/300',
+            available: 'available'
             //categoryId: 2
         },
         {
@@ -110,6 +119,7 @@ const productDBseed =
             inventory: '1018',
             year: '2018',
             imageUrl: 'https://www.fillmurray.com/200/300',
+            available: 'unavailable'
             //categoryId: 2
         },
     ]
