@@ -48,7 +48,21 @@ router.post('/', (req, res, next) => {
     .catch(next);
 })
 
-//api/users/:id
+//api/users/resetpass/
+router.put('/resetpass', (req, res, next) => {
+  User.findOne({ where: { email: req.body.email } })
+    .then(user => {
+      if (!user) {
+        res.status(401).send('User not found')
+      } else if (!user.correctPassword(req.body.currentPass)) {
+        res.status(401).send('Incorrect password')
+      } else {
+        user.update({password: req.body.newPass})
+      }
+    }).catch(next)
+})
+
+
 router.put('/:id', (req, res, next) => {
   req.user.update(req.body)
     .then(user => res.send("Your password has changed successfully"))
@@ -64,7 +78,6 @@ router.delete('/:id', (req, res, next) => {
     .catch(next);
 });
 
-
 //api/users/adminStatus/:id
 router.put('/adminStatus/:id', (req, res, next) => {
   User.findOne({
@@ -74,3 +87,15 @@ router.put('/adminStatus/:id', (req, res, next) => {
   .then(user => res.json(user))
   .catch(next)
 })
+
+
+// //api/users/passwordReset/:id
+// router.put('/passwordReset/:id', (req, res, next) => {
+//   User.findOne({
+//     where: { id: req.params.id }
+//   })
+//   .then(user => user.update({ password: req.body.bool})) //not sure how to get req.body from user input 
+//   .then(user => res.json(user))
+//   .catch(next)
+// })
+

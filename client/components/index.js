@@ -16,5 +16,6 @@ export { default as Contact } from './contact'
 export { default as Cart } from './cart'
 export { default as Orders } from './orders'
 export { default as AllUsers } from './allusers';
-export { default as Edit } from './edit'
-export { default as New } from './new'
+export { default as Edit } from './edit';
+export { default as New } from './new';
+export { default as ChangePass} from './changePass';

@@ -8,6 +8,7 @@ const UPDATE_TO_ADMIN_USER = 'UPDATE_TO_ADMIN_USER'
 
 
 
+
 //INITIAL users
 
 const defaultUsers = [];
@@ -33,11 +34,16 @@ export const deleteUserThunk = id => dispatch => {
 }
 
 export const updateToAdminThunk = (id, user) => dispatch => {
-    console.log(dispatch)
     axios.put(`/api/users/adminStatus/${id}`, user)
         .then(res => dispatch(updateToAdmin(res.data)))
         .catch(err => console.log(err))
 }
+
+// export const updateUserPassword = (id, user) => dispatch => {
+//     axios.put(`/api/users/passwordReset/${id}`, user) //where does user come from?
+//         .then(res => dispatch(updateUserPass(res.data)))
+//         .catch(err => console.log(err))
+// }
 
 
 export default function (users = defaultUsers, action) {
