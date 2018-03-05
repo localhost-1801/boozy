@@ -18,3 +18,5 @@ export { default as Orders } from './orders'
 export { default as AllUsers } from './allusers';
 export { default as ChangePass} from './changePass';
 export { default as AdminAllProducts } from './adminProducts'
+-export { default as Edit } from './edit'
+-export { default as New } from './new'
