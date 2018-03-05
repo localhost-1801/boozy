@@ -19,9 +19,11 @@ router.get('/p/:productId', (req, res, next) => {
     where: { productId: req.params.productId },
     include: [
       { model: Product },
-      { model: User, attributes: ['id', 'e-mail'] }
+      { model: User}
     ],
   })
+  .then(reviews => res.json(reviews))
+  .catch(next)
 })
 
 
@@ -35,10 +37,19 @@ router.get('/:id', (req, res, next) => {
 })
 
 //api/reviews
-router.post('/', (req, res, next) => {
-  Review.create(req.body)
-    .then(result => res.json(result))
-    .catch(next)
+router.post('/', async (req, res, next) => {
+  const newReview = await Review.create(req.body)
+  const newId = newReview.dataValues.id
+  Review.findOne({
+    where: {
+      id: newId
+    },
+    include: [
+      { model: Product },
+      { model: User}
+    ],
+  })
+  .then(result => { res.json(result)}) 
 })
 
 //reviews shouldn't be deleted nor updated
