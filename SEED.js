@@ -15,6 +15,18 @@ const userDBseed =
             email: 'TEST2@TEST2.com',
             username: 'I am not an alcoholic',
             password: '123'
+        },
+        {
+            email: 'ADMIN@ADMIN.COM',
+            username: 'I AM AN ADMIN',
+            password: '123',
+            isAdmin: true
+        },
+        {
+            email: 'ADMIN@ADMIN.ADMIN',
+            username: 'I AM AN ADMIN',
+            password: '123',
+            isAdmin: true
         }
     ]
 
@@ -43,7 +55,7 @@ const productDBseed =
             inventory: '1018',
             year: '2018',
             imageUrl: 'https://www.fillmurray.com/200/300',
-            //categoryId: 1
+            // categoryId: 1
         },
         {
             title: 'FAKE RED WINE',
@@ -79,7 +91,7 @@ const productDBseed =
             inventory: '1018',
             year: '2018',
             imageUrl: 'https://www.fillmurray.com/200/300',
-            //categoryId: 1
+            categoryId: 1
             // categories: [
             //     {id: 1},
             //     {id: 2}
@@ -288,3 +300,6 @@ const main = () => {
 };
 
 main();
+
+
+//test

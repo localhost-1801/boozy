@@ -11,7 +11,7 @@ const defaultProducts = []
 
 //Action creators
 
-const getProducts = products => ({type: GET_PRODUCTS, products})
+const getProducts = products => ({type: GET_PROD_BY_CAT, products})
 
 
 //Thunk creators
@@ -31,9 +31,11 @@ export const fetchProducts = () =>
 //Reducer
 export default function (state = defaultProducts, action) {
     switch (action.type) {
-      case GET_PRODUCTS:
+      case GET_PROD_BY_CAT:
         return action.products
       default:
         return state
     }
   }
+
+  //test

@@ -27,19 +27,19 @@ export const fetchReviews = () =>
             .then(res => dispatch(getReviews(res.data || defaultReviews)))
             .catch(err => console.log(err));
 
-export const fetchReviewsforProduct = (productId) =>
+export const fetchReviewsforProductThunk = (productId) =>
     dispatch =>
         axios.get(`/api/reviews/${productId}`)
             .then(res => dispatch(getReviewsForProduct(res.data || defaultReviews)))
             .catch(err => console.log(err));
 
-export const fetchReview = (id) =>
+export const fetchReviewThunk = (id) =>
     dispatch =>
         axios.get(`/api/reviews/${id}`)
             .then(res => dispatch(getReview(res.data || defaultReviews)))
             .catch(err => console.log(err));
 
-export const postReview = (review) =>
+export const postReviewThunk = (review) =>
     dispatch =>
         axios.post('/api/reviews', review)
             .then(res => dispatch(postReview(res.data || defaultReviews)))
@@ -48,7 +48,7 @@ export const postReview = (review) =>
 
 //REDUCERS
 
-export default function (state = defaultProducts, action) {
+export default function (state = defaultReviews, action) {
     switch (action.type) {
         case GET_REVIEWS_FOR_PRODUCT:
             return action.reviewsforProduct
@@ -62,3 +62,4 @@ export default function (state = defaultProducts, action) {
             return state
     }
 }
+//test

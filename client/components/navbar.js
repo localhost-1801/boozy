@@ -33,6 +33,13 @@ class Navbar extends Component {
           <Menu.Menu position="right">
             <Menu.Item
               as={Link}
+              to="/allUsers"
+              name="allUsers"
+              active={activeItem === "allUsers"}
+              onClick={this.setActiveItem}
+            />
+            <Menu.Item
+              as={Link}
               to="/about"
               name="about"
               active={activeItem === "about"}
@@ -53,42 +60,42 @@ class Navbar extends Component {
               onClick={this.setActiveItem}
             />
             {this.props.isLoggedIn && (
-                <Menu.Item
-                  as={Link}
-                  to="/logout"
-                  name="Logout"
-                  active={activeItem === "Logout"}
-                  onClick={this.props.handleClick}
-                />
+              <Menu.Item
+                as={Link}
+                to="/logout"
+                name="Logout"
+                active={activeItem === "Logout"}
+                onClick={this.props.handleClick}
+              />
             )}
             {!this.props.isLoggedIn && (
-                <Menu.Item
-                  as={Link}
-                  fitted="vertically"
-                  to="/login"
-                  name="Login"
-                  active={activeItem === "Login"}
-                  onClick={this.setActiveItem}
-                />
+              <Menu.Item
+                as={Link}
+                fitted="vertically"
+                to="/login"
+                name="Login"
+                active={activeItem === "Login"}
+                onClick={this.setActiveItem}
+              />
             )}
             {!this.props.isLoggedIn && (
-                <Menu.Item
-                  as={Link}
-                  fitted="vertically"
-                  to="/signup"
-                  name="Sign Up"
-                  active={activeItem === "Sign Up"}
-                  onClick={this.setActiveItem}
-                />
+              <Menu.Item
+                as={Link}
+                fitted="vertically"
+                to="/signup"
+                name="Sign Up"
+                active={activeItem === "Sign Up"}
+                onClick={this.setActiveItem}
+              />
             )}
             <Menu.Item
-            as={Link}
-            to="/cart"
-            name="cart"
-            icon='cart'
-            active={activeItem === "cart"}
-            onClick={this.setActiveItem}
-          />
+              as={Link}
+              to="/cart"
+              name="cart"
+              icon='cart'
+              active={activeItem === "cart"}
+              onClick={this.setActiveItem}
+            />
           </Menu.Menu>
         </Menu>
       </Segment>

@@ -14,6 +14,17 @@ router.get('/', (req, res, next) => {
     .catch(next)
 })
 
+//api/users/allUsersStatuses
+router.get('/allUsersStatuses', (req, res, next) => {
+  User.findAll({
+    attributes: ['id', 'email', 'username', 'isAdmin'],
+    order: ['username']
+  })
+    .then(users => res.json(users))
+    .catch(next)
+})
+
+
 //api/users/:id
 router.get('/:id', (req, res, next) => {
   User.findOne({
@@ -46,7 +57,20 @@ router.put('/:id', (req, res, next) => {
 
 //api/users/:id
 router.delete('/:id', (req, res, next) => {
-  req.user.destroy()
+  User.destroy({
+    where: { id: req.params.id }
+  })
     .then(() => res.sendStatus(204))
     .catch(next);
 });
+
+
+//api/users/adminStatus/:id
+router.put('/adminStatus/:id', (req, res, next) => {
+  User.findOne({
+    where: { id: req.params.id }
+  })
+  .then(user => user.update({ isAdmin: req.body.bool}))
+  .then(user => res.json(user))
+  .catch(next)
+})
