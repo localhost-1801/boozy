@@ -57,7 +57,9 @@ router.put('/resetpass', (req, res, next) => {
       } else if (!user.correctPassword(req.body.currentPass)) {
         res.status(401).send('Incorrect password')
       } else {
-        user.update({password: req.body.newPass})
+        user.update({ password: req.body.newPass })
+        req.login(user, err => (err ? next(err) : res.json(user)))
+
       }
     }).catch(next)
 })
@@ -83,9 +85,9 @@ router.put('/adminStatus/:id', (req, res, next) => {
   User.findOne({
     where: { id: req.params.id }
   })
-  .then(user => user.update({ isAdmin: req.body.bool}))
-  .then(user => res.json(user))
-  .catch(next)
+    .then(user => user.update({ isAdmin: req.body.bool }))
+    .then(user => res.json(user))
+    .catch(next)
 })
 
 

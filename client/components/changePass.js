@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 import React, { Component } from 'react'
 import { Button, Form, Grid, Header, Message, Segment, Icon } from 'semantic-ui-react'
 import { passwordReset } from '../store/user'
-
+import history from '../history'
 
 class Home extends React.Component {
   constructor(props) {
@@ -10,8 +10,21 @@ class Home extends React.Component {
   }
 
   render() {
+    const styles = {
+      zIndex: 150,
+      backgroundColor: `black`,
+      textAlign: 'center',
+      position: 'fixed',
+      padding: 0,
+      margin: 0,
+      top: 0,
+      left: 0,
+      width: "100%",
+      height: "100%",
+      opacity: 0.9
+    }
     return (
-      <div className="indexBackground">
+      <div className="indexBackgroundZIndex" style={styles}>
 
         <div className='login-form'>
           <style>{`
@@ -71,17 +84,13 @@ const mapState = null;
 
 const mapDispatch = (dispatch, ownProps) => ({
   onPasswordSubmit(event) {
-    console.log({
-      email: event.target.email.value,
-      currentPass: event.target.currentPassword.value,
-      newPass: event.target.newPassword.value
-    })
     event.preventDefault();
     dispatch(passwordReset({
       email: event.target.email.value,
       currentPass: event.target.currentPassword.value,
       newPass: event.target.newPassword.value
     }))
+    history.push('/products')
   }
 })
 
