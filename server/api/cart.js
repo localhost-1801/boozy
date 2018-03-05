@@ -72,6 +72,21 @@ router.put('/', (req, res, next) => {
     .catch(next);
 })
 
+//api/cart/cartItem
+router.delete('/cartItem', async (req, res, next) => {
+    const productId = req.body.productId
+    const cartId = hashids.decode(req.cookies.cart)[0];
+    console.log(req.body)
+    const cartItemToDelete = await CartItem.findOne({
+        where: {
+            productId: productId,
+            cartId: cartId
+        }
+    })
+    cartItemToDelete.destroy()
+        .then( nothing => res.send('deleted'))
+})
+
 //api/cart
 router.delete('/', (req, res, next) => {
     //not sure if cart will be on the request body?

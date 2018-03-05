@@ -13,6 +13,7 @@ const defaultCart = [];
 
 const add = (productToAdd) => ({type: ADD, productToAdd})
 const getCart = cart => ({ type: GET_CART, cart })
+const remove = (produdctIdToRemove) => ({type: REMOVE, produdctIdToRemove})
 
 
 //THUNK CREATORS
@@ -36,7 +37,14 @@ export const addProductToCart = (productToAdd) =>
         )
       })
     .catch(err => console.error(err));
-
+//Should take productId, and get cartId from cookie
+export const removeProductFromCart = (produdctIdToRemove) =>
+      dispatch =>
+      //
+        axios.delete(`/api/cart/cartItem`, produdctIdToRemove)
+            .then(ids => dispatch(remove(ids.data)))
+            .catch(err => console.error(err))
+    
 //REDUCERS
 
 //REDUCERS
