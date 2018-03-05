@@ -74,7 +74,6 @@ const createApp = () => {
       })
       .catch(next)
     } else {
-      console.log('missed');
       next()
     }
   })
