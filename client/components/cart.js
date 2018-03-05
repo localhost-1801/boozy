@@ -89,7 +89,8 @@ class Cart extends Component {
           Loading..
         </div>
       )
-    } else {
+    } 
+    console.log(this.props.cart)
     return (
       <div>
         <div className='cart-background'>
@@ -111,7 +112,7 @@ class Cart extends Component {
               Quantity
             </Grid.Column>
           </Grid.Row>
-          {this.props.cart.products.map( item => {
+          {this.props.cart.products.sort((a, b)=> a.title > b.title).map( item => {
             console.log(item)
             return(
               <Grid.Row key={item.id}>
@@ -173,7 +174,7 @@ class Cart extends Component {
     )
   }
   }
-}
+
 
 const mapState = ({ cart, user }) => ({ cart, user });
 const mapDispatch = (dispatch) => { return ({

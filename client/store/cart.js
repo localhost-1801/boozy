@@ -33,7 +33,7 @@ export const addProductToCart = (productToAdd) =>
   dispatch =>
     axios.put('/api/cart', productToAdd )
       .then(res =>{
-          console.log('in store:',res)
+          console.log('in store:',res.data)
         return (
           dispatch(add(res.data))
         )
@@ -63,13 +63,13 @@ export default function (state = defaultCart, action) {
             return action.cart
         case ADD:
             console.log(action.productToAdd)
-            return Object.assign({}, state, {
-                products: [...state.products, action.productToAdd]
-            })
+            return Object.assign({}, state, action.productToAdd)
         case REMOVE:
             
             return Object.assign({}, state, {
-                products: state.products.filter(product => product.id !== action.payload.productId)
+                products: state.products.filter(product => {
+                   return product.id !== +action.payload.productId
+                })
             })
         default:
             return state

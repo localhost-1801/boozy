@@ -56,7 +56,29 @@ router.put('/',  (req, res, next) => {
         let quantity = req.body.quantity.add ? found.quantity + req.body.quantity.value : req.body.quantity.value;
         console.log('in if statement')
         found.update({quantity})
-        .then(async updatedItem => {res.json(updatedItem)})
+        .then( async updatedItem => {
+            // const product = await Product.findOne({
+            //     where: {
+            //         id: updatedItem.dataValues.productId
+            //     },
+            //     include: [
+            //         { model: CartItem },
+            //       ]
+            // })
+            // console.log(product)
+            // return res.json(updatedItem)
+            return Cart.findOne({
+                where: {
+                    id: cartIdFromHash
+                },
+                include: [
+                    { model: Product, through: CartItem }
+                ]
+            })
+                .then(cartItems => {
+                    res.json(cartItems)
+                })
+        })
       } else {
         console.log('in else statement', req.body)
         CartItem.create({productId: req.body.productId, cartId: cartIdFromHash, quantity: req.body.quantity.value})
