@@ -13,22 +13,25 @@ class Orders extends Component {
 
   //neeed to .then off of .getUser somehow
   componentDidMount(){
-    console.log(this.props)
-    this.props.getUser()
-    this.props.getOrders(this.props.user.id)
+    this.props.getOrders(this.props.user.id);
   }
 
   render() {
+    console.log(this.props)
     if(!this.props.user.id){
       return(
         <p> Must Login to see previous orders </p>
       )
     } else {
-      console.log(this.props.orders);
     return (
       <div>
         <div className='cart'>
         </div>
+        {this.props.orders.map( item => (
+          <div>
+            Cart Id {item.cartId}
+          </div>
+        ))}
 
         <Header as='h2' color='black' textAlign='center'>
         {' '}Your Orders
@@ -108,8 +111,11 @@ class Orders extends Component {
 
 const mapState = ({ user, orders }) => ({ user, orders });
 const mapDispatch = (dispatch) => { return ({
-  getOrders(userId){ dispatch(fetchOrders(userId))},
-  getUser(){ dispatch(me()) }
+  getOrders(userId, cartToken){
+    dispatch(me());
+    dispatch(fetchOrders(userId));
+  },
+  getUser(){ dispatch(me()) },
 })}
 
 export default connect(mapState, mapDispatch)(Orders);

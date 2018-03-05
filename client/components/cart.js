@@ -4,6 +4,7 @@ import { Grid, Header, Image, Dropdown, Button, Form, Checkbox } from 'semantic-
 import { connect } from 'react-redux'
 import { fetchCart, addProductToCart } from '../store/cart'
 import { createNewOrder } from '../store/orders'
+import { Link } from "react-router-dom";
 
 class Cart extends Component {
   constructor(props){
@@ -145,11 +146,9 @@ class Cart extends Component {
             <Grid.Column width={3}>
             </Grid.Column>
             <Grid.Column width={3}>
-              <a
-                target='_self'
-                href='/orders'>
-                <Button onClick={this.checkout} color='green'>Place Order</Button>
-              </a>
+                <Link to='/orders'>
+                  <Button onClick={this.checkout} color='green'>Place Order</Button>
+                </Link>
             </Grid.Column>
           </Grid.Row>
         </Grid>
