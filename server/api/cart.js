@@ -41,9 +41,6 @@ router.post('/', (req, res, next) => {
 })
 
 //api/cart
-<<<<<<< HEAD
-router.put('/',  (req, res, next) => {
-=======
 router.put('/', (req, res, next) => {
 
     //not sure if cart will be on the request body?
@@ -54,7 +51,6 @@ router.put('/', (req, res, next) => {
     // })
     //     .then(modifiedCart => res.json(modifiedCart))
     //     .catch(next);
->>>>>>> master
     console.log('click');
     //takes a few cart paramaters: productId, and quantity object
     //quantity object: {add: true/false, value: quantity}

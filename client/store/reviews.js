@@ -19,7 +19,7 @@ const getReview = review => ({ type: GET_REVIEW, review })
 const post = review => ({ type: POST_REVIEW, review })
 
 
-//THUNK CREATORS 
+//THUNK CREATORS
 
 export const fetchReviews = () =>
     dispatch =>
@@ -27,11 +27,7 @@ export const fetchReviews = () =>
             .then(res => dispatch(getReviews(res.data || defaultReviews)))
             .catch(err => console.log(err));
 
-<<<<<<< HEAD
 export const fetchReviewsForProduct = (productId) =>
-=======
-export const fetchReviewsforProductThunk = (productId) =>
->>>>>>> master
     dispatch =>
         axios.get(`/api/reviews/p/${productId}`)
             .then(res => dispatch(getReviewsForProduct(res.data || defaultReviews)))
