@@ -81,7 +81,7 @@ class Cart extends Component {
       }
     }
     document.cookie = "cart=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-    this.props.createOrder(orderDetail, );
+    this.props.createOrder(payload);
   }
 
   render() {
