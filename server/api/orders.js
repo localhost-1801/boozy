@@ -30,10 +30,10 @@ router.get('/single/:userId/:id', (req, res, next) => {
 
 //api/orders
 router.post('/', (req, res, next) => {
-  Order.create(req.body)
+  Order.create(req.body.orderDetail)
     .then(result => {
       var data = {
-        from: 'Excited User <me@samples.mailgun.org>',
+        from: 'Boozy',
         to: req.body.email,
         subject: 'Conifrming your order',
         text: 'This E-mail is confirming your recent order with boozy winery'
