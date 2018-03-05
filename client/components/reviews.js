@@ -16,7 +16,7 @@ class Reviews extends Component {
   render() {
     console.log('reviews', this.props.reviews);
     if (this.props.reviews.length <= 0 ) {
-      console.log(this.props.theProduct)
+      console.log('REVIEWS SON: ', this.props.reviews)
       return <div>Be the first to review this product!</div>
     }
     if(this.props.reviews[0].user === undefined) {
@@ -52,7 +52,7 @@ class Reviews extends Component {
 
 }
 
-const mapState = ({ reviews }) => ({ reviews })
+const mapState = ({ user, reviews }) => ({ user, reviews })
 const mapDispatch = (dispatch) => {
   return {
     getReviews(id) {

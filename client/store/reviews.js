@@ -42,6 +42,7 @@ export const fetchReview = (id) =>
 export const postReview = (review) =>
     dispatch =>
         axios.post('/api/reviews', review)
+
             .then(res => dispatch(post(res.data || defaultReviews)))
             .catch(err => console.log(err));
 
