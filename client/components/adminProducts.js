@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { auth } from '../store'
-import { Card, Grid, Image, Icon, Button, Label, Segment, Menu, Input } from 'semantic-ui-react'
+import { Card, Header, Grid, Image, Icon, Button, Label, Segment, Menu, Input } from 'semantic-ui-react'
 import { fetchProducts } from '../store/products.js'
 import { Link } from 'react-router-dom'
 import { addProductToCart } from '../store/cart.js'
@@ -69,6 +69,9 @@ export class AdminAllProducts extends Component {
                         </Menu.Item>
                     </Menu.Menu>
                 </Menu>
+                <Header as='h2' textAlign='center'>
+                {' '}Admin - Review All Products
+              </Header>
                 <div style={{ height: '15px' }} />
                 <div style={{paddingLeft: '15rem', paddingRight:'15rem'}}>
                 <Card.Group itemsPerRow={3}>
@@ -81,7 +84,7 @@ export class AdminAllProducts extends Component {
                                 key={wine.id}
                                 centered={true}
                             >
-                                <Image as={Link} to={`/products/${wine.id}`} src='img/red.jpg' />
+                            <Image size="small" centered as={Link} to={`/products/${wine.id}`}  src={wine.imageURL} />
                                 <Card.Content as={Link} to={`/products/${wine.id}`}>
                                     <Card.Meta>
                                         <span className='date'>

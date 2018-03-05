@@ -82,7 +82,7 @@ export class Products extends Component {
                                 key={wine.id}
                                 centered={true}
                             >
-                                <Image as={Link} to={`/products/${wine.id}`} src='img/red.jpg' />
+                                <Image size="small" centered as={Link} to={`/products/${wine.id}`}  src={wine.imageURL} />
                                 <Card.Content as={Link} to={`/products/${wine.id}`}>
                                     <Card.Meta>
                                         <span className='date'>
@@ -131,5 +131,45 @@ export class Products extends Component {
 
 const mapState = ({ products, user }) => ({ products, user })
 const mapDispatch = { fetchProducts, addProductToCart }
+//const mapDispatch = {fetchStudents};
 
 export default connect(mapState, mapDispatch)(Products);
+
+const dummyData = [
+    {
+        wineName: 'Franzia Boxed Wine',
+        imageURL: 'https://files.slack.com/files-tmb/T024FPYBQ-F9F0MRVNU-9cf43749e0/wine_1024.jpg',
+        year: 2018,
+        description: 'Loved by college students and trophy wives alike'
+    },
+    {
+        wineName: 'Franzia Boxed Wine',
+        imageURL: 'https://files.slack.com/files-tmb/T024FPYBQ-F9F0MRVNU-9cf43749e0/wine_1024.jpg',
+        year: 2018,
+        description: 'Loved by college students and trophy wives alike'
+    },
+    {
+        wineName: 'Franzia Boxed Wine',
+        imageURL: 'https://files.slack.com/files-tmb/T024FPYBQ-F9F0MRVNU-9cf43749e0/wine_1024.jpg',
+        year: 2018,
+        description: 'Loved by college students and trophy wives alike'
+    },
+    {
+        wineName: 'Franzia Boxed Wine',
+        imageURL: 'https://files.slack.com/files-tmb/T024FPYBQ-F9F0MRVNU-9cf43749e0/wine_1024.jpg',
+        year: 2018,
+        description: 'Loved by college students and trophy wives alike'
+    },
+    {
+        wineName: 'Franzia Boxed Wine',
+        imageURL: 'https://files.slack.com/files-tmb/T024FPYBQ-F9F0MRVNU-9cf43749e0/wine_1024.jpg',
+        year: 2018,
+        description: 'Loved by college students and trophy wives alike'
+    },
+    {
+        wineName: 'Franzia Boxed Wine',
+        imageURL: 'https://files.slack.com/files-tmb/T024FPYBQ-F9F0MRVNU-9cf43749e0/wine_1024.jpg',
+        year: 2018,
+        description: 'Loved by college students and trophy wives alike'
+    },
+]
