@@ -22,7 +22,7 @@ class Cart extends Component {
   }
 
   componentDidMount(){
-    console.log(this.props.cart)
+    console.log('fetching cart: ', this.props.cart)
     this.props.setCart('' + document.cookie.slice(5))
   }
 
@@ -55,19 +55,25 @@ class Cart extends Component {
     })
   }
 
+  //expand variable to grab email from form and username from user object if it exists
   checkout(){
-    let orderDetail = {
-      address: this.state.address,
-      status: 'processing',
-      userId: this.props.user.id ? this.props.user.id : null,
-      cartId: this.props.cart.id
-    }
+    let productsString =
+      this.props.cart.products.map( item => (
+        '' + item.title + ' quantity: ' + item.cartItem.quantity + '\n'
+      ));
+      //make email request here, don't do it on the backend
+      let orderDetail = {
+        address: this.state.address,
+        status: 'processing',
+        userId: this.props.user.id ? this.props.user.id : null,
+        cartId: this.props.cart.id
+      }
     document.cookie = "cart=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     this.props.createOrder(orderDetail);
   }
 
   render() {
-    if(this.props.cart.length === 0){
+    if(!this.props.cart.id){
       return(
         <div>
           Loading..
@@ -76,7 +82,7 @@ class Cart extends Component {
     } else {
     return (
       <div>
-        <div className='cart-background'>
+        <div className='cart'>
         </div>
         <Header as='h2' color='black' textAlign='center'>
         {' '}Shopping Cart
