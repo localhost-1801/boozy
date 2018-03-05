@@ -82,8 +82,10 @@ class Cart extends Component {
   }
 
   render() {
-    // if(this.props.cart.length === 0){
+
+
       if(!this.props.cart.id){
+
       return(
         <div>
           Loading..

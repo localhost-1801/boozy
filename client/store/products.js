@@ -21,7 +21,6 @@ const getProducts = products => ({ type: GET_PRODUCTS, products })
 const update = product => ({ type: UPDATE, product })
 const removeProduct = (id) => ({ type: REMOVE_PRODUCT, id });
 const createProduct = product => ({ type: CREATE_PRODUCT, product })
-const updateProduct = product => ({ type: UPDATE_PRODUCT, product })
 
 
 //Thunk creators
@@ -60,12 +59,6 @@ export const createProductThunk = (product) =>
     dispatch =>
         axios.post(`api/products`, product)
             .then(res => dispatch(createProduct(res.data || defaultProduct)))
-            .catch(err => console.log(err))
-
-export const updateProductThunk = (product, id) =>
-    dispatch =>
-        axios.put(`api/products/${id}`, product)
-            .then(res => dispatch(updateProduct(res.data || defaultProduct)))
             .catch(err => console.log(err))
 
 //Reducer

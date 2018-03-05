@@ -4,6 +4,9 @@ import history from '../history'
  * ACTION TYPES
  */
 const GET_PRODUCT = 'GET_PRODUCT';
+const REMOVE_PRODUCT = 'REMOVE_PRODUCT'
+const CREATE_PRODUCT = 'CREATE_PRODUCT'
+const UPDATE_PRODUCT = 'UPDATE_PRODUCT'
 /**
  * INITIAL STATE
  */
