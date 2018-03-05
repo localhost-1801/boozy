@@ -1,5 +1,6 @@
 import axios from 'axios'
 import history from '../history'
+import { connect } from 'react-redux';
 
 /**
  * ACTION TYPES
@@ -7,8 +8,6 @@ import history from '../history'
 const GET_USER = 'GET_USER'
 const REMOVE_USER = 'REMOVE_USER'
 const SET_CURRENT_USER = 'SET_CURRENT_USER'
-const DELETE_USER = 'DELETE_USER'
-const UPDATE_TO_ADMIN_USER = 'UPDATE_TO_ADMIN_USER'
 
 /**
  * INITIAL STATE
@@ -21,8 +20,6 @@ const defaultUser = {}
 const getUser = user => ({ type: GET_USER, user })
 const removeUser = () => ({ type: REMOVE_USER })
 const setCurrentUser = user => ({ type: SET_CURRENT_USER, user })
-const deleteUser = (user) => ({ type: DELETE_USER, user })
-const updateToAdmin = (user) => ({ type: UPDATE_TO_ADMIN_USER, user })
 
 /**
  * THUNK CREATORS
@@ -71,18 +68,6 @@ export const logout = () =>
       })
       .catch(err => console.log(err))
 
-export const deleteUserThunk = studentId => dispatch => {
-  axios.delete(`/api/users/${studentId}`)
-    .then(() => dispatch(deleteUser(studentId)))
-    .catch(err => console.log(err))
-}
-
-export const updateToAdminThunk = (id, user) => dispatch => {
-  axios.put(`/api/users/adminStatus/${id}`, user)
-    .then(res => dispatch(updateToAdmin(res.data)))
-    .catch(err => console.log(err))
-}
-
 
 /**
  * REDUCER
@@ -95,10 +80,10 @@ export default function (state = defaultUser, action) {
       return action.user
     case REMOVE_USER:
       return defaultUser
-    case DELETE_USER:
-      return {}//once user is deleted set store to empty defaultUser
-    case UPDATE_TO_ADMIN_USER:
-      return action.user
+    // case DELETE_USER:
+    // //   return {}//once user is deleted set store to empty defaultUser
+    // case UPDATE_TO_ADMIN_USER:
+    //   return action.user
     default:
       return state
   }

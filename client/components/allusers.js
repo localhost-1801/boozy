@@ -2,11 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Icon, Label, Menu, Table, Button } from 'semantic-ui-react';
-import { fetchUsers } from '../store/users.js';
-import { deleteUserThunk, updateToAdminThunk } from '../store/user.js';
+import { fetchUsers, deleteUserThunk, updateToAdminThunk } from '../store/users.js';
 import { Link } from 'react-router-dom';
 
-export class Users extends Component {
+class Users extends Component {
     constructor(props) {
         super(props)
     }
@@ -16,29 +15,10 @@ export class Users extends Component {
     }
 
     render() {
-
-        const rows = this.props.users.map(user => {
-            return (
-                <Table.Row key={user.id}>
-                    <Table.Cell>{user.username}</Table.Cell>
-                    <Table.Cell>{user.email}</Table.Cell>
-                    <Table.Cell>{user.isAdmin === true ?
-                        <Icon color='green'
-                            name='checkmark'
-                            size='large' onClick={this.props.updateToAdminThunk(user.id, { bool: !user.isAdmin })} /> :
-                        <Icon color='red'
-                            name='cancel'
-                            size='large' onClick={this.props.updateToAdminThunk(user.id, { bool: !user.isAdmin })} />}
-                    </Table.Cell>
-                    <Table.Cell>
-                        <Button color='red' onClick={this.props.deleteUserThunk(user.id)}>DELETE USER</Button>
-                    </Table.Cell>
-                </Table.Row>
-            )
-        })
-
+        console.log(this.props)
+        let users = this.props.users
         return (
-            <div className='userTablePadding'>
+            <div className='userTablePadding indexBackground'>
                 <br />
                 <h1> All Users Status </h1>
                 <Table celled>
@@ -52,7 +32,31 @@ export class Users extends Component {
                     </Table.Header>
 
                     <Table.Body>
-                        {rows}
+                        {
+                            users.map(user => {
+                                return (
+                                    <Table.Row key={user.id}>
+                                        <Table.Cell>{user.username}</Table.Cell>
+                                        <Table.Cell>{user.email}</Table.Cell>
+                                        <Table.Cell>
+                                            <Button onClick={() => this.props.updateToAdmin(user.id, { bool: !user.isAdmin })}>
+                                                {user.isAdmin === true ?
+                                                    <Icon color='green'
+                                                        name='checkmark'
+                                                        size='large' /> :
+                                                    <Icon color='red'
+                                                        name='cancel'
+                                                        size='large'
+                                                    />}
+                                            </Button>
+                                        </Table.Cell>
+                                        <Table.Cell>
+                                            <Button color='red' onClick={() => this.props.deleteUser(user.id)}>DELETE USER</Button>
+                                        </Table.Cell>
+                                    </Table.Row>
+                                )
+                            })
+                        }
                     </Table.Body>
 
                 </Table>
@@ -61,15 +65,20 @@ export class Users extends Component {
     }
 }
 
-const mapState = ({ users }) => ({ users })
+const mapStateToProps = ({ users }) => ({ users })
 
-const mapDispatch = (dispatch) => {
+const mapDispatchToProps = (dispatch) => {
     return {
-        loadInitialData: () => dispatch(fetchUsers()),
-        deleteUserThunk: (id) => deleteUserThunk(id), //not sure if dispatch should be here
-        updateToAdminThunk: (id, user) => updateToAdminThunk(id, user) //not sure if dispatch should be here
-
+        loadInitialData() {
+            dispatch(fetchUsers())
+        },
+        deleteUser(id) {
+            dispatch(deleteUserThunk(id))
+        },
+        updateToAdmin(id, user) {
+            dispatch(updateToAdminThunk(id, user))
+        }
     }
 }
 
-export default connect(mapState, mapDispatch)(Users);
+export default connect(mapStateToProps, mapDispatchToProps)(Users);

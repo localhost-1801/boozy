@@ -67,7 +67,6 @@ router.delete('/:id', (req, res, next) => {
 
 //api/users/adminStatus/:id
 router.put('/adminStatus/:id', (req, res, next) => {
-  console.log(req.body);
   User.findOne({
     where: { id: req.params.id }
   })
