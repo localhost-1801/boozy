@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter, Route, Switch } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import { Login, Signup, UserHome, Home, UnAuthUserHome, Contact, About, SingleProduct, Products, Cart, Orders, Edit, New, AdminAllProducts, AllUsers, ChangePass, Admin } from './components'
+import { Login, Signup, UserHome, Home, UnAuthUserHome, Contact, About, SingleProduct, Products, Cart, Orders, Edit, New, AdminAllProducts, AllUsers, ChangePass } from './components'
 import { me } from './store'
 import { fetchProducts } from './store/products.js'
 
@@ -16,7 +16,7 @@ class Routes extends Component {
   }
 
   render() {
-    const { isLoggedIn } = this.props
+    const { isLoggedIn, isAdmin } = this.props
     return (
       <Switch>
         <Route exact path="/" component={Home} />
@@ -24,7 +24,7 @@ class Routes extends Component {
         <Route exact path="/about" component={About} />
         <Route exact path="/ageGate" component={UnAuthUserHome} />
         <Route exact path="/cart" component={Cart} />
-        <Route exact path="/allUsers" component={AllUsers} />
+
         <Route path="/wines" component={Products} />
         <Route exact path="/products" component={Products} />
         <Route exact path="/products/update/:id" component={Edit} />
@@ -34,14 +34,23 @@ class Routes extends Component {
         <Route path="/signup" component={Signup} />
         <Route path="/orders" component={Orders} />
         <Route path="/new" component={New} />
-        <Route path="/allProducts" component={AdminAllProducts} />
-        <Route path="/admin" component={Admin} />
+
         {
           isLoggedIn &&
           <Switch>
             {/* Routes placed here are only available after logging in */}
             <Route exact path="/changePassword" component={ChangePass} />
             <Route path="/userhome" component={UserHome} />
+            <Route exact path="/allUsers" component={AllUsers} />
+            <Route path="/allProducts" component={AdminAllProducts} />
+          </Switch>
+        }
+
+        {
+          isAdmin &&
+          <Switch>
+            <Route exact path="/allUsers" component={AllUsers} />
+            <Route path="/allProducts" component={AdminAllProducts} />
           </Switch>
         }
 
@@ -61,6 +70,7 @@ const mapState = (state) => {
     // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
     // Otherwise, state.user will be an empty object, and state.user.id will be falsey
     isLoggedIn: !!state.user.id,
+    isAdmin: !!state.user.isAdmin
   }
 }
 
