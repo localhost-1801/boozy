@@ -14,34 +14,34 @@ router.get('/', (req, res, next) => {
 
 // /api/products/id
 router.get('/:id', (req, res, next) => {
-    Product.findOne({
-        where: {
-            id: req.params.id
-        }
-    })
+    Product.findById(req.params.id)
         .then(product => res.json(product))
         .catch(next)
 })
 
-
 // api/products
 router.post('/', (req, res, next) => {
     Product.create(req.body)
-        .then(product => res.json(product))
+        .then(product => res.status(201).json(product))
         .catch(next)
 })
 
 //api/products/:id
 router.put('/:id', (req, res, next) => {
-    req.product.update(req.body)
+    let id = req.params.id;
+    Product.update(req.body, {
+        where: { id: id }
+    })
         .then(product => res.json(product))
         .catch(next)
 })
 
-
 //api/products/:id
 router.delete('/:id', (req, res, next) => {
-    req.product.destroy()
+    let id = req.params.id;
+    Product.destroy({
+        where: { id }
+    })
         .then(() => res.sendStatus(204))
         .catch(next);
 });

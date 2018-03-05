@@ -2,9 +2,11 @@
 import React, { Component } from 'react'
 import { Grid, Header, Image, Dropdown, Button, Form, Checkbox } from 'semantic-ui-react'
 import { connect } from 'react-redux'
-import { fetchCart, addProductToCart } from '../store/cart'
+import { fetchCart, addProductToCart, removeProductFromCart } from '../store/cart'
 import { createNewOrder } from '../store/orders'
 import { Link } from "react-router-dom";
+import Hashids from 'hashids'
+const hashids = new Hashids();
 
 class Cart extends Component {
   constructor(props){
@@ -38,9 +40,22 @@ class Cart extends Component {
     this.props.updateCart(cartDetails)
   }
 
+  handleDelete = (productId) => {
+    console.log('Here is my productId', productId)
+    console.log('in delete handler heres my cookie',document.cookie.slice(document.cookie.indexOf('=')+1))
+    const cartId = hashids.decode(document.cookie.slice(document.cookie.indexOf('=')+1))[0]
+    console.log('thisis my cartId', cartId)
+    const payload = {
+      productId: productId,
+      cartId: cartId
+      
+    }
+    this.props.removeProduct(payload);
+  }
+
   generateDropdown(item){
     let dropDowns = [];
-    for(var i = 1; i < item.cartItem.quantity + 4; i++){
+    for (var i = 1; i < item.cartItem.quantity + 4; i++){
       let iCopy = i;
       dropDowns.push(
         <Dropdown.Item text={i} key={i} onClick={() => this.handleQuantityChange(iCopy, item.cartItem.productId)} />
@@ -67,13 +82,16 @@ class Cart extends Component {
   }
 
   render() {
-    if(this.props.cart.length === 0){
+
+
+      if(!this.props.cart.id){
+
       return(
         <div>
-          Loading..
+          Loading...
         </div>
       )
-    } else {
+    } 
     return (
       <div>
         <div className='cart-background'>
@@ -95,8 +113,9 @@ class Cart extends Component {
               Quantity
             </Grid.Column>
           </Grid.Row>
-          {this.props.cart.products.map( item => {
-            return(
+          {this.props.cart.products.sort((a, b)=> a.title > b.title).map( item => {
+            console.log(item)
+            return (
               <Grid.Row key={item.id}>
                 <Grid.Column width={3}>
                   <Image src={item.imageURL} />
@@ -105,7 +124,7 @@ class Cart extends Component {
                   {item.title}
                   <br />
                   <br />
-                  <Button basic color='red' content='Delete' />
+                  <Button basic color='red' onClick={() => this.handleDelete(item.id)} content='Delete' />
                 </Grid.Column>
                 <Grid.Column width={3}>
                   {item.price}
@@ -156,13 +175,14 @@ class Cart extends Component {
     )
   }
   }
-}
+
 
 const mapState = ({ cart, user }) => ({ cart, user });
 const mapDispatch = (dispatch) => { return ({
   setCart(cookie){ dispatch(fetchCart(cookie))},
   updateCart(product){ dispatch(addProductToCart(product))},
-  createOrder(order){ dispatch(createNewOrder(order)) }
+  createOrder(order){ dispatch(createNewOrder(order)) },
+  removeProduct(productId){ dispatch(removeProductFromCart(productId))}
 })}
 
 export default connect(mapState, mapDispatch)(Cart);

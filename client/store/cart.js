@@ -6,7 +6,7 @@ import axios from 'axios';
 
 const GET_CART = 'GET_CART';
 const ADD = 'ADD_TO_CART';
-const REMOVE = 'REMOVE_FROM_CART';
+const REMOVE = 'REMOVE_FROM_CART'
 
 //INITIAL STATE
 
@@ -16,7 +16,7 @@ const defaultCart = {};
 
 const add = (productToAdd) => ({ type: ADD, productToAdd })
 const getCart = cart => ({ type: GET_CART, cart })
-const remove = (productToRemove) => ({ type: REMOVE, productToRemove })
+const remove = (payload) => ({type: REMOVE, payload})
 
 
 //THUNK CREATORS
@@ -32,24 +32,26 @@ export const fetchCart = (cookieToken) =>
             .catch(err => console.log(err));
 
 export const addProductToCart = (productToAdd) =>
-    dispatch =>
-        axios.put('/api/cart', productToAdd)
-            .then(res => {
-                return (
-                    dispatch(add(res.data))
-                )
-            })
-            .catch(err => console.error(err));
+  dispatch =>
+    axios.put('/api/cart', productToAdd )
+      .then(res =>{
+          console.log('in store:',res.data)
+        return (
+          dispatch(add(res.data))
+        )
+      })
+    .catch(err => console.error(err));
+//Should take productId, and get cartId from cookie
+export const removeProductFromCart = (payload) =>
+      dispatch =>{
+        console.log('in store, here is payload',payload)
+        axios.delete(`/api/cart/cartItem/${payload.productId}/${payload.cartId}`)
+        .then(ids => {
 
-export const removeProductToCart = (productToRemove) =>
-    dispatch =>
-        axios.put('/api/cart', productToRemove)
-            .then(res => {
-                return (
-                    dispatch(remove(res.data))
-                )
-            })
-            .catch(err => console.error(err));
+            dispatch(remove(ids.data))
+        })
+        .catch(err => console.error(err))
+      }
 
 
 
@@ -62,9 +64,15 @@ export default function (state = defaultCart, action) {
         case GET_CART:
             return action.cart
         case ADD:
-            return action.add
+            console.log(action.productToAdd)
+            return Object.assign({}, state, action.productToAdd)
         case REMOVE:
-            return action.remove
+
+            return Object.assign({}, state, {
+                products: state.products.filter(product => {
+                   return product.id !== +action.payload.productId
+                })
+            })
         default:
             return state
     }
