@@ -23,7 +23,7 @@ const remove = (productToRemove) => ({ type: REMOVE, productToRemove })
 
 export const fetchCart = (cookieToken) =>
     dispatch =>
-        axios.get('/api/cart')
+        axios.get(`/api/cart/${cookieToken}`)
             .then(res => {
                 return (
                     dispatch(getCart(res.data || defaultCart))

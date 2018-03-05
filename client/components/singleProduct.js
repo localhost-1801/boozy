@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { auth } from '../store'
-import { Grid, Container, Divider, Header, Card, Image, Icon, Item } from 'semantic-ui-react'
+import { Grid, Container, Divider, Header, Card, Image, Icon, Item, Button } from 'semantic-ui-react'
 import { fetchProducts } from '../store/products.js'
 
 class SingleProduct extends Component {
@@ -30,7 +30,13 @@ class SingleProduct extends Component {
                 <Divider horizontal >2014</Divider>
                 <Divider horizontal><Header as='h2'>{singleProduct.title}</Header></Divider>
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                <p className='centered-text'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                <Grid centered columns={1}>
+                <Grid.Row>
+                <Button><Icon name="plus cart" /> Add to Cart</Button>
+                <Button href="/edit">Edit Item</Button>
+                </Grid.Row>
+                </Grid>
               </Container>
             </Grid.Column>
           </Grid.Row>
