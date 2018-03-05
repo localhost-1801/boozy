@@ -65,6 +65,11 @@ form div {
   margin: 0;
 }
 
+.userTablePadding {
+  padding-left: 200px;
+  padding-right: 200px;
+}
+
 .single-product {
  height: 200px;
  background-image: url(img/background.jpg);

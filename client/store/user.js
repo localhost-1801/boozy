@@ -87,3 +87,6 @@ function setUserAndRedirect (user, history, dispatch) {
   dispatch(setCurrentUser(user));
   history.push('/')
 }
+
+
+//test
