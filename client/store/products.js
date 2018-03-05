@@ -1,8 +1,11 @@
 import axios from 'axios'
+import history from '../history'
 
 //ACTION TYPES
 
-const GET_PRODUCTS = 'GET_PRODUCTS';
+const GET_PRODUCTS = 'GET_PRODUCTS'
+const ADD = 'ADD_PRODUCTS'
+const UPDATE = 'UPDATE_PRODUCT'
 const REMOVE_PRODUCT = 'REMOVE_PRODUCT';
 const CREATE_PRODUCT = 'CREATE_PRODUCT';
 const UPDATE_PRODUCT = 'UPDATE_PRODUCT';
@@ -13,7 +16,9 @@ const defaultProducts = [];
 
 //Action creators
 
+const add = (productToAdd) => ({ type: ADD, productToAdd })
 const getProducts = products => ({ type: GET_PRODUCTS, products })
+const update = product => ({ type: UPDATE, product })
 const removeProduct = (id) => ({ type: REMOVE_PRODUCT, id });
 const createProduct = product => ({ type: CREATE_PRODUCT, product })
 const updateProduct = product => ({ type: UPDATE_PRODUCT, product })
@@ -30,6 +35,21 @@ export const fetchProducts = () =>
             })
             .catch(err => console.log(err))
 
+export const addProduct = productToAdd => dispatch => {
+    axios.post('/api/products', productToAdd)
+    .then(res => {
+        dispatch(add(res.data))
+
+    })
+    .then(() => history.push('/products'))
+    .catch(err => console.error(err))
+}
+
+export const updateProduct = (id, product) => dispatch => {
+    axios.put(`/api/products/${id}`, product)
+    .then(res => dispatch(update(res.data)))
+    .catch(err => console.error(err))
+}
 export const removeProductThunk = (id) =>
     dispatch =>
         axios.delete(`api/products/${id}`)
@@ -47,13 +67,16 @@ export const updateProductThunk = (product, id) =>
         axios.put(`api/products/${id}`, product)
             .then(res => dispatch(updateProduct(res.data || defaultProduct)))
             .catch(err => console.log(err))
-//test
 
 //Reducer
 export default function (state = defaultProducts, action) {
     switch (action.type) {
         case GET_PRODUCTS:
             return action.products
+        case ADD:
+            return [action.productToAdd, ...state]
+        case UPDATE:
+            return state.map(product => ( action.id === product.id ? action.product : product))
         case REMOVE_PRODUCT:
             return state.filter(product => product.id !== action.id);
         case CREATE_PRODUCT:
