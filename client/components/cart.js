@@ -22,7 +22,7 @@ class Cart extends Component {
   }
 
   componentDidMount(){
-    console.log(this.props.cart)
+    console.log('fetching cart: ', this.props.cart)
     this.props.setCart('' + document.cookie.slice(5))
   }
 
@@ -67,7 +67,7 @@ class Cart extends Component {
   }
 
   render() {
-    if(this.props.cart.length === 0){
+    if(!this.props.cart.id){
       return(
         <div>
           Loading..
@@ -76,7 +76,7 @@ class Cart extends Component {
     } else {
     return (
       <div>
-        <div className='cart-background'>
+        <div className='cart'>
         </div>
         <Header as='h2' color='black' textAlign='center'>
         {' '}Shopping Cart

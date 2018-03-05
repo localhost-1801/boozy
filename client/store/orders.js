@@ -61,4 +61,3 @@ export default function (state = defaultOrders, action) {
             return state
     }
 }
-
