@@ -263,19 +263,31 @@ const cartDBseed =
         {
             productId: 2,
             cartId: 2,
-            quantity: 10
+            quantity: 10,
+            purchasePrice: 12
         }
     ]
 const cartDummyData =
     [
         {
-            token: 'abc'
+            token: 'abc',
+            userId: 1,
+            address: '123 lane lavenswood junolyville san carolifcia'
         },
         {
-            token: 'dcfdasdf'
+            token: 'dcfdasdf',
+            userId: 2,
+            address: '123 lane lavenswood junolyville san carolifcia'
         },
         {
-            token: 'hello'
+            token: 'hello',
+            userId: 1,
+            address: '123 lane lavenswood junolyville san carolifcia'
+        },
+        {
+            token: 'mO',
+            userId: 1,
+            address: '123 lane lavenswood junolyville san carolifcia'
         }
     ]
 const prodCatDummyData =

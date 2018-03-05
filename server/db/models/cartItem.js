@@ -10,6 +10,9 @@ const CartItem = db.define('cartItem', {
             min: 1
         }
     },
+    purchasePrice: {
+      type: Sequelize.FLOAT,
+    }
     // scopes: {
     //     allProducts: {
     //         include: [

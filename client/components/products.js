@@ -17,7 +17,8 @@ export class Products extends Component {
             input: '',
         }
     }
-    handleAdd = (id) => {
+    handleAdd = (id, price) => {
+      console.log(price);
       if (document.cookie){
         //use thunk to make axios put request, {quantity: 5, productId: 2, token: lsafkl}
         this.props.addProductToCart({
@@ -25,6 +26,7 @@ export class Products extends Component {
             value: 1,
             add: true
           },
+          purchasePrice: price,
           //set to document.cookie
           token: document.cookie.slice(5) + '',
           productId: id
@@ -102,7 +104,7 @@ export class Products extends Component {
                                     <Segment.Group horizontal>
                                         <Segment>${wine.price}</Segment>
                                         <Segment>
-                                            <Label onClick={() => this.handleAdd(wine.id)}>
+                                            <Label onClick={() => this.handleAdd(wine.id, wine.price)}>
                                                 <Icon name="add to cart"/>
                                             </Label>
                                         </Segment>

@@ -9,13 +9,14 @@ const Cart = db.define('cart', {
         type: Sequelize.ENUM('unordered', 'processing', 'sent', 'delivered')
     },
     address: {
-        type: Sequelize.STRING,
-        allowNull: false
+        type: Sequelize.STRING
     },
     date: {
         type: Sequelize.STRING
+    },
+    email: {
+      type: Sequelize.STRING
     }
-
 })
 
 module.exports = Cart;

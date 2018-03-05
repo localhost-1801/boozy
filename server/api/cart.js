@@ -39,7 +39,17 @@ router.post('/', (req, res, next) => {
         })
         .catch(next);
 })
-
+router.put('/:id', (req, res, next) => {
+  Cart.findOne({
+    where: {
+      id: req.params.id
+    }
+  })
+    .then(cart => {
+      console.log('we made it to the API: ', cart)
+      return cart.update(req.body)
+    })
+})
 //api/cart
 router.put('/', (req, res, next) => {
 
@@ -61,10 +71,11 @@ router.put('/', (req, res, next) => {
         productId: req.body.productId
       }
     }).then(found => {
+      console.log('price', req.body.purchasePrice);
       if (found) {
         let quantity = req.body.quantity.add ? found.quantity + req.body.quantity.value : req.body.quantity.value;
         console.log('in if statement')
-        found.update({quantity})
+        found.update({quantity, purchasePrice: req.body.purchasePrice})
         .then( async updatedItem => {
             // const product = await Product.findOne({
             //     where: {
@@ -90,7 +101,7 @@ router.put('/', (req, res, next) => {
         })
       } else {
         console.log('in else statement', req.body)
-        CartItem.create({productId: req.body.productId, cartId: cartIdFromHash, quantity: req.body.quantity.value})
+        CartItem.create({productId: req.body.productId, cartId: cartIdFromHash, quantity: req.body.quantity.value, purchasePrice: req.body.purchasePrice})
         .then(newItem => {
             console.log(newItem)
             res.json(newItem)

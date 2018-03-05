@@ -19,6 +19,7 @@ Product.hasMany(Review);
 Review.belongsTo(Product);
 Review.belongsTo(User);
 Cart.hasOne(Order);
+Cart.belongsTo(User);
 // Product.belongsToMany(Order, { foreignKey: 'productId', through: OrderItem });
 // Order.belongsToMany(Product, { foreignKey: 'orderId', through: OrderItem })
 // Order.hasOne(Cart);//adds cart column to Order
