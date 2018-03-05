@@ -30,7 +30,7 @@ router.get('/single/:userId/:id', (req, res, next) => {
 
 //api/orders
 router.post('/', (req, res, next) => {
-  Order.create(req.body.orderDetail)
+  Order.create(req.body)
     .then(result => {
       var data = {
         from: 'Boozy',

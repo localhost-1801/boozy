@@ -71,15 +71,12 @@ class Cart extends Component {
   }
 
   checkout(){
-    let payload = {
-      email: this.state.email,
-      orderDetail: {
+      let orderDetail = {
+        email: this.state.email,
         address: this.state.address,
         status: 'processing',
         userId: this.props.user.id ? this.props.user.id : null,
-        email: this.state.email
       }
-    }
     document.cookie = "cart=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     this.props.createOrder(payload);
   }
