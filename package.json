@@ -26,6 +26,7 @@
     "body-parser": "^1.16.1",
     "compression": "^1.7.1",
     "connect-session-sequelize": "^4.1.0",
+    "cookie-parser": "^1.4.3",
     "express": "^4.14.1",
     "express-session": "^1.15.1",
     "hashids": "^1.1.4",

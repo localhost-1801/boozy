@@ -6,9 +6,9 @@ module.exports = router
 router.get('/:userId', (req, res, next) => {
   Order.findAll({
     where: { userId: req.params.userId },
-    // include: [
-    //   { model: Product },
-    //   { model: User, attributes: ['id', 'email'] }
+     // include: [
+     //   { model: Cart },
+      // { model: User, attributes: ['id', 'email'] }
     // ],
   }).then(orders => res.json(orders))
     .catch(next)

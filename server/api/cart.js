@@ -5,9 +5,10 @@ const Hashids = require('hashids')
 const hashids = new Hashids()
 module.exports = router
 
-router.get('/', (req, res, next) => {
+ //api/cart/:token
+router.get('/:token', (req, res, next) => {
     //assuming cookies will work
-    const cookieToken = 'abc'
+    const cookieToken = req.params.token
     Cart.findOne({
         where: {
             token: cookieToken
@@ -17,7 +18,6 @@ router.get('/', (req, res, next) => {
         ]
     })
         .then(cartItems => {
-            console.log(cartItems)
             res.json(cartItems)
         })
         .catch(err => { console.log(err) })
@@ -50,10 +50,13 @@ router.put('/', (req, res, next) => {
     // })
     //     .then(modifiedCart => res.json(modifiedCart))
     //     .catch(next);
-
+    console.log('click');
+    //takes a few cart paramaters: productId, and quantity object
+    //quantity object: {add: true/false, value: quantity}
+    let cartIdFromHash = hashids.decode(req.cookies.cart)[0];
     CartItem.findOne({
       where: {
-        cartId: hashids.decode(req.body.token)[0],
+        cartId: cartIdFromHash,
         productId: req.body.productId
       }
     }).then( res => {
@@ -63,7 +66,7 @@ router.put('/', (req, res, next) => {
         res.update({quantity})
       } else {
         console.log('in else statement')
-        CartItem.create({productId: req.body.productId, cartId: hashids.decode(req.body.token)[0], quantity: req.body.quantity.value})
+        CartItem.create({productId: req.body.productId, cartId: cartIdFromHash, quantity: req.body.quantity.value})
       }
     })
     .catch(next);

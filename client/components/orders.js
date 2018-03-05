@@ -1,18 +1,41 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { Table, Header, Image, Button } from 'semantic-ui-react'
+import { fetchOrders } from '../store/orders'
+import { me } from '../store/user'
 
 
-export default class Orders extends Component {
+class Orders extends Component {
+  constructor(props){
+    super(props)
+
+  }
+
+  //neeed to .then off of .getUser somehow
+  componentDidMount(){
+    this.props.getOrders(this.props.user.id);
+  }
+
   render() {
+    console.log(this.props)
+    if(!this.props.user.id){
+      return(
+        <p> Must Login to see previous orders </p>
+      )
+    } else {
     return (
       <div>
         <div className='cart'>
         </div>
+        {this.props.orders.map( item => (
+          <div>
+            Cart Id {item.cartId}
+          </div>
+        ))}
 
         <Header as='h2' color='black' textAlign='center'>
         {' '}Your Orders
     </Header>
-
       <div className="ordersTitle">
         <Table collapsing fixed color='olive' key='olive'>
           <Table.Header>
@@ -82,28 +105,17 @@ export default class Orders extends Component {
       </div>
       </div>
     )
+    }
   }
 }
 
+const mapState = ({ user, orders }) => ({ user, orders });
+const mapDispatch = (dispatch) => { return ({
+  getOrders(userId, cartToken){
+    dispatch(me());
+    dispatch(fetchOrders(userId));
+  },
+  getUser(){ dispatch(me()) },
+})}
 
-// <Grid columns={4}>
-// <Grid.Row>
-//   <Grid.Column>
-//     Purchased on <b>February 28, 2018</b>
-//   </Grid.Column>
-// </Grid.Row>
-
-// <Grid.Row>
-//   <Grid.Column>
-//     <Image src='img/white.jpg' />
-//   </Grid.Column>
-//   <Grid.Column>
-//     Wine Name
-//   </Grid.Column>
-//   <Grid.Column>
-//     Subtotal
-//   </Grid.Column>
-// </Grid.Row>
-// </Grid>
-
-
+export default connect(mapState, mapDispatch)(Orders);

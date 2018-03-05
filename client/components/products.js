@@ -18,17 +18,15 @@ export class Products extends Component {
         }
     }
     handleAdd = (id) => {
-      console.log(document.cookie)
       if (document.cookie){
         //use thunk to make axios put request, {quantity: 5, productId: 2, token: lsafkl}
-        console.log(id)
         this.props.addProductToCart({
           quantity: {
             value: 1,
             add: true
           },
           //set to document.cookie
-          token: 'nR',
+          token: document.cookie.slice(5) + '',
           productId: id
         })
       }
@@ -60,7 +58,7 @@ export class Products extends Component {
         })
 
         return (
-            <div>
+            <div className="productsBackground">
                 <Menu attached='top' >
                     <Menu.Item name='All' id='all' active={activeItem === 'all'} onClick={this.handleItemClick} />
                     <Menu.Item name='Reds' id='red' active={activeItem === 'red'} onClick={this.handleItemClick} />
