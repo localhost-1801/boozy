@@ -1,3 +1,4 @@
+
 import axios from 'axios'
 import history from '../history'
 import { connect } from 'react-redux';
@@ -8,7 +9,7 @@ import { connect } from 'react-redux';
 const GET_USER = 'GET_USER'
 const REMOVE_USER = 'REMOVE_USER'
 const SET_CURRENT_USER = 'SET_CURRENT_USER'
-
+const UPDATE_USER_PASS = 'UPDATE_USER_PASS';
 /**
  * INITIAL STATE
  */
@@ -20,6 +21,7 @@ const defaultUser = {}
 const getUser = user => ({ type: GET_USER, user })
 const removeUser = () => ({ type: REMOVE_USER })
 const setCurrentUser = user => ({ type: SET_CURRENT_USER, user })
+const updateUserPass = user => ({ type: UPDATE_USER_PASS, user })
 
 /**
  * THUNK CREATORS
@@ -33,6 +35,14 @@ export const signup = (credentials) => dispatch => {
     .catch(err => console.error(`Logging in with ${credentials.email} and ${credentials.password} was unsuccesful`, err));
 };
 
+
+export const passwordReset = (newAndOldPass) => dispatch => {
+  console.log('pass', newAndOldPass)
+  axios.put('/api/users/resetpass', newAndOldPass)
+    .then(res => dispatch(updateUserPass(res.data)))
+      .catch(err => console.log(err))
+}
+
 export const login = (credentials) => dispatch => {
   axios.post('/auth/login', credentials)
     .then(res => {
@@ -40,6 +50,7 @@ export const login = (credentials) => dispatch => {
     })
     .catch(err => console.error(`Logging in with ${credentials.email} and ${credentials.password} was unsuccesful`, err));
 };
+
 
 export const me = () =>
   dispatch =>
@@ -80,6 +91,8 @@ export default function (state = defaultUser, action) {
       return action.user
     case REMOVE_USER:
       return defaultUser
+    case UPDATE_USER_PASS:
+      return action.user
     // case DELETE_USER:
     // //   return {}//once user is deleted set store to empty defaultUser
     // case UPDATE_TO_ADMIN_USER:
