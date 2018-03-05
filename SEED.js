@@ -16,8 +16,7 @@ const userDBseed =
             email: 'TEST2@TEST2.com',
             username: 'I am not an alcoholic',
             password: '123',
-            isAdmin: false
-            password: '123'
+            isAdmin: false,
         },
         {
             email: 'ADMIN@ADMIN.COM',
@@ -99,7 +98,7 @@ const productDBseed =
             inventory: '1018',
             year: '2018',
             imageUrl: 'https://www.fillmurray.com/200/300',
-            available: 'available'
+            available: 'available',
             //categoryId: 1
             categoryId: 1
             // categories: [
