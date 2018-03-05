@@ -5,6 +5,8 @@ import PropTypes from 'prop-types'
 import { auth } from '../store'
 import { Grid, Container, Divider, Header, Card, Image, Icon, Item } from 'semantic-ui-react'
 import { fetchProducts } from '../store/products.js'
+import  Reviews  from './reviews'
+import ReviewForm from './reviewForm'
 
 class SingleProduct extends Component {
   constructor(props) {
@@ -16,6 +18,8 @@ class SingleProduct extends Component {
     if (singleProduct === undefined) {
       return <div>LOADING</div>
     }
+
+    console.log(!this.props.user)
     return (
       <div>
         <div className='single-product'>
@@ -37,40 +41,21 @@ class SingleProduct extends Component {
           <Divider horizontal> Reviews</Divider>
           <Grid.Row centered={false}>
             <Grid.Column width={13}>
-              <Item>
-                <Item.Content>
-                  <Item.Header as='a'>Jerry</Item.Header>
-                  <Item.Meta>8.20.2018</Item.Meta>
-                  <Item.Extra><Icon name='star' /><Icon name='star' /><Icon name='star' /><Icon name='star' /><Icon name='star' /> </Item.Extra>
-
-                  <Item.Description>
-                    Wow this product is amazing.
-                  </Item.Description>
-                </Item.Content>
-              </Item>
-              <Divider />
-              <Item>
-                <Item.Content>
-                  <Item.Header as='a'>Jerry</Item.Header>
-                  <Item.Meta>8.20.2018</Item.Meta>
-                  <Item.Extra><Icon name='star' /><Icon name='star' /><Icon name='star' /><Icon name='star' /><Icon name='star' /> </Item.Extra>
-
-                  <Item.Description>
-                    Wow this product is amazing.
-                  </Item.Description>
-                </Item.Content>
-              </Item>
-
+            <Reviews theProduct={singleProduct} />
+            {this.props.user.id !== undefined ? <ReviewForm productId={singleProduct.id}/> : <div>Please login to leave a review</div>}
             </Grid.Column>
           </Grid.Row>
+          
 
         </Grid>
+        
+
       </div>
     )
   }
 }
 
-const mapState = ({ products }) => ({ products })
+const mapState = ({ products, user, reviews }) => ({ products, user, reviews})
 const mapDispatch = null
 
 export default connect(mapState, mapDispatch)(SingleProduct);

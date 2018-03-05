@@ -16,7 +16,7 @@ const defaultReviews = [];
 const getReviews = reviews => ({ type: GET_REVIEWS, reviews })
 const getReviewsForProduct = reviewsforProduct => ({ type: GET_REVIEWS_FOR_PRODUCT, reviewsforProduct })
 const getReview = review => ({ type: GET_REVIEW, review })
-const postReview = review => ({ type: POST_REVIEW, review })
+const post = review => ({ type: POST_REVIEW, review })
 
 
 //THUNK CREATORS 
@@ -27,9 +27,9 @@ export const fetchReviews = () =>
             .then(res => dispatch(getReviews(res.data || defaultReviews)))
             .catch(err => console.log(err));
 
-export const fetchReviewsforProduct = (productId) =>
+export const fetchReviewsForProduct = (productId) =>
     dispatch =>
-        axios.get(`/api/reviews/${productId}`)
+        axios.get(`/api/reviews/p/${productId}`)
             .then(res => dispatch(getReviewsForProduct(res.data || defaultReviews)))
             .catch(err => console.log(err));
 
@@ -42,13 +42,13 @@ export const fetchReview = (id) =>
 export const postReview = (review) =>
     dispatch =>
         axios.post('/api/reviews', review)
-            .then(res => dispatch(postReview(res.data || defaultReviews)))
+            .then(res => dispatch(post(res.data || defaultReviews)))
             .catch(err => console.log(err));
 
 
 //REDUCERS
 
-export default function (state = defaultProducts, action) {
+export default function (state = [], action) {
     switch (action.type) {
         case GET_REVIEWS_FOR_PRODUCT:
             return action.reviewsforProduct
@@ -57,7 +57,7 @@ export default function (state = defaultProducts, action) {
         case GET_REVIEW:
             return action.review
         case POST_REVIEW:
-            return [action.review, ...state];
+            return [...state, action.review];
         default:
             return state
     }

@@ -19,9 +19,11 @@ router.get('/p/:productId', (req, res, next) => {
     where: { productId: req.params.productId },
     include: [
       { model: Product },
-      { model: User, attributes: ['id', 'e-mail'] }
+      { model: User}
     ],
   })
+  .then(reviews => res.json(reviews))
+  .catch(next)
 })
 
 
