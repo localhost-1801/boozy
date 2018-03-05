@@ -39,7 +39,6 @@ export default class UnAuthUserHome extends Component {
         </div>
       )
     }
-    console.log(homeOrAgeGate);
     return (
       homeOrAgeGate
     )
