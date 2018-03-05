@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
-const Product = require('./product') 
+const Product = require('./product')
 
 const CartItem = db.define('cartItem', {
     quantity: {
@@ -25,7 +25,7 @@ const CartItem = db.define('cartItem', {
     // },
     // getterMethods: {
     //     totalPrice() {
-    //         // return this.quantity 
+    //         // return this.quantity
     //     }
     // }
 })

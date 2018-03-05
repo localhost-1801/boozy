@@ -5,9 +5,10 @@ const Hashids = require('hashids')
 const hashids = new Hashids()
 module.exports = router
 
-router.get('/', (req, res, next) => {
+ //api/cart/:token
+router.get('/:token', (req, res, next) => {
     //assuming cookies will work
-    const cookieToken = 'abc'
+    const cookieToken = req.params.token
     Cart.findOne({
         where: {
             token: cookieToken
@@ -17,7 +18,6 @@ router.get('/', (req, res, next) => {
         ]
     })
         .then(cartItems => {
-            console.log(cartItems)
             res.json(cartItems)
         })
         .catch(err => { console.log(err) })
@@ -42,26 +42,33 @@ router.post('/', (req, res, next) => {
 
 //api/cart
 router.put('/', (req, res, next) => {
+
+    //not sure if cart will be on the request body?
+    // req.cart.update(req.body, {
+    //     include: [
+    //         { model: Product, through: CartItem }
+    //     ]
+    // })
+    //     .then(modifiedCart => res.json(modifiedCart))
+    //     .catch(next);
+    console.log('click');
+    //takes a few cart paramaters: productId, and quantity object
+    //quantity object: {add: true/false, value: quantity}
+    let cartIdFromHash = hashids.decode(req.cookies.cart)[0];
     CartItem.findOne({
-        where: {
-            cartId: hashids.decode(req.body.token)[0],
-            productId: req.body.productId
-        }
-    }).then(res => {
-        if (res) {
-            if (req.body.quantity.add) {
-                let quantity = req.body.quantity.add ? res.quantity + req.body.quantity.value : req.body.quantity.value;
-                console.log('in if statement')
-                res.update({ quantity })
-            } else { //req.body.quantity.add
-                let quantity = req.body.quantity.remove ? res.quantity + req.body.quantity.value : req.body.quantity.value;
-                console.log('in if, if-else statement')
-                res.update({ quantity })
-            }
-        } else {
-            console.log('in else statement')
-            CartItem.create({ productId: req.body.productId, cartId: hashids.decode(req.body.token)[0], quantity: req.body.quantity.value })
-        }
+      where: {
+        cartId: cartIdFromHash,
+        productId: req.body.productId
+      }
+    }).then( res => {
+      if (res) {
+        let quantity = req.body.quantity.add ? res.quantity + req.body.quantity.value : req.body.quantity.value;
+        console.log('in if statement')
+        res.update({quantity})
+      } else {
+        console.log('in else statement')
+        CartItem.create({productId: req.body.productId, cartId: cartIdFromHash, quantity: req.body.quantity.value})
+      }
     })
         .catch(next);
 })
