@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const { Order, Product, User, CartItem } = require('../db/models')
+const { Order, Product, User, CartItem, Cart } = require('../db/models')
 const Secrets = require('../auth/secrets')
 // const mailgun = require("mailgun-js");
 const api_key = process.env.MAILGUN_TOKEN;
@@ -11,10 +11,7 @@ module.exports = router
 router.get('/:userId', (req, res, next) => {
   Order.findAll({
     where: { userId: req.params.userId },
-     // include: [
-     //   { model: Cart },
-      // { model: User, attributes: ['id', 'email'] }
-    // ],
+     include: [{ all: true }]
   }).then(orders => res.json(orders))
     .catch(next)
 })

@@ -18,8 +18,10 @@ Category.belongsToMany(Product, { foreignKey: 'categoryId', through: 'ProdCatJoi
 Product.hasMany(Review);
 Review.belongsTo(Product);
 Review.belongsTo(User);
-User.hasMany(Order);
-Cart.hasOne(Order); //adds cart column to Order
+Cart.hasOne(Order);
+// Product.belongsToMany(Order, { foreignKey: 'productId', through: OrderItem });
+// Order.belongsToMany(Product, { foreignKey: 'orderId', through: OrderItem })
+// Order.hasOne(Cart);//adds cart column to Order
 // Order.hasMany(Product)
 
 
