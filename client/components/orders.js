@@ -112,8 +112,10 @@ class Orders extends Component {
 const mapState = ({ user, orders }) => ({ user, orders });
 const mapDispatch = (dispatch) => { return ({
   getOrders(userId, cartToken){
-    dispatch(me());
-    dispatch(fetchOrders(userId));
+    dispatch(me())
+    .then( result =>{
+      return(dispatch(fetchOrders(result.user.id)))
+    })
   },
   getUser(){ dispatch(me()) },
 })}

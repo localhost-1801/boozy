@@ -73,6 +73,7 @@ class Cart extends Component {
   checkout(){
       let orderDetail = {
         // email: this.state.email,
+        cartId: hashids.decode(document.cookie.slice(document.cookie.indexOf('=')+1))[0],
         address: this.state.address,
         status: 'processing',
         userId: this.props.user.id ? this.props.user.id : null,
