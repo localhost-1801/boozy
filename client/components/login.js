@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { login as loginFromReducer } from '../store/user'
 import { Button, Form, Grid, Header, Message, Segment, Icon } from 'semantic-ui-react'
+import history from '../history'
 
 class Login extends React.Component {
   constructor(props){
@@ -9,6 +10,7 @@ class Login extends React.Component {
   }
 
   render(){
+    console.log(this.props)
     const { onLoginSubmit } = this.props
      return(
       <div className='login-form'>
@@ -72,6 +74,7 @@ const mapDispatch = (dispatch, ownProps) => ({
       email: event.target.email.value,
       password: event.target.password.value
     }))
+    // history.push('/')
   }
 })
 

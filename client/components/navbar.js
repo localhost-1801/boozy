@@ -18,12 +18,25 @@ class Navbar extends Component {
     this.props.getAdmissionData()
   }
 
-  componentWillReceiveProps(nextProps) {
-    const { isLoggedIn, changePassFlag } = nextProps
-    if (isLoggedIn && changePassFlag) {
+  componentWillUpdate(nextProps) {
+    //const { isLoggedIn, changePassFlag } = this.props
+    console.log('props', this.props)
+    console.log('this.props log' ,this.props.isLoggedIn)
+    console.log('this.props flag' ,this.props.changePassFlag)
+    console.log('nextProps log' ,nextProps.isLoggedIn)
+    console.log('nextProps flag' ,nextProps.changePassFlag)
+    if (nextProps.isLoggedIn && nextProps.changePassFlag) {
+      console.log('history is being made');
       history.push('/changePassword')
+      // Navbar.forceUpdate();
     }
   }
+  // shouldComponentUpdate(nextProps) {
+  //   if (nextProps !== this.props) {
+  //     return true;
+  //   }
+  // }
+
 
   setActiveItem = (e, { name }) => this.setState({ activeItem: name });
 
