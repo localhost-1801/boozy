@@ -3,12 +3,18 @@ import { connect } from 'react-redux'
 import { Table, Header, Image, Button } from 'semantic-ui-react'
 import { fetchOrders } from '../store/orders'
 import { me } from '../store/user'
+import { fetchCart } from '../store/cart'
+import Hashids from 'hashids'
+const hashids = new Hashids();
 
 
 class Orders extends Component {
   constructor(props){
     super(props)
-
+    
+    this.state = {
+      carts: [],
+    }
   }
 
   //neeed to .then off of .getUser somehow
@@ -17,7 +23,7 @@ class Orders extends Component {
   }
 
   render() {
-    console.log(this.props)
+    console.log('orders', this.props.orders)
     if(!this.props.user.id){
       return(
         <p> Must Login to see previous orders </p>
@@ -111,9 +117,12 @@ class Orders extends Component {
 
 const mapState = ({ user, orders }) => ({ user, orders });
 const mapDispatch = (dispatch) => { return ({
-  getOrders(userId, cartToken){
-    dispatch(me());
-    dispatch(fetchOrders(userId));
+  getOrders(){
+    dispatch(me())
+    .then( result =>{
+      
+      return(dispatch(fetchOrders(result.user.id)))
+    })
   },
   getUser(){ dispatch(me()) },
 })}

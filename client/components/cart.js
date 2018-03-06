@@ -48,7 +48,7 @@ class Cart extends Component {
     const payload = {
       productId: productId,
       cartId: cartId
-      
+
     }
     this.props.removeProduct(payload);
   }
@@ -71,12 +71,13 @@ class Cart extends Component {
   }
 
   checkout(){
-    let orderDetail = {
-      address: this.state.address,
-      status: 'processing',
-      userId: this.props.user.id ? this.props.user.id : null,
-      cartId: this.props.cart.id
-    }
+      let orderDetail = {
+        // email: this.state.email,
+        cartId: hashids.decode(document.cookie.slice(document.cookie.indexOf('=')+1))[0],
+        address: this.state.address,
+        status: 'processing',
+        userId: this.props.user.id ? this.props.user.id : null,
+      }
     document.cookie = "cart=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     this.props.createOrder(orderDetail);
   }
@@ -91,7 +92,7 @@ class Cart extends Component {
           Loading...
         </div>
       )
-    } 
+    }
     return (
       <div>
         <div className='cart-background'>

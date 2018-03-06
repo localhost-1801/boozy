@@ -40,7 +40,7 @@ export const fetchOrder = (userId, id) =>
 
 export const createNewOrder = (order) =>
     dispatch =>
-        axios.post('/api/orders', order)
+        axios.put(`/api/cart/${order.cartId}`, order)
             .then(res => {
                 return (
                     dispatch(createOrder(res.data || defaultOrders))
@@ -61,4 +61,3 @@ export default function (state = defaultOrders, action) {
             return state
     }
 }
-
