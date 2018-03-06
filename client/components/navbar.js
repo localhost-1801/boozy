@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { logout } from "../store";
 import { Menu, Segment, Image, Dropdown } from "semantic-ui-react";
+import { fetchCart } from "../store/cart";
 
 class Navbar extends Component {
   constructor(props) {
@@ -122,7 +123,8 @@ const mapState = state => {
 const mapDispatch = dispatch => {
   return {
     handleClick() {
-      dispatch(logout());
+      dispatch(logout())
+      dispatch(fetchCart(document.cookie))
     }
   }
 }
