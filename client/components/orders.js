@@ -25,7 +25,7 @@ class Orders extends Component {
 
   render() {
     console.log('orders', this.props.orders)
-    if(!this.props.user.id){
+    if(!this.props.orders[0].id){
       return(
         <p> Must Login to see previous orders </p>
       )
