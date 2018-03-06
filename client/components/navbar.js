@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { logout } from "../store";
-import { Menu, Segment, Image } from "semantic-ui-react";
+import { Menu, Segment, Image, Dropdown } from "semantic-ui-react";
 
 class Navbar extends Component {
   constructor(props) {
@@ -28,16 +28,9 @@ class Navbar extends Component {
             to="/"
             name="Boozy Wines"
             active={activeItem === "Boozy Wines"}
-            onClick={this.handleItemClick}
+            onClick={this.setActiveItem}
           />
           <Menu.Menu position="right">
-            <Menu.Item
-              as={Link}
-              to="/allUsers"
-              name="allUsers"
-              active={activeItem === "allUsers"}
-              onClick={this.setActiveItem}
-            />
             <Menu.Item
               as={Link}
               to="/about"
@@ -59,6 +52,18 @@ class Navbar extends Component {
               active={activeItem === "contact"}
               onClick={this.setActiveItem}
             />
+
+            {this.props.isAdmin && (
+              <Dropdown item text='Admin'>
+              <Dropdown.Menu>
+                <Dropdown.Item href={`/allProducts`}>Review Products</Dropdown.Item>
+                <Dropdown.Item href={`/allUsers`}>Review Users</Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
+            )}
+
+
+
             {this.props.isLoggedIn && (
               <Menu.Item
                 as={Link}
@@ -68,6 +73,7 @@ class Navbar extends Component {
                 onClick={this.props.handleClick}
               />
             )}
+
             {!this.props.isLoggedIn && (
               <Menu.Item
                 as={Link}
@@ -108,7 +114,8 @@ class Navbar extends Component {
  */
 const mapState = state => {
   return {
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!state.user.id,
+    isAdmin: state.user.isAdmin
   }
 }
 

@@ -56,7 +56,7 @@ const productDBseed =
             price: '32.00',
             inventory: '1000',
             year: '2013',
-            imageUrl: 'http://www.citywinery.com/media/catalog/product/cache/4/image/480x420/040ec09b1e35df139433887a97daa66f/2/0/2013_syrah_reserve_alder_springs_vineyard.png',
+            imageURL: 'http://www.citywinery.com/media/catalog/product/cache/4/image/480x420/040ec09b1e35df139433887a97daa66f/2/0/2013_syrah_reserve_alder_springs_vineyard.png',
             available: 'available'
         },
         {
@@ -65,7 +65,7 @@ const productDBseed =
             price: '32.00',
             inventory: '2000',
             year: '2015',
-            imageUrl: 'http://www.citywinery.com/media/catalog/product/cache/4/image/480x420/040ec09b1e35df139433887a97daa66f/2/0/2012_cab_obsidian.png',
+            imageURL: 'http://www.citywinery.com/media/catalog/product/cache/4/image/480x420/040ec09b1e35df139433887a97daa66f/2/0/2012_cab_obsidian.png',
             available: 'available'
         },
         {
@@ -74,7 +74,7 @@ const productDBseed =
             price: '26.00',
             inventory: '1500',
             year: '2013',
-            imageUrl: 'http://www.citywinery.com/media/catalog/product/cache/4/image/480x420/040ec09b1e35df139433887a97daa66f/2/0/2013_pinot_noir_lakeshore_hyland_vineyard.png',
+            imageURL: 'http://www.citywinery.com/media/catalog/product/cache/4/image/480x420/040ec09b1e35df139433887a97daa66f/2/0/2013_pinot_noir_lakeshore_hyland_vineyard.png',
             available: 'available'
         },
         {
@@ -83,7 +83,7 @@ const productDBseed =
             price: '18.00',
             inventory: '1018',
             year: '2016',
-            imageUrl: 'http://www.citywinery.com/media/catalog/product/cache/4/image/480x420/040ec09b1e35df139433887a97daa66f/2/0/2016_morgan_1.png',
+            imageURL: 'http://www.citywinery.com/media/catalog/product/cache/4/image/480x420/040ec09b1e35df139433887a97daa66f/2/0/2016_morgan_1.png',
             available: 'available'
         },
         {
@@ -92,7 +92,7 @@ const productDBseed =
             price: '32.00',
             inventory: '1018',
             year: '2012',
-            imageUrl: 'http://www.citywinery.com/media/catalog/product/cache/4/image/420x420/040ec09b1e35df139433887a97daa66f/2/0/2012_bien_nacido_reserve_pinot_noir.png',
+            imageURL: 'http://www.citywinery.com/media/catalog/product/cache/4/image/420x420/040ec09b1e35df139433887a97daa66f/2/0/2012_bien_nacido_reserve_pinot_noir.png',
             available: 'available',
         },
         {
@@ -101,7 +101,7 @@ const productDBseed =
             price: '32.00',
             inventory: '1018',
             year: '2012',
-            imageUrl: 'http://www.citywinery.com/media/catalog/product/cache/4/image/420x420/040ec09b1e35df139433887a97daa66f/2/0/2012_pinot_noir_reserve_hyland_vineyard_1.png',
+            imageURL: 'http://www.citywinery.com/media/catalog/product/cache/4/image/420x420/040ec09b1e35df139433887a97daa66f/2/0/2012_pinot_noir_reserve_hyland_vineyard_1.png',
             available: 'available'
         },
         {
@@ -110,7 +110,7 @@ const productDBseed =
             price: '32.00',
             inventory: '1018',
             year: '2014',
-            imageUrl: 'http://www.citywinery.com/media/catalog/product/cache/4/image/040ec09b1e35df139433887a97daa66f/2/0/2014_pinot_noir_reserve_hyland_vineyard_1.png',
+            imageURL: 'http://www.citywinery.com/media/catalog/product/cache/4/image/040ec09b1e35df139433887a97daa66f/2/0/2014_pinot_noir_reserve_hyland_vineyard_1.png',
             available: 'available'
         },
         {
@@ -119,7 +119,7 @@ const productDBseed =
             price: '32.00',
             inventory: '1018',
             year: '2012',
-            imageUrl: 'http://www.citywinery.com/media/catalog/product/cache/4/image/480x420/040ec09b1e35df139433887a97daa66f/h/e/heartbreaker.png',
+            imageURL: 'http://www.citywinery.com/media/catalog/product/cache/4/image/480x420/040ec09b1e35df139433887a97daa66f/h/e/heartbreaker.png',
             available: 'available'
         },
         {
@@ -128,7 +128,7 @@ const productDBseed =
             price: '32.00',
             inventory: '1018',
             year: '2015',
-            imageUrl: 'http://www.citywinery.com/media/catalog/product/cache/4/image/420x420/040ec09b1e35df139433887a97daa66f/2/0/2015_covfefe_2.png',
+            imageURL: 'http://www.citywinery.com/media/catalog/product/cache/4/image/420x420/040ec09b1e35df139433887a97daa66f/2/0/2015_covfefe_2.png',
             available: 'available'
         },
         {
@@ -137,7 +137,7 @@ const productDBseed =
             price: '32.00',
             inventory: '1018',
             year: '2015',
-            imageUrl: 'http://www.citywinery.com/media/catalog/product/cache/4/image/480x420/040ec09b1e35df139433887a97daa66f/2/0/2015_verna.png',
+            imageURL: 'http://www.citywinery.com/media/catalog/product/cache/4/image/480x420/040ec09b1e35df139433887a97daa66f/2/0/2015_verna.png',
             available: 'available'
         },
         {
@@ -146,7 +146,7 @@ const productDBseed =
             price: '32.00',
             inventory: '1018',
             year: '2013',
-            imageUrl: 'http://www.citywinery.com/media/catalog/product/cache/4/image/040ec09b1e35df139433887a97daa66f/2/0/2013_aldersprings_1.png',
+            imageURL: 'http://www.citywinery.com/media/catalog/product/cache/4/image/040ec09b1e35df139433887a97daa66f/2/0/2013_aldersprings_1.png',
             available: 'available'
         },
         {
@@ -155,7 +155,7 @@ const productDBseed =
             price: '35.00',
             inventory: '1018',
             year: '2015',
-            imageUrl: 'http://www.citywinery.com/media/catalog/product/cache/4/image/480x420/040ec09b1e35df139433887a97daa66f/m/y/mystery_wine_.png',
+            imageURL: 'http://www.citywinery.com/media/catalog/product/cache/4/image/480x420/040ec09b1e35df139433887a97daa66f/m/y/mystery_wine_.png',
             available: 'unavailable'
         },
 
@@ -165,7 +165,7 @@ const productDBseed =
             price: '24.00',
             inventory: '1018',
             year: '2015',
-            imageUrl: 'https://drizly-products0.imgix.net/ci_starborough_sauvignon_blanc_466187b582cf1601.png?auto=format%2Ccompress&fm=jpeg&q=20',
+            imageURL: 'https://drizly-products0.imgix.net/ci_starborough_sauvignon_blanc_466187b582cf1601.png?auto=format%2Ccompress&fm=jpeg&q=20',
             available: 'available'
         },
         {
@@ -174,7 +174,7 @@ const productDBseed =
             price: '50.00',
             inventory: '1018',
             year: '2014',
-            imageUrl: 'https://drizly-products0.imgix.net/ci_4458.png?auto=format%2Ccompress&fm=jpeg&q=20',
+            imageURL: 'https://drizly-products0.imgix.net/ci_4458.png?auto=format%2Ccompress&fm=jpeg&q=20',
             available: 'available'
         },
         {
@@ -183,7 +183,7 @@ const productDBseed =
             price: '16.00',
             inventory: '1018',
             year: '2013',
-            imageUrl: 'https://drizly-products0.imgix.net/ci_2900.jpg?auto=format%2Ccompress&fm=jpeg&q=20',
+            imageURL: 'https://drizly-products0.imgix.net/ci_2900.jpg?auto=format%2Ccompress&fm=jpeg&q=20',
             available: 'available'
         },
         {
@@ -192,7 +192,7 @@ const productDBseed =
             price: '20.00',
             inventory: '1018',
             year: '2015',
-            imageUrl: 'https://drizly-products0.imgix.net/ci_1621.png?auto=format%2Ccompress&fm=jpeg&q=20',
+            imageURL: 'https://drizly-products0.imgix.net/ci_1621.png?auto=format%2Ccompress&fm=jpeg&q=20',
             available: 'available'
         },
         {
@@ -201,7 +201,7 @@ const productDBseed =
             price: '20.00',
             inventory: '1018',
             year: '2012',
-            imageUrl: 'https://drizly-products3.imgix.net/ci_cavit_pinot_grigio_38037095056066cf.jpeg?auto=format%2Ccompress&fm=jpeg&q=20',
+            imageURL: 'https://drizly-products3.imgix.net/ci_cavit_pinot_grigio_38037095056066cf.jpeg?auto=format%2Ccompress&fm=jpeg&q=20',
             available: 'unavailable'
         },
     ]

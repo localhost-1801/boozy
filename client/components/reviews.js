@@ -11,7 +11,7 @@ class Reviews extends Component {
   }
   componentDidMount() {
     console.log('rip', this.props.getReviews)
-    this.props.getReviews(this.props.theProduct.id);
+    this.props.getReviews(this.props.product.id);
   }
   render() {
     console.log('reviews', this.props.reviews);
@@ -52,7 +52,7 @@ class Reviews extends Component {
 
 }
 
-const mapState = ({ user, reviews }) => ({ user, reviews })
+const mapState = ({ user, reviews, product }) => ({ user, reviews, product })
 const mapDispatch = (dispatch) => {
   return {
     getReviews(id) {
@@ -62,7 +62,7 @@ const mapDispatch = (dispatch) => {
 }
 
 export default connect(mapState, mapDispatch)(Reviews);
-/* 
+/*
 <Item.Content>
 <Item.Header as='a'>Jerry</Item.Header>
 <Item.Meta>8.20.2018</Item.Meta>
@@ -72,5 +72,5 @@ export default connect(mapState, mapDispatch)(Reviews);
   Wow this product is amazing.
 </Item.Description>
 </Item.Content>
-</Item> 
+</Item>
 */

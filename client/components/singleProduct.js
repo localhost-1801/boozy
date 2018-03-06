@@ -22,7 +22,7 @@ class SingleProduct extends Component {
   render() {
     const { product } = this.props;
     const { isAdmin } = this.props.user;
-    if (product  === undefined) {
+    if (!Object.keys(product).length) {
       return <div>LOADING</div>
     }
 
@@ -33,7 +33,7 @@ class SingleProduct extends Component {
         <Grid centered>
           <Grid.Row>
             <Grid.Column width={4}>
-              <Image src='http://www.pngpix.com/wp-content/uploads/2016/10/PNGPIX-COM-Wine-Bottle-PNG-Transparent-Image.png' />
+              <Image src={product.imageURL} />
             </Grid.Column>
             <Grid.Column width={9}>
               <Container textAlign={'right'}>

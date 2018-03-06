@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Icon, Label, Menu, Table, Button } from 'semantic-ui-react';
+import { Icon, Label, Header, Menu, Table, Button } from 'semantic-ui-react';
 import { fetchUsers, deleteUserThunk, updateToAdminThunk, updateUserPassword } from '../store/users.js';
 import { Link } from 'react-router-dom';
 
@@ -18,9 +18,11 @@ class Users extends Component {
         console.log(this.props)
         let users = this.props.users
         return (
-            <div className='userTablePadding indexBackground'>
+            <div className='userTablePadding productsBackground'>
                 <br />
-                <h1> All Users Status </h1>
+                <h2 className = "adminUsersHeader">
+                {' '} Admin - Review All Users
+              </h2>
                 <Table celled>
                     <Table.Header>
                         <Table.Row>
