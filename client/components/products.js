@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 import { Card, Grid, Image, Icon, Button, Label, Segment, Menu, Input } from 'semantic-ui-react'
 import { fetchProducts } from '../store/products.js'
 import { Link } from 'react-router-dom'
@@ -96,9 +97,9 @@ export class Products extends Component {
                                     <Segment.Group horizontal>
                                         <Segment>${wine.price}</Segment>
                                         <Segment>
-                                            <Label onClick={() => this.handleAdd(wine.id, wine.price)}>
+                                            <Button onClick={() => this.handleAdd(wine.id, wine.price)}>
                                                 <Icon name="add to cart"/>
-                                            </Label>
+                                            </Button>
                                         </Segment>
                                     </Segment.Group>
                                 </Card.Content>

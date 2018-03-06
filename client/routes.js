@@ -34,19 +34,12 @@ class Routes extends Component {
         <Route path="/signup" component={Signup} />
         <Route path="/orders" component={Orders} />
         <Route path="/new" component={New} />
-
-        {
-          isLoggedIn && changePassFlag &&
-          <Switch>
-            {/* Routes placed here are only available after logging in */}
-          </Switch>
-        }
+        <Route exact path="/changePassword" component={ChangePass} />
 
         {
           isLoggedIn &&
           <Switch>
             {/* Routes placed here are only available after logging in */}
-            <Route exact path="/changePassword" component={ChangePass} />
             <Route path="/userhome" component={UserHome} />
             <Route exact path="/allUsers" component={AllUsers} />
             <Route path="/allProducts" component={AdminAllProducts} />

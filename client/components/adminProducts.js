@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 import { Card, Header, Grid, Image, Icon, Button, Label, Segment, Menu, Input } from 'semantic-ui-react'
 import { fetchProducts } from '../store/products.js'
 import { Link } from 'react-router-dom'

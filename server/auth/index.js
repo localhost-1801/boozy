@@ -13,7 +13,7 @@ router.post('/login', (req, res, next) => {
         res.status(401).send('Incorrect password')
       } else {
         if (user.changePassFlag === true) {
-          user.changePassFlag = false;
+          // user.changePassFlag = false;
           req.login(user, err => (err ? next(err) : res.json(user)))
         } else { 
           req.login(user, err => (err ? next(err) : res.json(user)))

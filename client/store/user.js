@@ -104,7 +104,11 @@ export default function (state = defaultUser, action) {
 
 function setUserAndRedirect(user, history, dispatch) {
   dispatch(setCurrentUser(user));
+  if (user.changePassFlag) {
+  history.push('/changePassword')
+  } else {
   history.push('/')
+  }
 }
 
 
