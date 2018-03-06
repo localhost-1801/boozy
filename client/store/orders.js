@@ -66,7 +66,7 @@ export default function (state = defaultOrders, action) {
         case GET_ORDER:
             return action.order
         case CREATE_ORDER:
-            return [action.order, ...state];
+            return Object.assign({}, state, res.data)
         default:
             return state
     }

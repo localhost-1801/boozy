@@ -4,8 +4,7 @@ import { Table, Header, Image, Button, Dropdown, Menu } from 'semantic-ui-react'
 import { fetchOrders } from '../store/orders'
 import { me } from '../store/user'
 import { fetchCart } from '../store/cart'
-import { createNewOrder } from '../store/orders'
-import { fetchAllOrders } from '../store/orders'
+import { createNewOrder, fetchAllOrders } from '../store/orders'
 import { Link } from 'react-router-dom'
 import Hashids from 'hashids'
 const hashids = new Hashids();
@@ -30,7 +29,7 @@ class allOrders extends Component {
   }
 
   handleStatusChange(newStatus, id){
-    this.props.updateCart({ status: newStatus, cartId: id})
+    this.props.updateCart({ status: newStatus, cartId: id});
   }
 
   //neeed to .then off of .getUser somehow
@@ -45,7 +44,7 @@ class allOrders extends Component {
         return true;
       } else if (this.state.filterBy === item.status){
         return true;
-      } else{
+      } else {
         return false;
       }
     })
