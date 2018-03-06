@@ -79,10 +79,16 @@ class allOrders extends Component {
                       <Link to={`/products/${product.id}`}><Table.Cell><b>{product.title}</b></Table.Cell></Link>
                     <Table.Cell><b>Subtotal:</b> <br />${product.cartItem.purchasePrice * product.cartItem.quantity}</Table.Cell>
                       <Table.Cell><b>Status:</b> <br /></Table.Cell>
+                      <div className="statusDropdown">
                         <Dropdown text={'' + item.status}>
                           <Dropdown.Menu >
+                            <Dropdown.Item text="unordered" key='1' onClick={() => this.handleStatusChange('unordered')} />
+                            <Dropdown.Item text="processing" key='2' onClick={() => this.handleStatusChange('processing')} />
+                            <Dropdown.Item text="sent" key='3' onClick={() => this.handleStatusChange('sent')} />
+                            <Dropdown.Item text="delivered" key='4' onClick={() => this.handleStatusChange('delivered')} />
                           </Dropdown.Menu>
                         </Dropdown>
+                      </div>
                     </Table.Row>
                   </Table.Body>
                 ))}
