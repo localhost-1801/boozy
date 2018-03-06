@@ -4,6 +4,7 @@ import { Table, Header, Image, Button } from 'semantic-ui-react'
 import { fetchOrders } from '../store/orders'
 import { me } from '../store/user'
 import { fetchCart } from '../store/cart'
+import { Link } from 'react-router-dom'
 import Hashids from 'hashids'
 const hashids = new Hashids();
 
@@ -50,7 +51,7 @@ class Orders extends Component {
                   <Table.Body key={product.id}>
                     <Table.Row textAlign='center'>
                       <Table.Cell><Image id='checkoutImg' src={product.imageURL} size='medium'/></Table.Cell>
-                      <Table.Cell><b>{product.title}</b></Table.Cell>
+                      <Link to={`/products/${product.id}`}><Table.Cell><b>{product.title}</b></Table.Cell></Link>
                     <Table.Cell><b>Subtotal:</b> <br />${product.cartItem.purchasePrice * product.cartItem.quantity}</Table.Cell>
                       <Table.Cell><b>Status:</b> <br />{item.status}</Table.Cell>
                     </Table.Row>
