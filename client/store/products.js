@@ -32,7 +32,7 @@ export const fetchProducts = () =>
                     dispatch(getProducts(res.data || defaultProducts))
                 )
             })
-            .catch(err => console.log(err))
+            .catch(err => console.error(err))
 
 export const addProduct = productToAdd => dispatch => {
     axios.post('/api/products', productToAdd)
@@ -53,13 +53,13 @@ export const removeProductThunk = (id) =>
     dispatch =>
         axios.delete(`api/products/${id}`)
             .then(res => dispatch(removeProduct(res.data || defaultProduct)))
-            .catch(err => console.log(err))
+            .catch(err => console.error(err))
 
 export const createProductThunk = (product) =>
     dispatch =>
         axios.post(`api/products`, product)
             .then(res => dispatch(createProduct(res.data || defaultProduct)))
-            .catch(err => console.log(err))
+            .catch(err => console.error(err))
 
 //Reducer
 export default function (state = defaultProducts, action) {

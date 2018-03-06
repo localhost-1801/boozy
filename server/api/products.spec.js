@@ -1,4 +1,4 @@
-/* global describe beforeEach it */
+'use strict';
 
 const {expect} = require('chai')
 const request = require('supertest')
@@ -12,27 +12,26 @@ describe('Product routes', () => {
   })
 
   describe('/api/products/', () => {
-    // const codysEmail = 'cody@puppybook.com'
-    const testProduct = {
+    it('GET /api/products', () => {
+    let productTest = Product.build({
         title: 'A title',
         description: 'A wine',
         price: 12.20,
         inventory: 10,
         year: 1992,
-    }
+        imageURL: 'https://www.fillmurray.com/200/300'
+    });
 
-    beforeEach(() => {
-      return Product.create(testProduct)
-    })
+    return productTest.save().then(function () {
 
-    it('GET /api/products', () => {
       return request(app)
         .get('/api/products')
         .expect(200)
         .then(res => {
-          expect(res.body).to.be.an('array')
-          expect(res.body[0]).to.be.equal(testProduct)
+          expect(res.body).to.be.an.instanceOf(Array)
+          expect(res.body[0].title).to.be.equal('A title')
         })
+      })
     })
-  }) // end describe('/api/users')
-}) // end describe('User routes')
+  })
+})

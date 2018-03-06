@@ -7,9 +7,11 @@ router.get('/', (req, res, next) => {
   Review.findAll({
     include: [
       { model: Product },
-      { model: User, attributes: ['id', 'e-mail'] }
+      { model: User, attributes: ['id', 'email'] }
     ],
   })
+  .then(reviews => res.json(reviews))
+  .catch(next)
 })
 
 
@@ -49,7 +51,7 @@ router.post('/', async (req, res, next) => {
       { model: User}
     ],
   })
-  .then(result => { res.json(result)}) 
+  .then(result => { res.json(result)})
 })
 
 //reviews shouldn't be deleted nor updated

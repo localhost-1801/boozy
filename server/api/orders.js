@@ -7,7 +7,7 @@ module.exports = router
 //api/orders/:userId
 router.get('/:userId', (req, res, next) => {
   Cart.findAll({
-    where: { userId: req.params.userId },
+    where: { userId: +req.params.userId },
      include: [{model: Product}]
   }).then(orders => res.json(orders))
     .catch(next)
