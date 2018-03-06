@@ -53,7 +53,6 @@ export const updateToAdminThunk = (id, user) => dispatch => {
 //         .catch(err => console.error(err))
 // }
 
-
 export default function (users = defaultUsers, action) {
     switch (action.type) {
         case GET_USERS:
