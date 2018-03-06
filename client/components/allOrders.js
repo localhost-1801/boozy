@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Table, Header, Image, Button, Dropdown } from 'semantic-ui-react'
+import { Table, Header, Image, Button, Dropdown, Menu } from 'semantic-ui-react'
 import { fetchOrders } from '../store/orders'
 import { me } from '../store/user'
 import { fetchCart } from '../store/cart'
@@ -15,9 +15,17 @@ class allOrders extends Component {
     super(props)
 
     this.state = {
-      activeItem: '',
-      filterBy: '',
+      activeItem: 'all',
+      filterBy: 'all',
     }
+    this.handleItemClick = this.handleItemClick.bind(this);
+  }
+
+  handleItemClick(e, { id }){
+    this.setState({
+      activeItem: id,
+      filterBy: id,
+    })
   }
 
   //neeed to .then off of .getUser somehow
@@ -26,6 +34,16 @@ class allOrders extends Component {
   }
 
   render() {
+    const { activeItem } = this.state
+    const filteredOrders = this.props.orders.filter( item => {
+      if (this.state.filterBy === 'all'){
+        return true;
+      } else if (this.state.filterBy === item.status){
+        return true;
+      } else{
+        return false;
+      }
+    })
     console.log('prop', this.props)
     if(!this.props.orders.length === 0){
       return (
@@ -34,13 +52,18 @@ class allOrders extends Component {
     }
     return (
       <div>
-        <div className='cart'>
-        </div>
+        <Menu attached='top' >
+            <Menu.Item name='All' id='all' active={activeItem === 'all'} onClick={this.handleItemClick} />
+            <Menu.Item name='Unordered' id='unordered' active={activeItem === 'unordered'} onClick={this.handleItemClick} />
+            <Menu.Item name='Processing' id='processing' active={activeItem === 'processing'} onClick={this.handleItemClick} />
+            <Menu.Item name='Sent' id='sent' active={activeItem === 'sent'} onClick={this.handleItemClick} />
+            <Menu.Item name='Delivered' id='delivered' active={activeItem === 'delivered'} onClick={this.handleItemClick} />
+        </Menu>
 
         <Header as='h2' color='black' textAlign='center'>
         {' '}All Orders
         </Header>
-        {this.props.orders.map( item => (
+        {filteredOrders.map( item => (
           <div key={item.id}>
             <div className="ordersTitle">
               <Table collapsing fixed color='olive' key='olive'>
