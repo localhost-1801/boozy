@@ -1,15 +1,17 @@
 const router = require('express').Router()
-const { Order, Product, User, CartItem } = require('../db/models')
+const { Order, Product, User, CartItem, Cart } = require('../db/models')
+const Secrets = require('../auth/secrets')
+// const mailgun = require("mailgun-js");
+const api_key = process.env.MAILGUN_TOKEN;
+const DOMAIN = 'http://127.0.0.1:8080/';
+const mailgun = require('mailgun-js')({apiKey: api_key, domain: DOMAIN});
 module.exports = router
 
 //api/orders/:userId
 router.get('/:userId', (req, res, next) => {
-  Order.findAll({
+  Cart.findAll({
     where: { userId: req.params.userId },
-     // include: [
-     //   { model: Cart },
-      // { model: User, attributes: ['id', 'email'] }
-    // ],
+     include: [{model: Product}]
   }).then(orders => res.json(orders))
     .catch(next)
 })
@@ -26,7 +28,19 @@ router.get('/single/:userId/:id', (req, res, next) => {
 //api/orders
 router.post('/', (req, res, next) => {
   Order.create(req.body)
-    .then(result => res.json(result))
+    .then(result => {
+      let data = {
+        from: 'Boozy',
+        to: 'boozy.winery@gmail.com',
+        subject: 'Conifrming your order',
+        text: 'This E-mail is confirming your recent order with boozy winery'
+      };
+      mailgun.messages.send(data, function (error, body){
+          console.error(error);
+          console.log(body);
+      })
+      return (res.json(result))
+    })
     .catch(next)
 })
 
