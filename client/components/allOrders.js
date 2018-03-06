@@ -4,6 +4,7 @@ import { Table, Header, Image, Button, Dropdown, Menu } from 'semantic-ui-react'
 import { fetchOrders } from '../store/orders'
 import { me } from '../store/user'
 import { fetchCart } from '../store/cart'
+import { createNewOrder } from '../store/orders'
 import { fetchAllOrders } from '../store/orders'
 import { Link } from 'react-router-dom'
 import Hashids from 'hashids'
@@ -26,6 +27,10 @@ class allOrders extends Component {
       activeItem: id,
       filterBy: id,
     })
+  }
+
+  handleStatusChange(newStatus, id){
+    this.props.updateCart({ status: newStatus, cartId: id})
   }
 
   //neeed to .then off of .getUser somehow
@@ -82,10 +87,10 @@ class allOrders extends Component {
                       <div className="statusDropdown">
                         <Dropdown text={'' + item.status}>
                           <Dropdown.Menu >
-                            <Dropdown.Item text="unordered" key='1' onClick={() => this.handleStatusChange('unordered')} />
-                            <Dropdown.Item text="processing" key='2' onClick={() => this.handleStatusChange('processing')} />
-                            <Dropdown.Item text="sent" key='3' onClick={() => this.handleStatusChange('sent')} />
-                            <Dropdown.Item text="delivered" key='4' onClick={() => this.handleStatusChange('delivered')} />
+                            <Dropdown.Item text="unordered" key='1' onClick={() => this.handleStatusChange('unordered', item.id)} />
+                            <Dropdown.Item text="processing" key='2' onClick={() => this.handleStatusChange('processing', item.id)} />
+                            <Dropdown.Item text="sent" key='3' onClick={() => this.handleStatusChange('sent', item.id)} />
+                            <Dropdown.Item text="delivered" key='4' onClick={() => this.handleStatusChange('delivered', item.id)} />
                           </Dropdown.Menu>
                         </Dropdown>
                       </div>
@@ -103,10 +108,10 @@ class allOrders extends Component {
 
 const mapState = ({ user, orders }) => ({ user, orders });
 const mapDispatch = (dispatch) => { return ({
-  updateCart(id){
-    dispatch(me())
+  updateCart(obj){
+    dispatch(createNewOrder(obj))
     .then( result =>{
-      return(dispatch(fetchOrders(result.user.id)))
+      return(dispatch(fetchAllOrders()))
     })
   },
   getOrders(){ dispatch(fetchAllOrders()) },
