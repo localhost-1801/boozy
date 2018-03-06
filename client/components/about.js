@@ -18,7 +18,7 @@ const About = () => (
                 <Grid.Column>
                     <Image src='/img/team/charlie.png' size="medium" />
                     <div className="about-name">Charley Kirkpatrick </div>
-                    <p className="title">Chief Llama Officer (CLO)</p>
+                    <p className="title">Chief Technology Llama (CTL)</p>
                 </Grid.Column>
                 <Grid.Column>
                     <Image src='/img/team/nirali.png' size="medium" />
