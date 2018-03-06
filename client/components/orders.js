@@ -3,8 +3,7 @@ import { connect } from 'react-redux'
 import { Table, Header, Image, Button } from 'semantic-ui-react'
 import { fetchOrders } from '../store/orders'
 import { me } from '../store/user'
-import { fetchAllOrders } from '../store/orders'
-import { Link } from 'react-router-dom'
+import { fetchCart } from '../store/cart'
 import Hashids from 'hashids'
 const hashids = new Hashids();
 
@@ -12,7 +11,7 @@ const hashids = new Hashids();
 class Orders extends Component {
   constructor(props){
     super(props)
-    
+
     this.state = {
       carts: [],
     }
@@ -25,7 +24,7 @@ class Orders extends Component {
 
   render() {
     console.log('orders', this.props.orders)
-    if(!this.props.orders[0].id){
+    if(!this.props.user.id){
       return(
         <p> Must Login to see previous orders </p>
       )
@@ -51,7 +50,7 @@ class Orders extends Component {
                   <Table.Body key={product.id}>
                     <Table.Row textAlign='center'>
                       <Table.Cell><Image id='checkoutImg' src={product.imageURL} size='medium'/></Table.Cell>
-                      <Link to={`/products/${product.id}`}><Table.Cell><b>{product.title}</b></Table.Cell></Link>
+                      <Table.Cell><b>{product.title}</b></Table.Cell>
                     <Table.Cell><b>Subtotal:</b> <br />${product.cartItem.purchasePrice * product.cartItem.quantity}</Table.Cell>
                       <Table.Cell><b>Status:</b> <br />{item.status}</Table.Cell>
                     </Table.Row>
@@ -66,11 +65,16 @@ class Orders extends Component {
   }
 }
 
-const mapState = ({ orders }) => ({ orders });
+const mapState = ({ user, orders }) => ({ user, orders });
 const mapDispatch = (dispatch) => { return ({
   getOrders(){
-    dispatch(fetchAllOrders())
+    dispatch(me())
+    .then( result =>{
+
+      return(dispatch(fetchOrders(result.user.id)))
+    })
   },
+  getUser(){ dispatch(me()) },
 })}
 
 export default connect(mapState, mapDispatch)(Orders);
