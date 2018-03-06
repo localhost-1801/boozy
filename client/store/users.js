@@ -25,7 +25,9 @@ const triggerPassChange = user => ({ type: TRIGGER_PASS_CHANGE, user })
 
 export const triggerPassChangeThunk = (id, user) => dispatch => {
     axios.put(`/api/users/AdminForcePassChange/${id}`, user)
-        .then(res => dispatch(triggerPassChange(res.data)))
+        .then(res => {
+            dispatch(triggerPassChange(res.data))
+        })
         .catch(err => console.log(err))
 }
 
@@ -46,13 +48,6 @@ export const updateToAdminThunk = (id, user) => dispatch => {
         .then(res => dispatch(updateToAdmin(res.data)))
         .catch(err => console.log(err))
 }
-
-// export const updateUserPassword = (id, user) => dispatch => {
-//     axios.put(`/api/users/passwordReset/${id}`, user) //where does user come from?
-//         .then(res => dispatch(updateUserPass(res.data)))
-//         .catch(err => console.log(err))
-// }
-
 
 export default function (users = defaultUsers, action) {
     switch (action.type) {
