@@ -173,3 +173,8 @@ form div {
 .thumbnail-photo {
   height: 225px
 }
+
+#checkoutImg {
+  height: 100px;
+  width: auto;
+}

@@ -49,9 +49,9 @@ class Orders extends Component {
                 {item.products.map( product => (
                   <Table.Body key={product.id}>
                     <Table.Row textAlign='center'>
-                      <Table.Cell><Image src='img/white.jpg' size='medium'/></Table.Cell>
+                      <Table.Cell><Image id='checkoutImg' src={product.imageURL} size='medium'/></Table.Cell>
                       <Table.Cell><b>{product.title}</b></Table.Cell>
-                    <Table.Cell><b>Subtotal:</b> <br />{product.cartItem.purchasePrice * product.cartItem.quantity}</Table.Cell>
+                    <Table.Cell><b>Subtotal:</b> <br />${product.cartItem.purchasePrice * product.cartItem.quantity}</Table.Cell>
                       <Table.Cell><b>Status:</b> <br />{item.status}</Table.Cell>
                     </Table.Row>
                   </Table.Body>
