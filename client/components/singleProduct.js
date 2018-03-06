@@ -5,8 +5,9 @@ import PropTypes from 'prop-types'
 import { Grid, Container, Divider, Header, Card, Image, Icon, Item, Button } from 'semantic-ui-react'
 import { fetchProducts } from '../store/products.js'
 import { fetchProduct } from '../store/product.js'
-import  Reviews  from './reviews'
+import Reviews from './reviews'
 import ReviewForm from './reviewForm'
+import { addProductToCart } from '../store/cart.js'
 
 class SingleProduct extends Component {
   constructor(props) {
@@ -14,10 +15,9 @@ class SingleProduct extends Component {
     this.state = {}
   }
 
-  componentDidMount(){
+  componentDidMount() {
     this.props.loadData()
   }
-
   render() {
     const { product } = this.props;
     const { isAdmin } = this.props.user;
@@ -41,12 +41,13 @@ class SingleProduct extends Component {
                 <p className='centered-text'>{product.description}</p>
                 <p className='centered-text'>${product.price}</p>
                 <Grid centered columns={1}>
-                <Grid.Row>
-                <Button><Icon name="plus cart" /> Add to Cart</Button>
-                {isAdmin && (
-                <Button href={`/products/update/${product.id}`}>Edit Item</Button>
-                )}
-                </Grid.Row>
+                  <Grid.Row>
+                    <Button onClick={() => this.props.handleAdd(product.id, product.price)}>
+                      <Icon name="plus cart" /> Add to Cart</Button>
+                    {isAdmin && (
+                      <Button href={`/products/update/${product.id}`}>Edit Item</Button>
+                    )}
+                  </Grid.Row>
                 </Grid>
               </Container>
             </Grid.Column>
@@ -54,8 +55,8 @@ class SingleProduct extends Component {
           <Divider horizontal> Reviews</Divider>
           <Grid.Row centered={false}>
             <Grid.Column width={13}>
-            <Reviews theProduct={product} />
-            {this.props.user.id !== undefined ? <ReviewForm productId={product.id}/> : <div>Please login to leave a review</div>}
+              <Reviews theProduct={product} />
+              {this.props.user.id !== undefined ? <ReviewForm productId={product.id} /> : <div>Please login to leave a review</div>}
             </Grid.Column>
           </Grid.Row>
 
@@ -70,16 +71,32 @@ class SingleProduct extends Component {
 
 const mapState = ({ product, products, user }) => ({ product, products, user })
 
-function mapDispatch(dispatch, ownProps){
+function mapDispatch(dispatch, ownProps) {
   const id = +ownProps.match.params.id;
   const history = ownProps.history
 
   return {
-    loadData(){
-      console.log('id: ', id)
+    loadData() {
       dispatch(fetchProduct(id));
+    },
+    handleAdd(id, price) {
+      console.log('hitting me')
+      if (document.cookie) {
+        //use thunk to make axios put request, {quantity: 5, productId: 2, token: lsafkl}
+        dispatch(addProductToCart({
+          quantity: {
+            value: 1,
+            add: true
+          },
+          purchasePrice: price,
+          //set to document.cookie
+          token: document.cookie.slice(5) + '',
+          productId: id
+        }))
+      }
     }
-  };
+
+  }
 }
 
 export default connect(mapState, mapDispatch)(SingleProduct);

@@ -103,9 +103,9 @@ export class Products extends Component {
                                     <Segment.Group horizontal>
                                         <Segment>${wine.price}</Segment>
                                         <Segment>
-                                            <Label onClick={() => this.handleAdd(wine.id, wine.price)}>
+                                            <Button onClick={() => this.handleAdd(wine.id, wine.price)}>
                                                 <Icon name="add to cart"/>
-                                            </Label>
+                                            </Button>
                                         </Segment>
                                     </Segment.Group>
                                 </Card.Content>
