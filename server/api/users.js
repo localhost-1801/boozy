@@ -48,6 +48,16 @@ router.post('/', (req, res, next) => {
     .catch(next);
 })
 
+//api/users/AdminForcePassChange/:id
+router.put('/AdminForcePassChange/:id', (req, res, next) => {
+  User.findOne({
+    where: { id: req.params.id }
+  })
+    .then(user => user.update({ changePassFlag: req.body.flag }))
+    .then(user => res.json(user))
+    .catch(next)
+})
+
 //api/users/resetpass/
 router.put('/resetpass', (req, res, next) => {
   User.findOne({ where: { email: req.body.email } })

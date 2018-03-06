@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Icon, Label, Header, Menu, Table, Button } from 'semantic-ui-react';
-import { fetchUsers, deleteUserThunk, updateToAdminThunk, updateUserPassword } from '../store/users.js';
+import { fetchUsers, deleteUserThunk, updateToAdminThunk, updateUserPassword, triggerPassChangeThunk } from '../store/users.js';
 import { Link } from 'react-router-dom';
 
 class Users extends Component {
@@ -54,7 +54,7 @@ class Users extends Component {
                                             </Button>
                                         </Table.Cell>
                                         <Table.Cell>
-                                            <Button color='blue'>Reset Password</Button>
+                                            <Button color='blue' onClick={() => this.props.resetPass(user.id, {flag: true})}>Reset Password</Button>
                                         </Table.Cell>
                                         <Table.Cell>
                                             <Button color='red' onClick={() => this.props.deleteUser(user.id)}>DELETE USER</Button>
@@ -84,6 +84,9 @@ const mapDispatchToProps = (dispatch) => {
         },
         updateToAdmin(id, user) {
             dispatch(updateToAdminThunk(id, user))
+        },
+        resetPass(id, user) {
+            dispatch(triggerPassChange(id, user))
         }
     }
 }

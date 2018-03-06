@@ -5,6 +5,7 @@ import axios from 'axios'
 const GET_USERS = 'GET_USERS';
 const DELETE_USER = 'DELETE_USER'
 const UPDATE_TO_ADMIN_USER = 'UPDATE_TO_ADMIN_USER'
+const TRIGGER_PASS_CHANGE = 'TRIGGER_PASS_CHANGE'
 
 
 
@@ -18,8 +19,15 @@ const defaultUsers = [];
 const getUsers = users => ({ type: GET_USERS, users });
 const deleteUser = id => ({ type: DELETE_USER, id })
 const updateToAdmin = user => ({ type: UPDATE_TO_ADMIN_USER, user })
+const triggerPassChange = user => ({ type: TRIGGER_PASS_CHANGE, user })
 
 //Thunk creators
+
+export const triggerPassChangeThunk = (id, user) => dispatch => {
+    axios.put(`/api/users/AdminForcePassChange/${id}`, user)
+        .then(res => dispatch(triggerPassChange(res.data)))
+        .catch(err => console.log(err))
+}
 
 export const fetchUsers = () => dispatch => {
     axios.get('/api/users/allUsersStatuses')
@@ -53,6 +61,8 @@ export default function (users = defaultUsers, action) {
         case DELETE_USER:
             return users.filter(user => user.id !== action.id)
         case UPDATE_TO_ADMIN_USER:
+            return users.map(user => action.user.id === user.id ? action.user : user)
+        case TRIGGER_PASS_CHANGE:
             return users.map(user => action.user.id === user.id ? action.user : user)
         default:
             return users;

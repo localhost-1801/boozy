@@ -1,6 +1,7 @@
 const router = require('express').Router()
 const User = require('../db/models/user')
 module.exports = router
+//import history?
 
 router.post('/login', (req, res, next) => {
 
@@ -11,7 +12,9 @@ router.post('/login', (req, res, next) => {
       } else if (!user.correctPassword(req.body.password)) {
         res.status(401).send('Incorrect password')
       } else {
+        //if flag is true
         req.login(user, err => (err ? next(err) : res.json(user)))
+        //set history?
       }
     })
     .catch(next)
