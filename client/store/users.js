@@ -47,12 +47,12 @@ export const updateToAdminThunk = (id, user) => dispatch => {
         .catch(err => console.error(err))
 }
 
+
 // export const updateUserPassword = (id, user) => dispatch => {
 //     axios.put(`/api/users/passwordReset/${id}`, user) //where does user come from?
 //         .then(res => dispatch(updateUserPass(res.data)))
 //         .catch(err => console.error(err))
 // }
-
 
 export default function (users = defaultUsers, action) {
     switch (action.type) {

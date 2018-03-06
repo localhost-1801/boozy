@@ -1,6 +1,6 @@
 const router = require('express').Router()
 const { Order, Product, User, CartItem, Cart } = require('../db/models')
-const Secrets = require('../auth/secrets')
+const Secrets = require('../../secrets')
 // const mailgun = require("mailgun-js");
 module.exports = router
 

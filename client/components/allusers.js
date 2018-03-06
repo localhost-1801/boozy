@@ -85,7 +85,7 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(updateToAdminThunk(id, user))
         },
         resetPass(id, user) {
-            dispatch(triggerPassChange(id, user))
+            dispatch(triggerPassChangeThunk(id, user))
         }
     }
 }
