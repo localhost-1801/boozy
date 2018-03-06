@@ -1,4 +1,4 @@
-/* global describe beforeEach it */
+'use strict';
 
 const {expect} = require('chai')
 const request = require('supertest')
@@ -12,22 +12,24 @@ describe('User routes', () => {
   })
 
   describe('/api/users/', () => {
-    const codysEmail = 'cody@puppybook.com'
-
-    beforeEach(() => {
-      return User.create({
-        email: codysEmail
-      })
+    it('GET /api/users', () => {
+    let userTest = User.build({
+      email: 'cody@puppybook.com',
+      username: 'cody',
+      isAdmin: false,
+      password: '123'
     })
 
-    it('GET /api/users', () => {
+    return userTest.save().then(function (){
+
       return request(app)
         .get('/api/users')
         .expect(200)
         .then(res => {
-          expect(res.body).to.be.an('array')
-          expect(res.body[0].email).to.be.equal(codysEmail)
+          expect(res.body).to.be.an.instanceof(Array)
+          expect(res.body[0].email).to.be.equal('cody@puppybook.com')
         })
+      })
     })
-  }) // end describe('/api/users')
-}) // end describe('User routes')
+  })
+})
