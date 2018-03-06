@@ -5,7 +5,9 @@ const Secrets = require('../auth/secrets')
 module.exports = router
 
 router.get('/', (req, res, next) => {
-  Cart.findAll()
+  Cart.findAll({
+    include: [{model: Product}]
+  })
     .then(orders => res.json(orders))
     .catch(next)
 })

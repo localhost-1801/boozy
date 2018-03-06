@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Table, Header, Image, Button } from 'semantic-ui-react'
+import { Table, Header, Image, Button, Dropdown } from 'semantic-ui-react'
 import { fetchOrders } from '../store/orders'
 import { me } from '../store/user'
 import { fetchCart } from '../store/cart'
+import { fetchAllOrders } from '../store/orders'
 import { Link } from 'react-router-dom'
 import Hashids from 'hashids'
 const hashids = new Hashids();
@@ -14,20 +15,21 @@ class allOrders extends Component {
     super(props)
 
     this.state = {
-      carts: [],
+      activeItem: '',
+      filterBy: '',
     }
   }
 
   //neeed to .then off of .getUser somehow
   componentDidMount(){
-    this.props.getOrders(this.props.user.id);
+    this.props.getOrders();
   }
 
   render() {
     console.log('prop', this.props)
-    if(!this.props.user.id){
-      return(
-        <p> Must Login to see previous orders </p>
+    if(!this.props.orders.length === 0){
+      return (
+        <p>Loading...</p>
       )
     }
     return (
@@ -53,7 +55,11 @@ class allOrders extends Component {
                       <Table.Cell><Image id='checkoutImg' src={product.imageURL} size='medium'/></Table.Cell>
                       <Link to={`/products/${product.id}`}><Table.Cell><b>{product.title}</b></Table.Cell></Link>
                     <Table.Cell><b>Subtotal:</b> <br />${product.cartItem.purchasePrice * product.cartItem.quantity}</Table.Cell>
-                      <Table.Cell><b>Status:</b> <br />{item.status}</Table.Cell>
+                      <Table.Cell><b>Status:</b> <br /></Table.Cell>
+                        <Dropdown text={'' + item.status}>
+                          <Dropdown.Menu >
+                          </Dropdown.Menu>
+                        </Dropdown>
                     </Table.Row>
                   </Table.Body>
                 ))}
@@ -68,13 +74,13 @@ class allOrders extends Component {
 
 const mapState = ({ user, orders }) => ({ user, orders });
 const mapDispatch = (dispatch) => { return ({
-  getOrders(){
+  updateCart(id){
     dispatch(me())
     .then( result =>{
       return(dispatch(fetchOrders(result.user.id)))
     })
   },
-  getUser(){ dispatch(me()) },
+  getOrders(){ dispatch(fetchAllOrders()) },
 })}
 
 export default connect(mapState, mapDispatch)(allOrders);
