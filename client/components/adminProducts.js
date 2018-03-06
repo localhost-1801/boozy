@@ -6,8 +6,6 @@ import { fetchProducts } from '../store/products.js'
 import { Link } from 'react-router-dom'
 import { addProductToCart } from '../store/cart.js'
 
-
-
 export class AdminAllProducts extends Component {
     constructor(props) {
         super(props)
@@ -32,7 +30,6 @@ export class AdminAllProducts extends Component {
     }
     handleItemClick = (e, { id }) => this.setState({ activeItem: id })
     handleInput = (e) => {
-        console.log(e.target.value)
         this.setState({ input: e.target.value })
     }
 

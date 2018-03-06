@@ -73,10 +73,9 @@ const mapState = ({ product, products, user }) => ({ product, products, user })
 
 function mapDispatch(dispatch, ownProps) {
   const id = +ownProps.match.params.id;
-  const history = ownProps.history
 
   return {
-    loadData() {
+    loadData(){
       dispatch(fetchProduct(id));
     },
     handleAdd(id, price) {
@@ -118,5 +117,3 @@ const GridExampleColumnWidth = () => (
 
   </Grid>
 )
-
-  //hopefully this stays
