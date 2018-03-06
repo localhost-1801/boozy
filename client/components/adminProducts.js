@@ -1,13 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import PropTypes from 'prop-types'
-import { auth } from '../store'
 import { Card, Header, Grid, Image, Icon, Button, Label, Segment, Menu, Input } from 'semantic-ui-react'
 import { fetchProducts } from '../store/products.js'
 import { Link } from 'react-router-dom'
 import { addProductToCart } from '../store/cart.js'
-
-
 
 export class AdminAllProducts extends Component {
     constructor(props) {
@@ -33,7 +29,6 @@ export class AdminAllProducts extends Component {
     }
     handleItemClick = (e, { id }) => this.setState({ activeItem: id })
     handleInput = (e) => {
-        console.log(e.target.value)
         this.setState({ input: e.target.value })
     }
 

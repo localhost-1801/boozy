@@ -1,10 +1,10 @@
 
 import React, { Component } from 'react'
-import { Grid, Header, Image, Dropdown, Button, Form, Checkbox } from 'semantic-ui-react'
+import { Grid, Header, Image, Dropdown, Button, Form } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import { fetchCart, addProductToCart, removeProductFromCart } from '../store/cart'
 import { createNewOrder } from '../store/orders'
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 import Hashids from 'hashids'
 const hashids = new Hashids();
 
@@ -24,7 +24,6 @@ class Cart extends Component {
   }
 
   componentDidMount(){
-    console.log(this.props.cart)
     this.props.setCart('' + document.cookie.slice(5))
   }
 
@@ -41,10 +40,7 @@ class Cart extends Component {
   }
 
   handleDelete = (productId) => {
-    console.log('Here is my productId', productId)
-    console.log('in delete handler heres my cookie',document.cookie.slice(document.cookie.indexOf('=')+1))
-    const cartId = hashids.decode(document.cookie.slice(document.cookie.indexOf('=')+1))[0]
-    console.log('thisis my cartId', cartId)
+    const cartId = hashids.decode(document.cookie.slice(document.cookie.indexOf('=') + 1))[0]
     const payload = {
       productId: productId,
       cartId: cartId
@@ -66,28 +62,28 @@ class Cart extends Component {
 
   updateFormState(event){
     this.setState({
-      [event.target.name] : event.target.value
+      [event.target.name]: event.target.value
     })
   }
 
   checkout(){
       let orderDetail = {
         // email: this.state.email,
-        cartId: hashids.decode(document.cookie.slice(document.cookie.indexOf('=')+1))[0],
+        cartId: hashids.decode(document.cookie.slice(document.cookie.indexOf('=') + 1))[0],
         address: this.state.address,
         status: 'processing',
         userId: this.props.user.id ? this.props.user.id : null,
       }
-    document.cookie = "cart=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    document.cookie = 'cart=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
     this.props.createOrder(orderDetail);
   }
 
   render() {
 
 
-      if(!this.props.cart.id){
+      if (!this.props.cart.id){
 
-      return(
+      return (
         <div>
           Loading...
         </div>
@@ -95,12 +91,12 @@ class Cart extends Component {
     }
     return (
       <div>
-        <div className='cart-background'>
+        <div className="cart-background">
         </div>
-        <Header as='h2' color='black' textAlign='center'>
+        <Header as="h2" color="black" textAlign="center">
         {' '}Shopping Cart
       </Header>
-        <Grid divided='vertically'>
+        <Grid divided="vertically">
         <Grid.Row>
             <Grid.Column width={3}>
             </Grid.Column>
@@ -115,7 +111,6 @@ class Cart extends Component {
             </Grid.Column>
           </Grid.Row>
           {this.props.cart.products.sort((a, b)=> a.title > b.title).map( item => {
-            console.log(item)
             return (
               <Grid.Row key={item.id}>
                 <Grid.Column width={3}>
@@ -125,7 +120,7 @@ class Cart extends Component {
                   {item.title}
                   <br />
                   <br />
-                  <Button basic color='red' onClick={() => this.handleDelete(item.id)} content='Delete' />
+                  <Button basic color="red" onClick={() => this.handleDelete(item.id)} content="Delete" />
                 </Grid.Column>
                 <Grid.Column width={3}>
                   {item.price}
@@ -145,15 +140,15 @@ class Cart extends Component {
               <Form>
                 <Form.Field>
                   <label>E-Mail</label>
-                  <input name='eMail' onChange={this.updateFormState} placeholder='E-Mail' />
+                  <input name="eMail" onChange={this.updateFormState} placeholder="E-Mail" />
                 </Form.Field>
                 <Form.Field>
                   <label>Credit Card Number</label>
-                  <input name='cCNumber' onChange={this.updateFormState} placeholder='Credit Card Number' />
+                  <input name="cCNumber" onChange={this.updateFormState} placeholder="Credit Card Number" />
                 </Form.Field>
                 <Form.Field>
                   <label>Address</label>
-                  <input name='address' onChange={this.updateFormState} placeholder='Address' />
+                  <input name="address" onChange={this.updateFormState} placeholder="Address" />
                 </Form.Field>
               </Form>
             </Grid.Column>
@@ -166,8 +161,8 @@ class Cart extends Component {
             <Grid.Column width={3}>
             </Grid.Column>
             <Grid.Column width={3}>
-                <Link to='/orders'>
-                  <Button onClick={this.checkout} color='green'>Place Order</Button>
+                <Link to="/orders">
+                  <Button onClick={this.checkout} color="green">Place Order</Button>
                 </Link>
             </Grid.Column>
           </Grid.Row>

@@ -15,7 +15,6 @@ class Users extends Component {
     }
 
     render() {
-        console.log(this.props)
         let users = this.props.users
         return (
             <div className='userTablePadding productsBackground'>

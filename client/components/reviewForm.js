@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { postReview, fetchReviewsForProduct } from '../store/reviews'
-import { Grid, Button, Select, Container, Form, TextArea, Divider, Rating, Header, Card, Image, Icon, Item, Dropdown } from 'semantic-ui-react'
+import { Button, Form, TextArea, Divider } from 'semantic-ui-react'
 import ReactStars from 'react-stars'
 
 class ReviewForm extends Component {
@@ -13,7 +13,6 @@ class ReviewForm extends Component {
         }
     }
     ratingChanged = (newRating) => {
-        console.log(newRating)
         this.setState({ rating: newRating });
     }
     handleChange = (e, {name, value}) => {
@@ -58,12 +57,5 @@ class ReviewForm extends Component {
 
 const mapState = ({ user }) => ({ user })
 const mapDispatch = {postReview, fetchReviewsForProduct}
-// const mapDispatch = (dispatch) => {
-//     return {
-//         getReviews(id) {
-//             dispatch(fetchReviewsForProduct(id))
-//         }
-//     }
-// }
 
 export default connect(mapState, mapDispatch)(ReviewForm);

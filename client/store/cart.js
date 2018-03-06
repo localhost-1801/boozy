@@ -29,13 +29,12 @@ export const fetchCart = (cookieToken) =>
                     dispatch(getCart(res.data || defaultCart))
                 )
             })
-            .catch(err => console.log(err));
+            .catch(err => console.error(err));
 
 export const addProductToCart = (productToAdd) =>
   dispatch =>
     axios.put('/api/cart', productToAdd )
       .then(res =>{
-          console.log('in store:',res.data)
         return (
           dispatch(add(res.data))
         )
@@ -44,7 +43,6 @@ export const addProductToCart = (productToAdd) =>
 //Should take productId, and get cartId from cookie
 export const removeProductFromCart = (payload) =>
       dispatch =>{
-        console.log('in store, here is payload',payload)
         axios.delete(`/api/cart/cartItem/${payload.productId}/${payload.cartId}`)
         .then(ids => {
 
@@ -64,7 +62,6 @@ export default function (state = defaultCart, action) {
         case GET_CART:
             return action.cart
         case ADD:
-            console.log(action.productToAdd)
             return Object.assign({}, state, action.productToAdd)
         case REMOVE:
 

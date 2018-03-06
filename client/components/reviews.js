@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { fetchReviewsForProduct } from '../store/reviews'
-import { Grid, Container, Divider, Rating, Header, Card, Image, Icon, Item } from 'semantic-ui-react'
+import { Divider, Rating, Item } from 'semantic-ui-react'
 
 
 class Reviews extends Component {
@@ -10,13 +10,10 @@ class Reviews extends Component {
     this.state = {}
   }
   componentDidMount() {
-    console.log('rip', this.props.getReviews)
     this.props.getReviews(this.props.product.id);
   }
   render() {
-    console.log('reviews', this.props.reviews);
     if (this.props.reviews.length <= 0 ) {
-      console.log('REVIEWS SON: ', this.props.reviews)
       return <div>Be the first to review this product!</div>
     }
     if(this.props.reviews[0].user === undefined) {
@@ -27,7 +24,6 @@ class Reviews extends Component {
     return (
       <div>
         {this.props.reviews.map(review => {
-          console.log(review)
           return (
             <div key={review.id}>
               <Item>
@@ -62,15 +58,4 @@ const mapDispatch = (dispatch) => {
 }
 
 export default connect(mapState, mapDispatch)(Reviews);
-/*
-<Item.Content>
-<Item.Header as='a'>Jerry</Item.Header>
-<Item.Meta>8.20.2018</Item.Meta>
-<Item.Extra><Icon name='star' /><Icon name='star' /><Icon name='star' /><Icon name='star' /><Icon name='star' /> </Item.Extra>
 
-<Item.Description>
-  Wow this product is amazing.
-</Item.Description>
-</Item.Content>
-</Item>
-*/
