@@ -4,6 +4,14 @@ const Secrets = require('../../secrets')
 // const mailgun = require("mailgun-js");
 module.exports = router
 
+router.get('/', (req, res, next) => {
+  Cart.findAll({
+    include: [{model: Product}]
+  })
+    .then(orders => res.json(orders))
+    .catch(next)
+})
+
 //api/orders/:userId
 router.get('/:userId', (req, res, next) => {
   Cart.findAll({

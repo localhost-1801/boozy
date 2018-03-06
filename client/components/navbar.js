@@ -4,7 +4,9 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { logout, me } from "../store";
 import { Menu, Segment, Image, Dropdown } from "semantic-ui-react";
+import { fetchCart } from "../store/cart";
 import history from '../history'
+
 
 class Navbar extends Component {
   constructor(props) {
@@ -68,11 +70,12 @@ class Navbar extends Component {
 
             {this.props.isAdmin && (
               <Dropdown item text='Admin'>
-                <Dropdown.Menu>
-                  <Dropdown.Item href={`/allProducts`}>Review Products</Dropdown.Item>
-                  <Dropdown.Item href={`/allUsers`}>Review Users</Dropdown.Item>
-                </Dropdown.Menu>
-              </Dropdown>
+              <Dropdown.Menu>
+                <Dropdown.Item href={`/allProducts`}>Review Products</Dropdown.Item>
+                <Dropdown.Item href={`/allUsers`}>Review Users</Dropdown.Item>
+                <Dropdown.Item href={`/allOrders`}>Review Orders</Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
             )}
 
 
@@ -136,7 +139,8 @@ const mapState = state => {
 const mapDispatch = dispatch => {
   return {
     handleClick() {
-      dispatch(logout());
+      dispatch(logout())
+      dispatch(fetchCart(document.cookie))
     },
     getAdmissionData() {
       dispatch(me())

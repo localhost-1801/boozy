@@ -46,6 +46,15 @@ router.put('/:id', (req, res, next) => {
     }
   })
     .then(cart => {
+      console.log('we made it to the API: ', cart)
+      cart.update(req.body)
+        .then(newCart => {
+          Cart.findAll({
+            include: [{model: Product}]
+          })
+            .then(orders => res.json(orders))
+            .catch(next)
+        })
       return cart.update(req.body)
     })
 })
