@@ -20,7 +20,7 @@ router.get('/:token', (req, res, next) => {
         .then(cartItems => {
             res.json(cartItems)
         })
-        .catch(err => { console.log(err) })
+        .catch(err => { console.error(err) })
 })
 
 //api/cart
@@ -55,6 +55,7 @@ router.put('/:id', (req, res, next) => {
             .then(orders => res.json(orders))
             .catch(next)
         })
+      return cart.update(req.body)
     })
 })
 //api/cart
@@ -68,7 +69,6 @@ router.put('/', (req, res, next) => {
     // })
     //     .then(modifiedCart => res.json(modifiedCart))
     //     .catch(next);
-    console.log('click');
     //takes a few cart paramaters: productId, and quantity object
     //quantity object: {add: true/false, value: quantity}
     let cartIdFromHash = hashids.decode(req.cookies.cart)[0];
@@ -78,10 +78,8 @@ router.put('/', (req, res, next) => {
         productId: req.body.productId
       }
     }).then(found => {
-      console.log('price', req.body.purchasePrice);
       if (found) {
         let quantity = req.body.quantity.add ? found.quantity + req.body.quantity.value : req.body.quantity.value;
-        console.log('in if statement')
         found.update({quantity, purchasePrice: req.body.purchasePrice})
         .then( async updatedItem => {
             // const product = await Product.findOne({
@@ -92,7 +90,6 @@ router.put('/', (req, res, next) => {
             //         { model: CartItem },
             //       ]
             // })
-            // console.log(product)
             // return res.json(updatedItem)
             return Cart.findOne({
                 where: {
@@ -107,10 +104,8 @@ router.put('/', (req, res, next) => {
                 })
         })
       } else {
-        console.log('in else statement', req.body)
         CartItem.create({productId: req.body.productId, cartId: cartIdFromHash, quantity: req.body.quantity.value, purchasePrice: req.body.purchasePrice})
         .then(newItem => {
-            console.log(newItem)
             res.json(newItem)
         })
       }
@@ -123,7 +118,6 @@ router.delete('/cartItem/:prodId/:cartId', async (req, res, next) => {
     const productId = req.params.prodId
     // const cartId = hashids.decode(req.cookies.cart)[0];
     const cartId = req.params.cartId
-    console.log('in api route', req.params,productId, cartId)
     const cartItemToDelete = await CartItem.findOne({
         where: {
             productId: productId,

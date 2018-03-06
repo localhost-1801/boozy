@@ -15,7 +15,6 @@ class Users extends Component {
     }
 
     render() {
-        console.log(this.props)
         let users = this.props.users
         return (
             <div className='userTablePadding productsBackground'>
@@ -86,7 +85,7 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(updateToAdminThunk(id, user))
         },
         resetPass(id, user) {
-            dispatch(triggerPassChange(id, user))
+            dispatch(triggerPassChangeThunk(id, user))
         }
     }
 }

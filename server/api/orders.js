@@ -1,6 +1,6 @@
 const router = require('express').Router()
 const { Order, Product, User, CartItem, Cart } = require('../db/models')
-const Secrets = require('../auth/secrets')
+const Secrets = require('../../secrets')
 // const mailgun = require("mailgun-js");
 module.exports = router
 
@@ -15,7 +15,7 @@ router.get('/', (req, res, next) => {
 //api/orders/:userId
 router.get('/:userId', (req, res, next) => {
   Cart.findAll({
-    where: { userId: req.params.userId },
+    where: { userId: +req.params.userId },
      include: [{model: Product}]
   }).then(orders => res.json(orders))
     .catch(next)

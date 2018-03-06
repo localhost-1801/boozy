@@ -18,14 +18,13 @@ const getProducts = products => ({type: GET_PROD_BY_CAT, products})
 export const fetchProducts = () =>
     dispatch =>
         axios.get('/api/products')
-            .then(res => 
+            .then(res =>
                 {
-                    console.log('hi',res.data)
                     return (
                         dispatch(getProducts(res.data || defaultProducts))
                     )
                 })
-            .catch(err => console.log(err))
+            .catch(err => console.error(err))
 
 
 //Reducer

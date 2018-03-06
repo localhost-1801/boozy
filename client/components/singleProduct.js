@@ -1,10 +1,7 @@
 
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import PropTypes from 'prop-types'
-import { auth } from '../store'
-import { Grid, Container, Divider, Header, Card, Image, Icon, Item, Button } from 'semantic-ui-react'
-import { fetchProducts } from '../store/products.js'
+import { Grid, Container, Divider, Header, Image, Icon, Button } from 'semantic-ui-react'
 import { fetchProduct } from '../store/product.js'
 import  Reviews  from './reviews'
 import ReviewForm from './reviewForm'
@@ -73,11 +70,9 @@ const mapState = ({ product, products, user }) => ({ product, products, user })
 
 function mapDispatch(dispatch, ownProps){
   const id = +ownProps.match.params.id;
-  const history = ownProps.history
 
   return {
     loadData(){
-      console.log('id: ', id)
       dispatch(fetchProduct(id));
     }
   };
@@ -102,5 +97,3 @@ const GridExampleColumnWidth = () => (
 
   </Grid>
 )
-
-  //hopefully this stays

@@ -2,9 +2,11 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { logout } from "../store";
+import { logout, me } from "../store";
 import { Menu, Segment, Image, Dropdown } from "semantic-ui-react";
 import { fetchCart } from "../store/cart";
+import history from '../history'
+
 
 class Navbar extends Component {
   constructor(props) {
@@ -14,15 +16,27 @@ class Navbar extends Component {
     this.setActiveItem = this.setActiveItem.bind(this);
   }
 
+  componentWillMount() {
+    this.props.getAdmissionData()
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { isLoggedIn, changePassFlag } = nextProps
+    if (isLoggedIn && changePassFlag) {
+      history.push('/changePassword')
+    }
+  }
+
   setActiveItem = (e, { name }) => this.setState({ activeItem: name });
 
   render() {
     const { activeItem } = this.state;
-
+    //if user is logged in && changePassFlag === true && 
+    //url matches changePassword
     return (
       <Segment className="navbar">
         <Menu pointing secondary className="navbar">
-        <Image src="/img/logo.jpg" href="/" size='tiny' verticalAlign='bottom' />
+          <Image src="/img/logo.jpg" href="/" size='tiny' verticalAlign='bottom' />
           <Menu.Item
             className="logo"
             as={Link}
@@ -117,7 +131,8 @@ class Navbar extends Component {
 const mapState = state => {
   return {
     isLoggedIn: !!state.user.id,
-    isAdmin: state.user.isAdmin
+    isAdmin: state.user.isAdmin,
+    changePassFlag: state.user.changePassFlag
   }
 }
 
@@ -126,6 +141,9 @@ const mapDispatch = dispatch => {
     handleClick() {
       dispatch(logout())
       dispatch(fetchCart(document.cookie))
+    },
+    getAdmissionData() {
+      dispatch(me())
     }
   }
 }

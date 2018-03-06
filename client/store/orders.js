@@ -36,7 +36,7 @@ export const fetchOrders = (userId) =>
                     dispatch(getOrders(res.data || defaultOrders))
                 )
             })
-            .catch(err => console.log(err));
+            .catch(err => console.error(err));
 
 export const fetchOrder = (userId, id) =>
     dispatch =>
@@ -46,7 +46,7 @@ export const fetchOrder = (userId, id) =>
                     dispatch(getOrder(res.data || defaultOrders))
                 )
             })
-            .catch(err => console.log(err));
+            .catch(err => console.error(err));
 
 export const createNewOrder = (order) =>
     dispatch =>
@@ -56,7 +56,7 @@ export const createNewOrder = (order) =>
                     dispatch(createOrder(res.data || defaultOrders))
                 )
             })
-            .catch(err => console.log(err));
+            .catch(err => console.error(err));
 //REDUCERS
 
 export default function (state = defaultOrders, action) {

@@ -1,5 +1,3 @@
-/* global describe beforeEach it */
-
 const {expect} = require('chai')
 const db = require('../index')
 const User = db.model('user')
@@ -11,12 +9,14 @@ describe('User model', () => {
 
   describe('instanceMethods', () => {
     describe('correctPassword', () => {
-      let cody
+      let cody;
 
       beforeEach(() => {
         return User.create({
           email: 'cody@puppybook.com',
-          password: 'bones'
+          username: 'cody',
+          isAdmin: false,
+          password: '123'
         })
           .then(user => {
             cody = user
@@ -24,12 +24,12 @@ describe('User model', () => {
       })
 
       it('returns true if the password is correct', () => {
-        expect(cody.correctPassword('bones')).to.be.equal(true)
+        expect(cody.correctPassword('123')).to.be.equal(true)
       })
 
       it('returns false if the password is incorrect', () => {
-        expect(cody.correctPassword('bonez')).to.be.equal(false)
+        expect(cody.correctPassword('1234')).to.be.equal(false)
       })
-    }) // end describe('correctPassword')
-  }) // end describe('instanceMethods')
-}) // end describe('User model')
+    })
+  })
+})

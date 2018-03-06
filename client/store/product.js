@@ -26,27 +26,27 @@ export const fetchProduct = (id) =>
     dispatch =>
         axios.get(`/api/products/${id}`)
             .then(res => dispatch(getProduct(res.data)))
-            .catch(err => console.log(err))
+            .catch(err => console.error(err))
 
 
 export const removeProductThunk = (id) =>
     dispatch =>
         axios.delete(`/api/products/${id}`)
             .then(res => dispatch(removeProduct(res.data || defaultProduct)))
-            .catch(err => console.log(err))
+            .catch(err => console.error(err))
 
 export const createProductThunk = (productToAdd) =>
     dispatch =>
         axios.post('/api/products', productToAdd)
             .then(res => dispatch(createProduct(res.data)))
             .then(() => history.push('/products'))
-            .catch(err => console.log(err))
+            .catch(err => console.error(err))
 
 export const updateProductThunk = (product, id) =>
     dispatch =>
         axios.put(`/api/products/${id}`, product)
         .then(res => dispatch(updateProduct(res.data || defaultProduct)))
-        .catch(err => console.log(err))
+        .catch(err => console.error(err))
 
 
 /**

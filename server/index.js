@@ -1,4 +1,3 @@
-/* WE HAVE A VERY STRANGE BUG THAT ONLY LETS YOU ADD 6 THINGS TO CART */
 const path = require('path')
 const express = require('express')
 const morgan = require('morgan')
@@ -12,7 +11,6 @@ const sessionStore = new SequelizeStore({db})
 const PORT = process.env.PORT || 8080
 const app = express()
 const socketio = require('socket.io')
-const axios = require('axios')
 const Hashids = require('hashids')
 const hashids = new Hashids()
 const Cart = require('./db/models/cart')
@@ -60,14 +58,12 @@ const createApp = () => {
   //cookie middleware
   app.use(cookieParser())
   app.use((req, res, next) => {
-    // console.log(req.cookies)
     if (!req.cookies.cart){
       Cart.create()
       .then(newCart => {
         let cartHash = hashids.encode(newCart.id);
           newCart.update({token: cartHash})
           res.cookie('cart', cartHash);
-          // res.json(newCart)
       })
       .then(result => {
         next()

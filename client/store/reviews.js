@@ -25,26 +25,26 @@ export const fetchReviews = () =>
     dispatch =>
         axios.get(`/api/reviews/`)
             .then(res => dispatch(getReviews(res.data || defaultReviews)))
-            .catch(err => console.log(err));
+            .catch(err => console.error(err));
 
 export const fetchReviewsForProduct = (productId) =>
     dispatch =>
         axios.get(`/api/reviews/p/${productId}`)
             .then(res => dispatch(getReviewsForProduct(res.data || defaultReviews)))
-            .catch(err => console.log(err));
+            .catch(err => console.error(err));
 
 export const fetchReviewThunk = (id) =>
     dispatch =>
         axios.get(`/api/reviews/${id}`)
             .then(res => dispatch(getReview(res.data || defaultReviews)))
-            .catch(err => console.log(err));
+            .catch(err => console.error(err));
 
 export const postReview = (review) =>
     dispatch =>
         axios.post('/api/reviews', review)
 
             .then(res => dispatch(post(res.data || defaultReviews)))
-            .catch(err => console.log(err));
+            .catch(err => console.error(err));
 
 
 //REDUCERS
