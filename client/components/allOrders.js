@@ -3,16 +3,16 @@ import { connect } from 'react-redux'
 import { Table, Header, Image, Button } from 'semantic-ui-react'
 import { fetchOrders } from '../store/orders'
 import { me } from '../store/user'
-import { fetchAllOrders } from '../store/orders'
+import { fetchCart } from '../store/cart'
 import { Link } from 'react-router-dom'
 import Hashids from 'hashids'
 const hashids = new Hashids();
 
 
-class Orders extends Component {
+class allOrders extends Component {
   constructor(props){
     super(props)
-    
+
     this.state = {
       carts: [],
     }
@@ -24,7 +24,7 @@ class Orders extends Component {
   }
 
   render() {
-    console.log('orders', this.props.orders)
+    console.log('prop', this.props)
     if(!this.props.user.id){
       return(
         <p> Must Login to see previous orders </p>
@@ -36,7 +36,7 @@ class Orders extends Component {
         </div>
 
         <Header as='h2' color='black' textAlign='center'>
-        {' '}Your Orders
+        {' '}All Orders
         </Header>
         {this.props.orders.map( item => (
           <div key={item.id}>
@@ -44,7 +44,7 @@ class Orders extends Component {
               <Table collapsing fixed color='olive' key='olive'>
                 <Table.Header>
                   <Table.Row>
-                    <Table.HeaderCell colSpan='5'>Placed order</Table.HeaderCell>
+                    <Table.HeaderCell colSpan='5'>Order ID# {item.id}</Table.HeaderCell>
                   </Table.Row>
                 </Table.Header>
                 {item.products.map( product => (
@@ -66,11 +66,15 @@ class Orders extends Component {
   }
 }
 
-const mapState = ({ orders }) => ({ orders });
+const mapState = ({ user, orders }) => ({ user, orders });
 const mapDispatch = (dispatch) => { return ({
   getOrders(){
-    dispatch(fetchAllOrders())
+    dispatch(me())
+    .then( result =>{
+      return(dispatch(fetchOrders(result.user.id)))
+    })
   },
+  getUser(){ dispatch(me()) },
 })}
 
-export default connect(mapState, mapDispatch)(Orders);
+export default connect(mapState, mapDispatch)(allOrders);

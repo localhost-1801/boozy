@@ -59,6 +59,7 @@ class Navbar extends Component {
               <Dropdown.Menu>
                 <Dropdown.Item href={`/allProducts`}>Review Products</Dropdown.Item>
                 <Dropdown.Item href={`/allUsers`}>Review Users</Dropdown.Item>
+                <Dropdown.Item href={`/allOrders`}>Review Orders</Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
             )}

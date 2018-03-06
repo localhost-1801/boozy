@@ -18,6 +18,16 @@ const createOrder = order => ({ type: CREATE_ORDER, order })
 
 //THUNK CREATORS
 
+export const fetchAllOrders = () =>
+    dispatch =>
+        axios.get('/api/orders')
+            .then(res => {
+                return (
+                    dispatch(getOrders(res.data || defaultOrders))
+                )
+            })
+            .catch(err => console.log(err));
+
 export const fetchOrders = (userId) =>
     dispatch =>
         axios.get(`/api/orders/${userId}`)
