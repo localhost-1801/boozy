@@ -54,7 +54,10 @@ router.put('/AdminForcePassChange/:id', (req, res, next) => {
     where: { id: req.params.id }
   })
     .then(user => user.update({ changePassFlag: req.body.flag }))
-    .then(user => res.json(user))
+    .then(user => {
+      console.log(user.changePassFlag);
+     return res.json(user)
+    })
     .catch(next)
 })
 
