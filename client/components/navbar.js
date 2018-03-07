@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { logout, me } from "../store";
-import { Menu, Segment, Image, Dropdown } from "semantic-ui-react";
+import { Menu, Icon, Segment, Image, Dropdown } from "semantic-ui-react";
 import { fetchCart } from "../store/cart";
 import history from '../history'
 
@@ -46,6 +46,11 @@ class Navbar extends Component {
     const { activeItem } = this.state;
     //if user is logged in && changePassFlag === true && 
     //url matches changePassword
+    // const cart = this.props.cart
+    // console.log(cart)
+    let cartItems = this.props.cart.products ? this.props.cart.products.reduce((acc, product) => {return acc + product.cartItem.quantity}, 0) : 0
+
+  
     return (
       <Segment className="navbar">
         <Menu pointing secondary className="navbar">
@@ -126,11 +131,12 @@ class Navbar extends Component {
             <Menu.Item
               as={Link}
               to="/cart"
-              name="cart"
-              icon='cart'
+              name='cart'
               active={activeItem === "cart"}
               onClick={this.setActiveItem}
-            />
+            >
+            <Icon name='cart'/>{`Cart (${cartItems})`}
+            </Menu.Item>
           </Menu.Menu>
         </Menu>
       </Segment>
@@ -145,7 +151,8 @@ const mapState = state => {
   return {
     isLoggedIn: !!state.user.id,
     isAdmin: state.user.isAdmin,
-    changePassFlag: state.user.changePassFlag
+    changePassFlag: state.user.changePassFlag,
+    cart: state.cart
   }
 }
 
