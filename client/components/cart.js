@@ -93,12 +93,8 @@ class Cart extends Component {
       <div>
         <div className="cart-background">
         </div>
-<<<<<<< HEAD
         <div style={{paddingLeft: '2em', paddingRight: '2em'}}>
         <Header as='h2' color='black' textAlign='center'>
-=======
-        <Header as="h2" color="black" textAlign="center">
->>>>>>> master
         {' '}Shopping Cart
       </Header>
         <Grid divided="vertically">
