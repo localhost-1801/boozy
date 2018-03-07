@@ -403,17 +403,17 @@ const orderDBseed =
     ]
 
 const categoryDBseed =
-    [
-        {
-            name: 'white'
-        },
-        {
-            name: 'red'
-        },
-        {
-            name: 'dry'
-        }
-    ]
+[
+    {
+        name: 'white'
+    },
+    {
+        name: 'red'
+    },
+    {
+        name: 'dry'
+    }
+]
 
 const cartDBseed =
     [
@@ -458,20 +458,20 @@ const cartDummyData =
         }
     ]
 const prodCatDummyData =
-    [
-        {
-            productId: 1,
-            categoryId: 1,
-        },
-        {
-            productId: 2,
-            categoryId: 1,
-        },
-        {
-            productId: 2,
-            categoryId: 2,
-        }
-    ]
+[
+    {
+        productId: 1,
+        categoryId: 1,
+    },
+    {
+        productId: 2,
+        categoryId: 1,
+    },
+    {
+        productId: 2,
+        categoryId: 2,
+    }
+]
 
 const seed = async () => {
 

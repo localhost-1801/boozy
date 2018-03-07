@@ -11,7 +11,7 @@ const hashids = new Hashids();
 class Orders extends Component {
   constructor(props){
     super(props)
-    
+
     this.state = {
       carts: [],
     }
@@ -23,7 +23,6 @@ class Orders extends Component {
   }
 
   render() {
-    console.log('orders', this.props.orders)
     if(!this.props.user.id){
       return(
         <p> Must Login to see previous orders </p>
@@ -70,7 +69,7 @@ const mapDispatch = (dispatch) => { return ({
   getOrders(){
     dispatch(me())
     .then( result =>{
-      
+
       return(dispatch(fetchOrders(result.user.id)))
     })
   },

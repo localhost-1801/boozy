@@ -37,10 +37,9 @@ export const signup = (credentials) => dispatch => {
 
 
 export const passwordReset = (newAndOldPass) => dispatch => {
-  console.log('pass', newAndOldPass)
   axios.put('/api/users/resetpass', newAndOldPass)
     .then(res => dispatch(updateUserPass(res.data)))
-      .catch(err => console.log(err))
+      .catch(err => console.error(err))
 }
 
 export const login = (credentials) => dispatch => {
@@ -57,7 +56,7 @@ export const me = () =>
     axios.get('/auth/me')
       .then(res =>
         dispatch(getUser(res.data || defaultUser)))
-      .catch(err => console.log(err))
+      .catch(err => console.error(err))
 
 export const auth = (email, password, method) =>
   dispatch =>
@@ -75,9 +74,10 @@ export const logout = () =>
     axios.post('/auth/logout')
       .then(_ => {
         dispatch(removeUser())
+        document.cookie = "cart=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
         history.push('/login')
       })
-      .catch(err => console.log(err))
+      .catch(err => console.error(err))
 
 
 /**
@@ -104,7 +104,11 @@ export default function (state = defaultUser, action) {
 
 function setUserAndRedirect(user, history, dispatch) {
   dispatch(setCurrentUser(user));
+  if (user.changePassFlag) {
+  history.push('/changePassword')
+  } else {
   history.push('/')
+  }
 }
 
 

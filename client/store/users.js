@@ -25,29 +25,34 @@ const triggerPassChange = user => ({ type: TRIGGER_PASS_CHANGE, user })
 
 export const triggerPassChangeThunk = (id, user) => dispatch => {
     axios.put(`/api/users/AdminForcePassChange/${id}`, user)
-        .then(res => {
-            dispatch(triggerPassChange(res.data))
-        })
-        .catch(err => console.log(err))
+        .then(res => dispatch(triggerPassChange(res.data)))
+        .catch(err => console.error(err))
 }
 
 export const fetchUsers = () => dispatch => {
     axios.get('/api/users/allUsersStatuses')
         .then(res => dispatch(getUsers(res.data)))
-        .catch(err => console.log(err))
+        .catch(err => console.error(err))
 }
 
 export const deleteUserThunk = id => dispatch => {
     axios.delete(`/api/users/${id}`)
         .then(() => dispatch(deleteUser(id)))
-        .catch(err => console.log(err))
+        .catch(err => console.error(err))
 }
 
 export const updateToAdminThunk = (id, user) => dispatch => {
     axios.put(`/api/users/adminStatus/${id}`, user)
         .then(res => dispatch(updateToAdmin(res.data)))
-        .catch(err => console.log(err))
+        .catch(err => console.error(err))
 }
+
+
+// export const updateUserPassword = (id, user) => dispatch => {
+//     axios.put(`/api/users/passwordReset/${id}`, user) //where does user come from?
+//         .then(res => dispatch(updateUserPass(res.data)))
+//         .catch(err => console.error(err))
+// }
 
 export default function (users = defaultUsers, action) {
     switch (action.type) {

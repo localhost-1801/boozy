@@ -56,7 +56,7 @@ router.put('/AdminForcePassChange/:id', (req, res, next) => {
     .then(user => user.update({ changePassFlag: req.body.flag }))
     .then(user => {
       console.log(user.changePassFlag);
-     return res.json(user)
+      return res.json(user)
     })
     .catch(next)
 })
@@ -70,7 +70,7 @@ router.put('/resetpass', (req, res, next) => {
       } else if (!user.correctPassword(req.body.currentPass)) {
         res.status(401).send('Incorrect password')
       } else {
-        user.update({ password: req.body.newPass })
+        user.update({ password: req.body.newPass, changePassFlag: false })
         req.login(user, err => (err ? next(err) : res.json(user)))
 
       }

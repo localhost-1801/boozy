@@ -10,6 +10,7 @@ class Home extends React.Component {
   }
 
   render() {
+    console.log('pepper pepper pepper')
     const styles = {
       zIndex: 150,
       backgroundColor: `black`,
@@ -43,7 +44,7 @@ class Home extends React.Component {
               <Header as='h2' color='olive' textAlign='center'>
                 {' '}An Admin has asked that you reset your Password. Please reset to continue.
             </Header>
-              <Form onSubmit={evt => this.props.onPasswordSubmit(evt)} size='large'>
+              <Form onSubmit={this.props.onPasswordSubmit} size='large'>
                 <Segment raised>
                   <Form.Input
                     name='email'

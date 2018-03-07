@@ -1,13 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import { auth } from '../store'
 import { Card, Grid, Image, Icon, Button, Label, Segment, Menu, Input } from 'semantic-ui-react'
 import { fetchProducts } from '../store/products.js'
 import { Link } from 'react-router-dom'
 import { addProductToCart } from '../store/cart.js'
-
-
 
 export class Products extends Component {
     constructor(props) {
@@ -19,16 +16,13 @@ export class Products extends Component {
         }
     }
     handleAdd = (id, price) => {
-      console.log(price);
       if (document.cookie){
-        //use thunk to make axios put request, {quantity: 5, productId: 2, token: lsafkl}
         this.props.addProductToCart({
           quantity: {
             value: 1,
             add: true
           },
           purchasePrice: price,
-          //set to document.cookie
           token: document.cookie.slice(5) + '',
           productId: id
         })
@@ -38,7 +32,6 @@ export class Products extends Component {
     
     handleItemClick = (e, { id }) => this.setState({ activeItem: id })
     handleInput = (e) => {
-        console.log(e.target.value)
         this.setState({ input: e.target.value })
     }
 
@@ -116,9 +109,9 @@ export class Products extends Component {
                                     <Segment.Group horizontal>
                                         <Segment>${wine.price}</Segment>
                                         <Segment>
-                                            <Label onClick={() => this.handleAdd(wine.id, wine.price)}>
+                                            <Button onClick={() => this.handleAdd(wine.id, wine.price)}>
                                                 <Icon name="add to cart"/>
-                                            </Label>
+                                            </Button>
                                         </Segment>
                                     </Segment.Group>
                                 </Card.Content>
@@ -141,49 +134,7 @@ export class Products extends Component {
 }
 
 //map state and map dispatch to props
-
-
 const mapState = ({ products, user }) => ({ products, user })
 const mapDispatch = { fetchProducts, addProductToCart }
-//const mapDispatch = {fetchStudents};
 
 export default connect(mapState, mapDispatch)(Products);
-
-const dummyData = [
-    {
-        wineName: 'Franzia Boxed Wine',
-        imageURL: 'https://files.slack.com/files-tmb/T024FPYBQ-F9F0MRVNU-9cf43749e0/wine_1024.jpg',
-        year: 2018,
-        description: 'Loved by college students and trophy wives alike'
-    },
-    {
-        wineName: 'Franzia Boxed Wine',
-        imageURL: 'https://files.slack.com/files-tmb/T024FPYBQ-F9F0MRVNU-9cf43749e0/wine_1024.jpg',
-        year: 2018,
-        description: 'Loved by college students and trophy wives alike'
-    },
-    {
-        wineName: 'Franzia Boxed Wine',
-        imageURL: 'https://files.slack.com/files-tmb/T024FPYBQ-F9F0MRVNU-9cf43749e0/wine_1024.jpg',
-        year: 2018,
-        description: 'Loved by college students and trophy wives alike'
-    },
-    {
-        wineName: 'Franzia Boxed Wine',
-        imageURL: 'https://files.slack.com/files-tmb/T024FPYBQ-F9F0MRVNU-9cf43749e0/wine_1024.jpg',
-        year: 2018,
-        description: 'Loved by college students and trophy wives alike'
-    },
-    {
-        wineName: 'Franzia Boxed Wine',
-        imageURL: 'https://files.slack.com/files-tmb/T024FPYBQ-F9F0MRVNU-9cf43749e0/wine_1024.jpg',
-        year: 2018,
-        description: 'Loved by college students and trophy wives alike'
-    },
-    {
-        wineName: 'Franzia Boxed Wine',
-        imageURL: 'https://files.slack.com/files-tmb/T024FPYBQ-F9F0MRVNU-9cf43749e0/wine_1024.jpg',
-        year: 2018,
-        description: 'Loved by college students and trophy wives alike'
-    },
-]
