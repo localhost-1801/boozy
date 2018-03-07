@@ -93,51 +93,59 @@ class Cart extends Component {
       <div>
         <div className="cart-background">
         </div>
-        <Header as="h2" color="black" textAlign="center">
+        <div style={{paddingLeft: '2em', paddingRight: '2em'}}>
+        <Header as='h2' color='black' textAlign='center'>
         {' '}Shopping Cart
       </Header>
         <Grid divided="vertically">
         <Grid.Row>
             <Grid.Column width={3}>
             </Grid.Column>
-            <Grid.Column width={6} className="cartHeader">
+            <Grid.Column width={5} className="cartHeader">
               Product(s)
             </Grid.Column>
-            <Grid.Column width={3} className="cartHeader">
+            <Grid.Column width={2} className="cartHeader">
               Price
         </Grid.Column>
-            <Grid.Column width={3} className="cartHeader">
+            <Grid.Column width={2} className="cartHeader">
               Quantity
+            </Grid.Column>
+            <Grid.Column width={2} className="cartHeader">
+              Total
             </Grid.Column>
           </Grid.Row>
           {this.props.cart.products.sort((a, b)=> a.title > b.title).map( item => {
             return (
               <Grid.Row key={item.id}>
                 <Grid.Column width={3}>
-                  <Image src={item.imageURL} />
+                  <Image size='tiny' src={item.imageURL} />
                 </Grid.Column>
-                <Grid.Column width={6}>
+                <Grid.Column width={5}>
                   {item.title}
                   <br />
                   <br />
                   <Button basic color="red" onClick={() => this.handleDelete(item.id)} content="Delete" />
                 </Grid.Column>
-                <Grid.Column width={3}>
-                  {item.price}
+                <Grid.Column width={2}>
+                  ${item.price}
             </Grid.Column>
-                <Grid.Column width={3}>
+                <Grid.Column width={2}>
                   <Dropdown text={'' + item.cartItem.quantity}>
                     <Dropdown.Menu >
                       {this.generateDropdown(item)}
                     </Dropdown.Menu>
                   </Dropdown>
                 </Grid.Column>
+                <Grid.Column width={2}>
+                  ${item.price * item.cartItem.quantity}
+            </Grid.Column>
               </Grid.Row>
             )
           })}
           <Grid.Row>
             <Grid.Column width={15}>
               <Form>
+                <Form.Group>
                 <Form.Field>
                   <label>E-Mail</label>
                   <input name="eMail" onChange={this.updateFormState} placeholder="E-Mail" />
@@ -150,6 +158,7 @@ class Cart extends Component {
                   <label>Address</label>
                   <input name="address" onChange={this.updateFormState} placeholder="Address" />
                 </Form.Field>
+                </Form.Group>
               </Form>
             </Grid.Column>
           </Grid.Row>
@@ -167,6 +176,7 @@ class Cart extends Component {
             </Grid.Column>
           </Grid.Row>
         </Grid>
+        </div>
       </div>
     )
   }
