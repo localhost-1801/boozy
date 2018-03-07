@@ -15,6 +15,7 @@ export class Products extends Component {
         this.state = {
             activeItem: 'all',
             input: '',
+            dry: false
         }
     }
     handleAdd = (id, price) => {
@@ -33,6 +34,8 @@ export class Products extends Component {
         })
       }
     }
+    handleDryFilter = (e) => this.setState({ dry: !this.state.dry})
+    
     handleItemClick = (e, { id }) => this.setState({ activeItem: id })
     handleInput = (e) => {
         console.log(e.target.value)
@@ -41,20 +44,27 @@ export class Products extends Component {
 
 
     render() {
-        const { activeItem } = this.state
+        const { activeItem, dry } = this.state
         const { isAdmin } = this.props.user
         const filteredProducts = this.props.products.filter(wine => {
             if (wine.title.toLowerCase().indexOf(this.state.input.toLowerCase()) > -1 && wine.availability === 'available'){
-                if (this.state.activeItem === 'all') {
-                    return true
-                } else {
+      
                     // if(wine.categories.find(category => {
                     //     if(category.name === this.state.activeItem) return true
                     // })) return true
                     return wine.categories.find(category => {
+                        if (this.state.activeItem === 'all'){
+                            return true;
+                        }
                         return category.name === this.state.activeItem
+                    }) && wine.categories.find(category => {
+                        if ( this.state.dry){
+                            return category.name === 'dry'
+                        } else {
+                            return true;
+                        }
                     })
-                }
+                
             } else {
                 return false
             }
@@ -66,6 +76,8 @@ export class Products extends Component {
                     <Menu.Item name='All' id='all' active={activeItem === 'all'} onClick={this.handleItemClick} />
                     <Menu.Item name='Reds' id='red' active={activeItem === 'red'} onClick={this.handleItemClick} />
                     <Menu.Item name='Whites' id='white' active={activeItem === 'white'} onClick={this.handleItemClick} />
+                    <Menu.Item name='Dry' id='dry' active={dry} onClick={this.handleDryFilter} />
+
                     <Menu.Menu position='right'>
                         <Menu.Item>
                             <Input onChange={this.handleInput} transparent icon={{ name: 'search', link: true }} placeholder='Search our wines...' />
