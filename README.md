@@ -6,5 +6,5 @@
 * Fork and clone repo
 * To install libraries, in the terminal, run `npm install`
 * To create database, run Postgres and in the terminal, run `createdb boozy`
-* To start running the server, in the terminal, navigate to the backend folder and run `npm run start-dev`
+* To start running the server, in the terminal run `npm run start-dev`
 * Navigate to localhost:8080 to view website
